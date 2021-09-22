@@ -1,0 +1,17 @@
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Core.Contract.deps.json
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Core.Contract.dll
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\ref\Shop.Core.Contract.dll
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Core.Contract.pdb
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Common.dll
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Core.Domain.dll
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Common.pdb
+F:\Shop\Core\Shop.Core.Contract\bin\Debug\net5.0\Shop.Core.Domain.pdb
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.csproj.AssemblyReference.cache
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.GeneratedMSBuildEditorConfig.editorconfig
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.AssemblyInfoInputs.cache
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.AssemblyInfo.cs
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.csproj.CoreCompileInputs.cache
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.csproj.CopyComplete
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.dll
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\ref\Shop.Core.Contract.dll
+F:\Shop\Core\Shop.Core.Contract\obj\Debug\net5.0\Shop.Core.Contract.pdb

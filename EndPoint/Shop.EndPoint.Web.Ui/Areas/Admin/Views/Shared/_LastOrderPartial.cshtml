@@ -1,0 +1,45 @@
+﻿@inject IProfileIndexService profileindexservice
+
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">آخرین سفارشات</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table no-margin">
+                <thead>
+                    <tr>
+                        <th>شماره فاکتور</th>
+                        <th>قیمت</th>
+                        <th>زمان سفارش</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in profileindexservice.GetLastInvoice())
+                    {
+                        <tr>
+                            <td><a href="">@item.InvoiceNumber</a></td>
+                            <td>@item.Price</td>
+                            <td><span class="label label-success">@item.Date</span></td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="box-footer text-center">
+        <a asp-controller="Invoice" asp-action="Index" class="uppercase">نمایش همه صورتحساب ها</a>
+    </div>
+
+</div>

@@ -1,0 +1,156 @@
+﻿@model ShopActionResult<List<InvoiceViewModel>>
+
+@{
+
+    ViewData["Title"] = "صورتحساب ها";
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+
+        <small>لیست صورتحساب ها </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">لیست صورتحساب ها </li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                @if (Model.Data.Count() > 0)
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">شناسه فاکتور</th>
+                                                <th class="text-center">تاریخ سفارش</th>
+                                                <th class="text-center">بهای کل ( تومان )</th>
+                                                <th class="text-center">شناسه تراکنش</th>
+                                                <th class="text-center">وضعیت پرداخت</th>
+                                                <th class="text-center">جزئیات صورتحساب</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Data.OrderByDescending(c => c.Date))
+                                            {
+
+
+                                                <tr>
+
+                                                    <td class="text-center">
+                                                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @ShamsiPlugin.ToPeString(item.Date)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @Html.DisplayFor(modelItem => item.Price)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @Html.DisplayFor(modelItem => item.TransactionId)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (item.Status == true)
+                                                        {
+                                                            <div class="btn btn-success">پرداخت موفق</div>
+                                                        }
+
+
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-area="Admin" asp-controller="Invoice" asp-action="InvoiceDetails" asp-route-invoicenumber="@item.InvoiceNumber"><i class="fa fa-shopping-cart" style="color:forestgreen; font-size:25px;"></i></a>    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+
+                                }
+                                else
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;" class="alert alert-danger">
+                                                    <span>   صورتحسابی ثبت نشده </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.Pages; i++)
+                                    {
+
+                                        if (Model.Page == i)
+                                        {
+
+
+
+                                            <li class="active">
+                                                <a href="/Admin/Comment/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/Admin/Invoice/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+

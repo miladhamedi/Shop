@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Shop.Common\Shop.Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Shop.Infrastructure.Data.Sql\Shop.Infrastructure.Data.Sql.csproj" />
+    <ProjectReference Include="..\Shop.Core.Contract\Shop.Core.Contract.csproj" />
+    <ProjectReference Include="..\Shop.Core.Domain\Shop.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

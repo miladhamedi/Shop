@@ -1,0 +1,96 @@
+﻿@model CommentViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+
+}
+<section class="content-header">
+    <h1>
+        تایید حذف
+        <small> نظر ثبت شده</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active"> نظر ثبت شده</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <dl class="dl-horizontal">
+
+                                    <input type="hidden" name="id" asp-for="CommentId" />
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.NameFamily)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.NameFamily)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Text)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Text)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.IP)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.IP)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Date)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Date)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Confirm)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Confirm)
+                                    </dd>
+                                </dl>
+                                <form asp-area="Admin" asp-controller="Comment" asp-action="Delete" method="post">
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="حذف شود" class="btn btn-info" /> |
+                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

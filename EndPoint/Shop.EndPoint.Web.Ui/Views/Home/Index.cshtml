@@ -1,0 +1,688 @@
+﻿@inject ICategoryService  categoryservice
+@inject IProductIndexService  productindexservice
+@{
+    ViewData["Title"] = "خانه";
+    var listCat = categoryservice.GetAll();
+    var Inexpensivelist = productindexservice.InexpensiveProduct();
+    var NewProduct = productindexservice.NewProduct();
+    var MostDisProduct = productindexservice.Mostdiscounts();
+    var BestListPro = productindexservice.Bestselling();
+}
+
+
+<header class='header_style1'>
+    <div class='container'>
+        <div class='inner'>
+            <div class='header_part1 clearfix'>
+                <div class='right_part'>
+                    <a href='' title='' class='logo'></a>
+                </div><!--close .right_part-->
+                <div class='center_part'>
+                    <ul class='step clearfix none_list_style'>
+                        <li class='item'><a asp-controller="Home" asp-action="Index" title='' class='link'>صفحه اصلی</a></li>
+                        <li class='item have_menu'>
+                            <a href='#' title='' class='link'>محصولات</a>
+                            <div class='sub_style1'>
+                                <ul class='step2 none_list_style'>
+                                    @foreach (var item in listCat.Data)
+                                    {
+                                        <li class='item2'>
+                                            <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId"
+                                               class='link2'>@item.Titel</a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                        <li class='item'><a asp-controller="Home" asp-action="Article" title='' class='link'>مقالات</a></li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="About" title='' class='link'>
+                                درباره
+                                ما
+                            </a>
+                        </li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="Contact" title='' class='link'>
+                                تماس
+                                با ما
+                            </a>
+                        </li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="Law" title='' class='link'>
+                                قوانین
+                                و سیاست ها
+                            </a>
+                        </li>
+                    </ul>
+                </div><!--close .center_part-->
+                <div class='left_part'>
+                    <ul class='step none_list_style'>
+                        <li class='item have_tooltip responsive_menu_btn menu'>
+                            <span class='link'>
+                                <i class='i-layout'></i>
+                                <div class='tooltip_style1'>
+                                    <span>فهرست</span>
+                                </div>
+                            </span>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Cart" asp-action="Index" class='link' title=''>
+                                    <i class='i-shop'></i>
+                                    <div class='tooltip_style1'><span>0</span></div>
+                                </a>
+                            </li>
+                            <li class="item have_tooltip">
+                                <a asp-controller="Profile" asp-action="Index" class="link" title="">
+                                    <i class="i-avatar"></i>
+                                    <div style="display: none; opacity: 1;" class="tooltip_style1"><span>پروفایل من</span></div>
+                                </a>
+                            </li>
+                            <li class="item have_tooltip">
+                                <a asp-controller="Account" asp-action="Logout" class="link" title="">
+                                    <i class="i-power-1"></i>
+                                    <div style="display: none; opacity: 1;" class="tooltip_style1"><span>خروج</span></div>
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+
+
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Account" asp-action="Register" class='link' title=''>
+                                    <i class='i-add-user'></i>
+                                    <div class='tooltip_style1'><span> عضویت</span></div>
+                                </a>
+                            </li>
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Account" asp-action="Login" class='link' title=''>
+                                    <i class='i-user'></i>
+                                    <div class='tooltip_style1'><span>ورود </span></div>
+                                </a>
+                            </li>
+
+                        }
+
+
+                    </ul>
+                </div><!--close .left_part-->
+            </div><!--close .header_part1-->
+            <div class='header_part2'>
+
+
+                <!--<div class='text_part'>-->
+                <!--<div class='sub_title'>فروشگاه لوازم آشپزخانه</div>
+                <div class='title'>کی کِت</div>-->
+                <!--<img src='assets/front/_images/logo/logo_text.png' alt=''>
+                </div>-->
+                <!--close .text_part-->
+
+
+            </div><!--close .header_part2-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+    <div class='header_part3'>
+        <div class='part_position'>
+            <div class='container'>
+                <div class='inner'>
+                    <div class='wrapper clearfix'>
+                        <a href='' title='' class='logo_part'></a>
+                        <div class='search_part'>
+                            <form method="POST" asp-controller="Product" asp-action="SearchProduct">
+                                <input type="hidden" name="_token" value="KubHdUwJNAhD3EiMO7ancz5OGMtQTMwekpJlr53n">
+                                <button class='search_btn' type="submit"><i class='i-search'></i></button>
+
+                                <input type='text' name="title" placeholder='محصول مورد نظر خود را جستجو کنید...'>
+                            </form>
+                        </div><!--close .search_part-->
+                    </div><!--close .wrapper-->
+                </div><!--close .inner-->
+            </div><!--close .container-->
+        </div><!--close .part_poition-->
+    </div><!--close .header_part3-->
+    <div class='responsive_menu'>
+        <div class='close_bg'></div>
+        <div class='wrapper'>
+            <div class='close_btn'><i class='i-cancel'></i></div>
+            <div class='top_part'>
+                <a href='' title='' class='logo'>
+                    <span>فروشگاه لوازم آشپزخانه کی کِت</span>
+                </a>
+            </div><!-- close .top_part -->
+            <div class='middle_part'>
+                <ul class='step clearfix none_list_style'>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li class='item have_tooltip'>
+                            <a asp-controller="Cart" asp-action="ListCart" class='link' title=''>
+                                <i class='i-shop'></i>
+                                <div class='tooltip_style1'><span>سبد خرید</span></div>
+                            </a>
+                        </li>
+                        <li class="item have_tooltip">
+                            <a asp-controller="Profile" asp-action="Index" class="link" title="">
+                                <i class="i-avatar"></i>
+                                <div style="display: none; opacity: 1;" class="tooltip_style1"><span>پروفایل من</span></div>
+                            </a>
+                        </li>
+                        <li class="item have_tooltip">
+                            <a asp-controller="Account" asp-action="Logout" class="link" title="">
+                                <i class="i-power-1"></i>
+                                <div style="display: none; opacity: 1;" class="tooltip_style1"><span>خروج</span></div>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+
+
+
+                        <li class='item have_tooltip'>
+                            <a asp-controller="Account" asp-action="Register" class='link' title=''>
+                                <i class='i-add-user'></i>
+                                <div class='tooltip_style1'><span> عضویت</span></div>
+                            </a>
+                        </li>
+                        <li class='item have_tooltip'>
+                            <a asp-controller="Account" asp-action="Login" class='link' title=''>
+                                <i class='i-user'></i>
+                                <div class='tooltip_style1'><span>ورود </span></div>
+                            </a>
+                        </li>
+
+                    }
+                </ul>
+            </div><!-- close .middle_part -->
+
+
+
+
+            <div class='bottom_part'>
+                <div class='have_scroll_y'>
+                    <ul class='step none_list_style'>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="Index" title='' class='link'>صفحه اصلی</a>
+                        </li>
+                        <li class='item have_menu'>
+                            <a href='/محصولات/products' title='' class='link'>محصولات</a>
+                            <div class='sub_style2'>
+                                <ul class='step2 none_list_style'>
+                                    @foreach (var item in listCat.Data)
+                                    {
+                                        <li class='item2'>
+                                            <a asp-controller="Home" asp-action="CategoryByProduct" asp-route-catgoryid="@item.CategoryId"
+                                               class='link2'>@item.Titel</a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class='item'><a asp-controller="Home" asp-action="Article" title='' class='link'>مقالات</a></li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="About" title='' class='link'>
+                                درباره
+                                ما
+                            </a>
+                        </li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="Contact" title='' class='link'>
+                                تماس
+                                با ما
+                            </a>
+                        </li>
+                        <li class='item'>
+                            <a asp-controller="Home" asp-action="Law" title='' class='link'>
+                                قوانین
+                                و سیاست ها
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- close .have_scroll_y -->
+            </div><!-- close .bottom_part -->
+        </div><!-- close .wrapper -->
+    </div><!-- close .responsive_menu -->
+</header>
+
+<main class='main_page'>
+    <section class='home_part1'>
+        <div class='container'>
+            <div class='inner'>
+                <ul class='box_style1 clearfix none_list_style'>
+                    @foreach (var item in Inexpensivelist)
+                    {
+                        <li class='item'>
+                            <div class='pic_part'>
+                                <div class='pic'
+                                     style='background-image: url(/uploads/Products/@item.Picture);'>
+                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title=''
+                                       class='name ellipsis'>
+                                    </a>
+                                </div>
+                            </div>
+                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title=''
+                               class='name ellipsis'>
+                                @item.Title
+                            </a>
+                            <a asp-controller="#" asp-action="#" asp-route-id="#" title=''
+                               class='link'><i class='i-plus'></i></a>
+                        </li>
+                    }
+
+
+                </ul><!--close .box_style1-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+    </section><!--close .home_part1-->
+    <section class='home_part2'>
+        <div class='container'>
+            <div class='inner'>
+                <div class='title_style1'>
+                    <div class='title'>جدیدترین ها</div>
+                    <div class='btn'>
+                        <div class='owl_btns' data-target='.slide1'>
+                            <span class='arrow right prev'><i class='i-left-open'></i></span>
+                            <span class='arrow left next'><i class='i-right-open'></i></span>
+                        </div>
+                    </div>
+                </div><!--close .title_style1-->
+                <div class='box_style2'>
+                    <ul class='step slide1 owl-carousel none_list_style'>
+                        @foreach (var item in NewProduct)
+                        {
+                            <li class='item'>
+                                <div class='top_part'>
+                                    <ul class='link_part none_list_style'>
+                                        <li class='item2 add_cart have_tooltip'>
+                                            <a href='#'
+                                               title='' class='link2'>
+                                                <i class='i-add-shop'></i>
+                                                <div class='tooltip_style1'><span>افزودن به سبد خرید</span></div>
+                                            </a>
+                                        </li>
+
+                                        <li class='item2 box_btn have_tooltip'>
+                                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId">
+                                                <i class='i-link'></i>
+                                                <div class='tooltip_style1'><span>جزییات بیشتر</span></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class='pic'
+                                         style='background-image: url(/uploads/Products/@item.Picture);'>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                           title='' class='name ellipsis'></a>
+                                    </div>
+                                    @if (item.DisCountPercent >= 1)
+                                    {
+                                        var price = Math.Round(item.Price);
+                                        var pricestring = string.Format("{0:0,0}", price);
+
+                                        var Disprice = Math.Round(item.PriceDiscount);
+                                        var Dispricestring = string.Format("{0:0,0}", price);
+
+                                        <div class='price_part'>
+                                            <span class='org_price'>
+                                                @pricestring
+                                                تومان
+                                            </span>
+                                            <span class='off_price'>@Dispricestring تومان</span>
+                                        </div>
+
+
+
+                                    }
+                                    else
+                                    {
+                                        var price = Math.Round(item.Price);
+                                        var pricestring = string.Format("{0:0,0}", price);
+
+                                        <div class='price_part'>
+                                            <span class='org_price'>
+                                                @pricestring
+                                                تومان
+                                            </span>
+
+                                        </div>
+
+                                    }
+
+                                </div>
+                                <div class='bottom_part'>
+                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                       title='' class='name ellipsis'>@item.Title</a>
+                                </div>
+                            </li><!--close .item-->
+                        }
+
+
+                    </ul><!--close .step-->
+                </div><!--close .box_style2-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+    </section><!--close .home_part2-->
+    <section class='home_part3'>
+        <div class='container'>
+            <div class='inner'>
+                <div class='btn'>
+                    <div class='owl_btns' data-target='.slide2'>
+                        <span class='arrow prev fleft'>
+                            قبلی<i class='i-left-open icon1'></i><i class='i-left-open icon2'></i>
+                        </span>
+                        <span class='arrow next fright'>
+                            بعدی<i class='i-right-open icon1'></i><i class='i-right-open icon2'></i>
+                        </span>
+                    </div>
+                </div>
+                <ul class='step slide2 owl-carousel none_list_style'>
+                    @foreach (var item in MostDisProduct)
+                    {
+                        <li class='item clearfix'>
+                            <div class='section_part left_part fleft'>
+                                <div class='pic_part'
+                                     style='background-image:url(/uploads/Products/@item.Picture);'>
+                                    <ul class='step2 none_list_style'>
+                                        <li class='star'></li>
+
+                                    </ul>
+                                </div><!--close .pic_part-->
+                            </div><!--close .section_part-->
+                            <div class='section_part right_part fright'>
+                                <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                   title='' class='title_style2'> @item.Title</a>
+                                <p class='text ellipsis'>
+                                    @item.Description
+                                </p><!--close .text-->
+                                <div class='product_information'>
+                                    <div class='title_style3'><span class='title'>مشخصات کالا</span></div>
+                                    <ul class='step2 none_list_style'>
+                                        <li class='item2'>
+                                            <span class='title'>
+                                                شرکت سازنده
+                                                :
+                                            </span>
+                                            <span class='content'>@item.Manufacturer</span>
+                                        </li>
+                                        <li class='item2'>
+                                            <span class='title'>
+                                                رنگ
+                                                :
+                                            </span>
+                                            <span class='content'>@item.Color</span>
+                                        </li>
+                                        <li class='item2'>
+                                            <span class='title'>
+                                                گارانتی
+                                                :
+                                            </span>
+                                            <span class='content'>@item.Warranty</span>
+                                        </li>
+                                    </ul>
+                                </div><!--close .product_information-->
+                                <div class='link_part'>
+                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                       title=''
+                                       class='btn_style1 add_cart'>
+                                        <i class='i-add-shop'></i><span>جزییات بیشتر کالا</span>
+                                    </a>
+
+                                </div>
+
+                            </div><!--close .right_part-->
+                        </li><!--close .item-->
+                    }
+
+
+                </ul><!--close .step-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+    </section><!--close .home_part3-->
+    <section class='home_part4'>
+        <div class='title_style4'>
+            <div class='title'>پرفروش ترین ها</div>
+        </div><!--close .title_style1-->
+        <div class='container'>
+            <div class='inner'>
+                <div class='box_style3'>
+                    <ul class='step slide3 owl-carousel none_list_style'>
+                        @foreach (var item in BestListPro)
+                        {
+                            <li class='item'>
+                                <div class='top_part'>
+                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                       title='' class='pic'
+                                       style='background-image: url(/uploads/Products/@item.Picture);'>
+
+                                    </a>
+                                </div><!--close .top_part-->
+                                <div class='bottom_part'>
+                                    <div class='content_part'>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                           title='' class='name ellipsis'>@item.Title</a>
+                                        @if (item.DisCountPercent >= 1)
+                                        {
+                                            var price = Math.Round(item.Price);
+                                            var pricestring = string.Format("{0:0,0}", price);
+
+                                            var Disprice = Math.Round(item.DiscountPrice);
+                                            var Dispricestring = string.Format("{0:0,0}", Disprice);
+
+                                            <div class='price_part'>
+                                                <span class='org_price'>
+                                                    @pricestring
+                                                    تومان
+                                                </span>
+                                                <span class='off_price'>@Dispricestring تومان</span>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            var price = Math.Round(item.Price);
+                                            var pricestring = string.Format("{0:0,0}", price);
+
+                                            <div class='price_part'>
+                                                <span class='org_price'>
+                                                    @pricestring
+                                                    تومان
+                                                </span>
+
+                                            </div>
+
+                                        }
+                                    </div><!--close .content_part-->
+                                    <ul class='link_part clearfix none_list_style'>
+                                        <li class='item2 add_cart'>
+                                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title='' class='link2'>
+                                                <i class='i-add-shop'></i>
+                                                <span>جزییات بیشتر کالا</span>
+                                            </a>
+                                        </li>
+                                        <li class='item2 see_more'>
+                                            <a href='#'
+                                               title='' class='link2'>
+
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div><!--close .bottom_part-->
+                            </li><!--close .item-->
+                        }
+
+
+                    </ul><!--close .step-->
+                </div><!--close .box_style2-->
+                <div class='btn'>
+                    <div class='owl_btns' data-target='.slide3'>
+                        <span class='arrow right prev'><i class='i-left-open'></i></span>
+                        <span class='arrow left next'><i class='i-right-open'></i></span>
+                    </div>
+                </div>
+            </div><!--close .inner-->
+        </div><!--close .container-->
+    </section><!--close .home_part4-->
+    <section class="home_part5">
+        <div class="container">
+            <div class="inner">
+                <div class="box_style7">
+
+                    <ul class="step none_list_style">
+
+                        <li class="item">
+                            <a href="#" title="" class="link"><img src="~/uploads/brand (3).jpg" /></a>
+
+                        </li>
+                        <li class="item">
+                            <a href="#" title="" class="link"><img src="~/uploads/brand (2).jpg" /></a>
+
+                        </li>
+                        <li class="item">
+                            <a href="#" title="" class="link"><img src="~/uploads/brand (4).jpg" /></a>
+
+                        </li>
+                        <li class="item">
+                            <a href="#" title="" class="link"><img src="~/uploads/brand.jpg" /></a>
+
+                        </li>
+
+
+                    </ul>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+
+    $(document).ready(function () {
+        /////////////////////////////////////////////////////////////////////////////////////
+        // open .sub_menu
+        $('.have_menu').hover(function () {
+            $(this).find('.sub_style1').fadeIn(0, function () {
+                $(this).addClass('active');
+            });
+        }, function () {
+            $(this).find('.sub_style1').slideUp(200, function () {
+                $(this).removeClass('active');
+            });
+        });
+        /////////////////////////////////////////////////////////////////////////////////////
+        // header text 3D
+        var rotateForce = 17; // max popup rotation in deg
+        $(document).mousemove(function (e) {
+            var docX = $(document).width();
+            var docY = $(document).height();
+            var rotateY = (e.pageX / docX * rotateForce * 2) - rotateForce;
+            var rotateX = -((e.pageY / docY * rotateForce * 5) - rotateForce);
+            $('.header_style1 .header_part2 .text_part').css('transform', 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)');
+        });
+        /////////////////////////////////////////////////////////////////////////////////////
+        // .select_style1
+        $('.select_style1').niceSelect();
+        /////////////////////////////////////////////////////////////////////////////////////
+        //#slideshow
+        $('.slide1').owlCarousel({
+            autoplay: true,
+            autoplayTimeout: 4000,
+            loop: true,
+            nav: true,
+            navText: [],
+            autoplaySpeed: 1000,
+            rtl: true,
+            mouseDrag: true,
+            dots: false,
+            items: 5,
+            startPosition: 0,
+            autoWidth: false,
+            margin: 15,
+            responsive: {
+                0: { items: 1 },
+                750: { items: 2, margin: 25 },
+                1000: { items: 4, margin: 15 },
+                1200: { items: 5, margin: 15 }
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////////////////
+        //#slideshow
+        $('.slide2').owlCarousel({
+            autoplay: true,
+            autoplayTimeout: 18000,
+            animateOut: "fadeOut",
+            animateIn: "fadeIn",
+            loop: true,
+            nav: true,
+            navText: [],
+            rtl: true,
+            mouseDrag: false,
+            dots: false,
+            items: 1
+        });
+        $('.slide2').on('translated.owl.carousel', function () {
+            $('.slide2 .item').removeClass('active');
+            setTimeout(function () {
+                $('.slide2 .item').addClass('active');
+            }, 500);
+        });
+        $('.slide2').on('changed.owl.carousel ', function () {
+            $('.slide2 .item').removeClass('active');
+        });
+        $(window).load(function () {
+            $('.slide2 .item').addClass('active');
+        });
+        /////////////////////////////////////////////////////////////////////////////////////
+        //#slideshow
+        $('.slide3').owlCarousel({
+            autoplay: true,
+            autoplayTimeout: 5000,
+            loop: true,
+            nav: true,
+            navText: [],
+            autoplaySpeed: 1000,
+            rtl: true,
+            mouseDrag: true,
+            dots: false,
+            lazyLoad: true,
+            items: 4,
+            startPosition: 0,
+            autoWidth: false,
+            margin: 25,
+            responsive: {
+                0: { items: 1 },
+                750: { items: 2 },
+                900: { items: 3 },
+                1200: { items: 4 }
+            }
+        });
+        ////////////////////////////////////////////////////////////////////////////
+        // OWL BTNS
+        $('.owl_btns .next').click(function () {
+            var target = $(this).parents('.owl_btns').data('target');
+            $(target).trigger('next.owl.carousel');
+        });
+        $('.owl_btns .prev').click(function () {
+            var target = $(this).parents('.owl_btns').data('target');
+            $(target).trigger('prev.owl.carousel');
+        });
+
+
+    });
+
+</script>
+
+
+
+

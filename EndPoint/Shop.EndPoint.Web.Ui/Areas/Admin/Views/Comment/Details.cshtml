@@ -1,0 +1,89 @@
+﻿@model CommentViewModel
+@inject IProductService productservice
+@{
+    ViewData["Title"] = "جزئیات نظر";
+     var ProductName = productservice.GetByIdPro(Model.ProductId).Titel;
+}
+<style>
+    span {
+        color: #3c8dbc;
+        font-weight: 700;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>نظر ثبت شده</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت نظر ثبت شده</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="timeline">
+                <li class="time-label">
+                    <span class="bg-red">
+                        ارسال کننده:
+                        @Html.DisplayFor(model => model.NameFamily)
+                    </span>
+                </li>
+
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">@Html.DisplayNameFor(model => model.NameFamily)<span href="">  @Html.DisplayFor(model => model.NameFamily)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">@Html.DisplayNameFor(model => model.Email)<span href="">  @Html.DisplayFor(model => model.Email) </span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"> @Html.DisplayNameFor(model => model.IP)<span href="">  @Html.DisplayFor(model => model.IP)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"> @Html.DisplayNameFor(model => model.Date)<span href="">@ShamsiPlugin.ToPeString(Model.Date)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"> @Html.DisplayNameFor(model => model.Confirm)<span href=""> @Html.DisplayFor(model => model.Confirm)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">  @Html.DisplayNameFor(model => model.ProductName)<span href=""> @Html.DisplayFor(model => ProductName)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">@Html.DisplayNameFor(model => model.Text)<span href=""> @Html.DisplayFor(model => model.Text)</span> </h3>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="col-md-offset-1">
+                <a asp-controller="Comment" asp-area="Admin" asp-action="Edit" asp-route-id="@Model.CommentId" class="btn btn-info">منتشر کردن</a>
+                <a asp-controller="Comment" asp-area="Admin" asp-action="Index" class="btn btn-warning">بازگشت به لیست</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+

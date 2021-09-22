@@ -1,0 +1,84 @@
+﻿@model GalleryViewModel
+
+@{
+    ViewData["Title"] = "اضافه کردن تصویر";
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+        اضافه کردن
+        <small>تصویر </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">اضافه کردن تصویر </li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                    </div>
+
+                    <form asp-controller="Gallery" asp-action="Create" asp-route-returnUrl=@ViewBag.ReturnUrl enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="ProductId" value=@ViewBag.ProductId class="form-control" />
+
+                            <div class="form-group">
+                               
+                                <div class="">
+                                    <label asp-for="Titel" class="col-md-2 control-label"></label>
+                                    <input asp-for="Titel" class="form-control" />
+                                    <span asp-validation-for="Titel" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PictureName" class="col-md-2 control-label"></label>
+                                <div class="">
+                                    <input asp-for="PictureName"  name="PictureName" value="انتخاب عکس:" type="file" />
+                                    <span asp-validation-for="PictureName" class="text-danger"></span>
+                                    <img src="~/assets/front/_images/bg/download.jpg" id="dvPreview" style="margin-top: -25px;" class="col-md-offset-5" height="150" width="150" alt="Alternate Text" />
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-0 ">
+                                    <input type="submit" value="ثبت تصویر محصول" class="btn btn-lg btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+

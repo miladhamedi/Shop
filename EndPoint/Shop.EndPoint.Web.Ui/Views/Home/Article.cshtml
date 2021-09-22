@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ArticleViewModel>
+@{
+    ViewData["Title"] = "آرشیو مقالات";
+    ViewData["Breadcromb"] = "آرشیو مقالات";
+}
+    <partial name="_HeaderPartial" />
+
+<div class="article_archive_part1">
+    <div class="container">
+        <div class="inner">
+            <div class="box_style4">
+                <ul class="step none_list_style clearfix">
+
+                    @foreach (var item in Model)
+                    {
+                        <li class="item clearfix">
+                            <a asp-controller="Home" asp-action="DetailArticle" asp-route-id="@item.ArticleId" title="" class="pic_part" style="background-image:url(/uploads/article/@item.Image);">
+                                <div class="box_info">
+                                    <ul class="step2 none_list_style">
+                                        <li class="item2">
+                                            <div class="icon"><i class="i-eye"></i></div>
+                                            <div class="content">@item.View</div>
+                                        </li>
+                                        <li class="item2">
+                                            <div class="icon"><i class="i-calendar"></i></div>
+                                            <div class="content">@item.Date</div>
+                                        </li>
+                                    </ul>
+                                </div><!--close .box_info-->
+                            </a><!--close .pic_part-->
+                            <div class="content_part">
+                                <a href="/Home/Details?id=@item.ArticleId" title="" class="name ellipsis" style="overflow-wrap: break-word;">@item.Titel</a>
+                                <p class="text ellipsis is-truncated" style="overflow-wrap: break-word;">
+                                    @item.Description
+                                </p>
+                                <a  asp-controller="Home" asp-action="DetailArticle" asp-route-id="@item.ArticleId" title="" class="link">بیشتر</a>
+                            </div><!--close .content_part-->
+                        </li><!--close .item-->
+                    }
+
+
+                </ul><!--close .step-->
+            </div><!--close .box_style4-->
+            <div class="pagination_style1">
+            </div><!--close .pagination_style1-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div>

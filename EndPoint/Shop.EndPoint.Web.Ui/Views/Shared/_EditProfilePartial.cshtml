@@ -1,0 +1,112 @@
+﻿@model UserViewModel
+@inject IUserService userservice
+@{
+    Layout = null;
+    var AppUser = User.Identity.Name;
+    var user = userservice.GetByUserName(AppUser);
+
+}
+<div class='panel_content'>
+   
+    <div class="table1">
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2" width="220">
+                        اطلاعات تماس منزل به نام
+                        <span>@user.NameFamily</span>
+                        <span>@user.Email</span>
+                    </td>
+                    <td colspan="2" width="220">@user.Address</td>
+
+                </tr>
+                <tr>
+                    <td>@user.Province</td>
+                    <td>@user.City</td>
+                    <td>@user.PostalCode</td>
+                    <td>@user.IrCode</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='form_style2'>
+        <form asp-controller="Profile" asp-action="EditInformationUser" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @{
+                if (TempData["Message"] != null)
+                {
+                    string message = TempData["Message"].ToString();
+
+                    if (message == "Edit")
+                    {
+
+                        <div class="alarm_style2">
+                            <div class="success_alarm box">
+                                <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                <div class="alarm_text">ویرایش اطلاعات با موفقیت ثبت شد</div>
+                                <div class="close_icon"><i class="i-cancel"></i></div>
+                            </div>
+                        </div>
+
+                    }
+                    if (message == "NotEdit")
+                    {
+                        <div class="alarm_style2">
+                            <div class="success_alarm box">
+                                <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                <div class="alarm_text">ویرایش اطلاعات انجام نشد</div>
+                                <div class="close_icon"><i class="i-cancel"></i></div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            }
+
+
+            <ul class='step none_list_style clearfix'>
+                <li>
+                    <input asp-for="UserName" value="@user.UserName" type="hidden">
+                </li>
+                <li class='item half'>
+                    <div class='icon'><i class='i-mobile'></i></div>
+                    <input asp-for="IrCode" type='text' maxlength="10" placeholder='کدملی' value="@user.IrCode">
+                    <span class='focus_bg'></span>
+                    <span asp-validation-for="IrCode" class="text-danger"></span>
+                </li>
+                <li class='item half'>
+                    <div class='icon'><i class='i-mail-2'></i></div>
+                    <input asp-for="City" type='text' placeholder='شهر' value="@user.City">
+                    <span class='focus_bg'></span>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </li>
+                <li class='item half'>
+                    <div class='icon'><i class='i-telephone'></i></div>
+                    <input asp-for="Province" type='text' placeholder='استان' value="@user.Province">
+                    <span class='focus_bg'></span>
+                    <span asp-validation-for="Province" class="text-danger"></span>
+                </li>
+                <li class='item half'>
+                    <div class='icon'><i class='i-mobile'></i></div>
+                    <input asp-for="PostalCode" type='text' maxlength="10" placeholder='کدپستی' value="@user.PostalCode">
+                    <span class='focus_bg'></span>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </li>
+
+                <li class='item textarea'>
+                    <div class='icon'><i class='i-mobile'></i></div>
+                    <input asp-for="Address" multiple type='text' placeholder='آدرس' value="@user.Address">
+                    <span class='focus_bg'></span>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </li>
+                <li class="item submit">
+                    <button type="submit">ویرایش اطلاعات</button>
+                </li>
+            </ul>
+        </form>
+    </div><!--close .form_style2-->
+</div><!--clsoe .panel_content-->
+
+
+<partial name="_ValidationScriptsPartial">

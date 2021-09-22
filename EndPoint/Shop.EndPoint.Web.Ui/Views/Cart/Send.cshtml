@@ -1,0 +1,188 @@
+﻿@inject IWeightService weightservice
+@{
+    var user = User.Identity.Name;
+    var sendprice = weightservice.SendPrice(user);
+    ViewBag.Breadcromb = "اطلاعات ارسال سفارش";
+    ViewBag.Title = "اطلاعات ارسال سفارش";
+}
+
+<partial name="_HeaderPartial" />
+
+<div class='cart_part1'>
+    <div class='container'>
+        <div class='inner'>
+            <div class='top_part'>
+                <ul class='step clearfix none_list_style'>
+                    <li class='item  checked  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>1</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+                                    </svg>
+                                </div>
+                            </div><!--close .number-->
+                            <div class='content'>
+                                <span>سبد خرید</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+                                            </svg>
+                                </div>
+                            </div><!--close .content-->
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item  checked  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>2</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>اطلاعات پستی گیرنده</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item      active
+'>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>3</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>اطلاعات ارسال سفارش</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>4</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>بازبینی سفارش</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                </ul><!--close .step-->
+            </div><!--close .top_part-->
+            <form asp-action="Review" asp-controller="Cart" method="POST">
+                @{ 
+                    var Pricepro = Math.Round(sendprice);
+                    var Priceproduct = string.Format("{0:0,0}", Pricepro);
+                }
+                <div class='bottom_part'>
+                    <div class='select_box send_ways'>
+                        <ul class='step none_list_style'>
+                            <li class='item clearfix'>
+                                <div class='right_part'>
+                                    <label class='check_radio_style1'>
+                                        <input type='radio' name='post' id='payment1' checked>
+                                        <span class='icon'></span>
+                                    </label>
+                                </div><!-- close .right_part -->
+                                <div class='left_part'>
+                                        <div class='icon'><i class='i-send-box1'></i></div>
+                                        <div class='title'>ارسال پست پیشتاز</div>
+                                        <div class='sub_title'>از طریق درگاه بانکی</div>
+                                </div><!-- close .left_part -->
+                                <div class='price_part'>
+                                        <div class='title'>هزینه ارسال</div>
+                                        <div class='price'>@Priceproduct</div>
+                                </div><!-- close price_part -->
+                            </li><!-- close .item -->
+                        </ul><!-- close .step -->
+                    </div><!--close .payment_methods -->
+                    <div class='cart_btn'>
+                        <button style="border: none;vertical-align: top;cursor: pointer;" type="submit"
+                                class='btn_style1 add_cart'>
+                            <i class='i-left-open'></i><span>مرحله بعدی</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div><!--close .bottom_part-->
+    </div><!--close .inner-->
+</div><!--close .container-->

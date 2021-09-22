@@ -1,0 +1,72 @@
+﻿@inject IProfileIndexService profileindexservice
+@{
+    var price = profileindexservice.ListInvoice().Sum(c => Convert.ToInt32(c.Price));
+    var tax = profileindexservice.ListInvoice().Sum(c => Convert.ToInt32(c.Tax));
+    var amountSent = profileindexservice.ListInvoice().Sum(c => Convert.ToInt32(c.AmountSent));
+    var PriceSum = price + tax + amountSent;
+}
+<div class="col-md-4">
+
+    <div class="info-box bg-yellow">
+        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">میزان فروش</span>
+            <span class="info-box-number">@price تومان</span>
+            <div class="progress">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+            <span class="progress-description">
+                میزان فروش ناخالص سایت
+            </span>
+        </div>
+
+    </div>
+
+    <div class="info-box bg-green">
+        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">فروش خالص</span>
+            <span class="info-box-number">
+                @PriceSum  تومان
+            </span>
+            <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+            </div>
+            <span class="progress-description">
+                فقط میزان فروش  محصولات
+            </span>
+        </div>
+
+    </div>
+
+    <div class="info-box bg-red">
+        <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">هزینه ارسال ها</span>
+            <span class="info-box-number">@amountSent تومان</span>
+            <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+            </div>
+            <span class="progress-description">
+                میزان هزینه کل ارسال
+            </span>
+        </div>
+
+    </div>
+
+    <div class="info-box bg-aqua">
+        <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text">مالیات کل</span>
+            <span class="info-box-number">@tax تومان</span>
+            <div class="progress">
+                <div class="progress-bar" style="width: 40%"></div>
+            </div>
+            <span class="progress-description">
+                میزان دریافت کل مالیات ها
+            </span>
+        </div>
+
+    </div>
+
+</div>

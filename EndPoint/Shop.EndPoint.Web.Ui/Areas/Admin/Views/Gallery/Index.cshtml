@@ -1,0 +1,106 @@
+﻿@model List<GalleryViewModel>
+
+
+@{
+
+    ViewData["Title"] = "تصویر محصول";
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+
+        <small>تصویر محصول</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">تصویر محصول</li>
+    </ol>
+</section>
+
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <a href='/Admin/Gallery/Create?productid=@Model.First().ProductId&returnUrl=/Admin/Gallery/Index' class="btn btn-success"><i class="fa fa-plus-square"></i> افزودن  تصویر</a>
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-info"><i class="fa fa-plus-square"></i>  برگشت ب لیست محصولات</a>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                               تصویر محصول
+                                            </th>
+                                            <th class="text-center">
+                                               نام محصول
+                                            </th>
+                                            <th class="text-center">ویرایش </th>
+                                            <th class="text-center"> حذف</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="text-center">
+
+                                                    <div class="form-horizontal"> 
+                                                        <img src="~/uploads/Products/@item.PictureName" height="100" width="100" alt="@item.Titel" />
+                                                    </div>
+                                                   
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(modelItem => item.Titel)
+                                                </td>
+                                                @if (item.Default == true)
+                                                {
+                                                    <td style="text-align:center">
+                                                        <a asp-action="Edit" asp-controller="Gallery" asp-route-galleryid="@item.GalleryId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
+                                                        &nbsp;&nbsp;
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="text-align:center">
+                                                        <a asp-action="Edit" asp-controller="Gallery" asp-route-galleryid="@item.GalleryId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
+                                                        &nbsp;&nbsp;
+
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-controller="Gallery" asp-action="Delete" asp-route-galleryid="@item.GalleryId"><i class="fa fa-trash" style="color:red; font-size:20px;"></i></a>
+                                                        &nbsp;&nbsp;
+                                                    </td>
+                                                }
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

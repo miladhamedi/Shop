@@ -1,0 +1,107 @@
+﻿@model List<ShopingCartViewModel>
+@inject IGalleryService galleryservice
+@inject IProductService productservice
+
+@{
+
+    ViewBag.Titel = "جزئیات صورتحساب";
+
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>صورتحساب ها</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت صورتحساب ها</li>
+    </ol>
+</section>
+
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-userid="@Model.First().UserId" class="btn btn-info">  مشخصات پستی کاربر</a>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr>
+                                            <th class='pic text-center'><span>محصول</span></th>
+                                            <th class='subject text-center'><span>شرح</span></th>
+                                            <th class='price text-center'><span>قیمت واحد</span></th>
+                                            <th class='count text-center'><span>تعداد</span></th>
+                                            <th class='total_price text-center  '><span>قیمت کل</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            var product = productservice.GetByIdPro(item.ProductId);
+                                            <tr>
+                                                <td class="text-center">
+
+                                                    <div class="form-horizontal">
+                                                        @{
+                                                            string UrlImg = galleryservice.GetPicName(item.ProductId);
+                                                        }
+
+                                                        <img class='pic' src='/uploads/Products/@UrlImg' height="100" width="100" alt="@product.Titel" />
+                                                    </div>
+
+                                                </td>
+
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(modelItem => product.Titel)
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class='price'>@product.Price</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(modelItem => item.Count)
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <span class='total_price'>
+                                                        @{
+                                                            var price = item.Price;
+                                                            var count = item.Count;
+                                                            var pricecount = Convert.ToDecimal(price) * count;
+                                                        }
+
+                                                        @pricecount.ToString()
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

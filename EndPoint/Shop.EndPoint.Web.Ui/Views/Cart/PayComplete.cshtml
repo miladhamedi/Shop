@@ -1,0 +1,106 @@
+﻿@model InvoiceViewModel
+@{
+
+    ViewBag.Breadcromb = "صورتحساب سفارش";
+    ViewBag.Title = "صورتحساب سفارش";
+}
+
+<partial name="_HeaderPartial" />
+<div class='cart_part1'>
+    <div class='container'>
+        <div class='inner'>
+            <div class='bottom_part'>
+                <div class='table_style1'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class='text-center'><span> کد محصول</span></th>
+                                <th class='text-center'><span>تصویر محصول</span></th>
+                                <th class='text-center'><span>نام</span></th>
+                                <th class='text-center'><span>قیمت واحد</span></th>
+                                <th class='text-center'><span>تعداد</span></th>
+                                <th class='text-center'><span>قیمت کل</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.ListCarts)
+                            {
+
+                                var PricePro = Math.Round(item.Price);
+                                var PriceProductstring = string.Format("{0:0,0}", PricePro);
+
+                                <tr>
+                                    <td>
+                                        <span class="price">@item.ProductCode</span>
+                                    </td>
+                                    <td>
+                                        <a href="/Home/ProductDetails?id=@item.ProductId" title='@item.ProductName' class='link'>
+                                            <img class='pic' src='/uploads/Products/@item.ProductImge' title='@item.ProductName' alt=''>
+                                        </a>
+                                    </td>
+                                    <td>@item.ProductName</td>
+                                    <td><span class='price'>@PriceProductstring</span></td>
+                                    <td>@item.Count</td>
+                                    <td>
+
+                                        <span class='total_price'>
+                                            @{
+                                                var Price = item.Price;
+                                                var count = item.Count;
+                                                var pricecount = Price * count;
+                                                var PriceProduct = Math.Round(pricecount);
+                                                var PriceProstring = string.Format("{0:0,0}", PriceProduct);
+                                            }
+
+                                            @PriceProstring
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- close .table_style1 -->
+                <div class='title_style7' style='padding:30px 0 20px;'>
+                    <span class='title'>خلاصه صورت حساب شما</span>
+                </div>
+            @{ 
+                var price = Math.Round(Model.Price);
+                var pricepro = string.Format("{0:0,0}", price);
+                var pricetax = Math.Round(Model.Tax);
+                var PriceproTax = string.Format("{0:0,0}", pricetax);
+                var priceAmount = Math.Round(Model.AmountSent);
+                var PriceproAmount = string.Format("{0:0,0}", priceAmount);
+            }
+                <div class='final_price'>
+                    <ul class='step none_list_style'>
+                        <li class='item clearfix'>
+                            <div class='title'>زمان خرید</div>
+                            <div class='price'>@Model.Date </div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title'>شناسه خرید و شماره مرجع بانکی</div>
+                            <div class='price'>@Model.TransactionId  -- @Model.RefrenceId</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title'>جمع کل خرید شما</div>
+                            <div class='price'>@pricepro تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title'>مالیات برارزش افزوده</div>
+                            <div class='price'>@PriceproTax تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title'>هزینه ارسال</div>
+                            <div class='price'>@PriceproAmount تومان</div>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div><!--close .bottom_part-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div>

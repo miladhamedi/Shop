@@ -1,0 +1,654 @@
+﻿@inject IUserService userservice
+@inject IShopingCartService shopingservice
+@inject IWeightService weightservice
+@inject IProductService productserivce
+@inject IGalleryService galleryservice
+@{
+    var Appuser = User.Identity.Name;
+    var user = userservice.GetByUserName(Appuser);
+    var Cartlist = shopingservice.GetAllUserById(user.Id);
+    var pricsend = weightservice.SendPrice(Appuser);
+    var discount = shopingservice.GetDisCount(Appuser);
+
+    ViewBag.Breadcromb = "بازبینی سفارش";
+    ViewBag.Title = "بازبینی سفارش";
+}
+
+<partial name="_HeaderPartial" />
+
+@{
+    if (ViewBag.Message != null)
+    {
+        string OK = ViewBag.Status.ToString();
+        if (OK == "OK")
+        {
+            string Msg = ViewBag.Message.ToString();
+            <div class="alarm_style2">
+                <div class="success_alarm box">
+                    <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                    <div class="alarm_text">@Msg</div>
+                    <div class="close_icon"><i class="i-cancel"></i></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            string Msg = ViewBag.Message.ToString();
+            <div class="alarm_style2">
+                <div class="error_alarm box">
+                    <div class="alarm_icon"><img src="/assets/front/_images/icon/er" alt=""></div>
+                    <div class="alarm_text">@Msg</div>
+                    <div class="close_icon"><i class="i-cancel"></i></div>
+                </div>
+            </div>
+        }
+    }
+}
+
+<div class='cart_part1'>
+    <div class='container'>
+        <div class='inner'>
+            <div class='top_part'>
+                <ul class='step clearfix none_list_style'>
+                    <li class='item  checked  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>1</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+ 
+
+                                            </svg>
+                                </div>
+                            </div><!--close .number-->
+                            <div class='content'>
+                                <span>سبد خرید</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div><!--close .content-->
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item  checked  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>3</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>اطلاعات پستی گیرنده</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item  checked  '>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>4</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>اطلاعات ارسال سفارش</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                    <li class='item      active'>
+                        <a href='' title='' class='link'>
+                            <div class='number'>
+                                <span>5</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow"
+                                          d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <path id="dec-post-arrow_1_"
+                                          d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                            <div class='content'>
+                                <span>بازبینی سفارش</span>
+                                <div class='svg_arrow'>
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                         xml:space="preserve">
+                                    <path id="dec-post-arrow_1_"
+                                          d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li><!--close .item-->
+                </ul><!--close .step-->
+            </div><!--close .top_part-->
+            <div class='bottom_part'>
+                <div class='table_style1'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class='text text-center'><span>محصول</span></th>
+                                <th class='subject text-center'><span>شرح</span></th>
+                                <th class='price text-center'><span>قیمت واحد</span></th>
+                                <th class='count text-center'><span>تعداد</span></th>
+                                <th class='total_price text-center'><span>قیمت کل</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Cartlist)
+                            {
+                                var product = productserivce.GetByIdPro(item.ProductId);
+                                var ProPrice = Math.Round(item.Price);
+                                var ProductPrice = string.Format("{0:0,0}", ProPrice);
+                                <tr>
+                                    <td>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title='@product.Titel' class='link'>
+                                            @{
+                                                string UrlImg = galleryservice.GetPicName(item.ProductId);
+                                            }
+                                            <img class='pic' src='/uploads/Products/@UrlImg' title='' alt=''>
+                                        </a>
+                                    </td>
+                                    <td>@product.Titel</td>
+                                    <td><span class='price'>@ProductPrice</span></td>
+                                    <td>@item.Count</td>
+                                    <td>
+                                        <span class='total_price'>
+                                            @{
+
+                                                var priceall = Convert.ToInt32(item.Price) * item.Count;
+                                                var priceallstring = string.Format("{0:0,0}", priceall);
+
+                                                }
+                                            @priceallstring
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- close .table_style1 -->
+                <div class='title_style7' style='padding:30px 0 20px;'>
+                    <span class='title'>خلاصه صورت حساب شما</span>
+                </div>
+                <div class='final_price'>
+                    <ul class='step none_list_style'>
+                        @{
+
+                            List<int> pricesum = new List<int>();
+
+                            foreach (var item in Cartlist)
+                            {
+                                pricesum.Add(Convert.ToInt32(item.Price) * item.Count);
+                            }
+                            var sumpay = pricesum.Sum();
+                            var PriceSum = string.Format("{0:0,0}", sumpay);
+
+                            List<int> listtax = new List<int>();
+
+                            foreach (var item in Cartlist)
+                            {
+                                listtax.Add(Convert.ToInt32(item.Tax) * item.Count);
+                            }
+                            var sumtax = listtax.Sum();
+                            var SumTax = string.Format("{0:0,0}", sumtax);
+
+
+                            var sumall = (Convert.ToInt32(sumtax) + Convert.ToInt32(sumpay) + Convert.ToInt32(pricsend) - discount);
+                            var SumallPrice = Math.Round(sumall);
+                            var SumAllPrice = string.Format("{0:0,0}", SumallPrice);
+
+                            var Disprice = Math.Round(discount);
+                            var Dispricestring = string.Format("{0:0,0}", Disprice);
+
+                            var AmonutSent = Math.Round(pricsend);
+                            var PriceSent = string.Format("{0:0,0}", AmonutSent);
+                        }
+
+                        <li class='item clearfix'>
+                            <div class='title '>جمع کل خرید شما</div>
+                            <div class='price'>@PriceSum تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title '>جمع تخفیف</div>
+                            <div class='price'>@Dispricestring تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title '>مالیات برارزش افزوده</div>
+                            <div class='price'>@SumTax تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title '>هزینه ارسال</div>
+                            <div class='price'>@PriceSent تومان</div>
+                        </li>
+                        <li class='item clearfix'>
+                            <div class='title '>جمع کل قابل پرداخت</div>
+                            <div class='price'> @SumAllPrice تومان</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class='title_style7' style='padding:30px 0 20px;'>
+                    <span class='title'>اطلاعات ارسال سفارش</span>
+                </div>
+                <div class='client_position'>
+                    <ul class='step none_list_style'>
+                        <li class='item clearfix'>
+                            <div class='icon'><i class='i-marker'></i></div>
+                            <div class='text'>
+                                این بسته به
+                                <span>@user.NameFamily</span>
+                                به آدرس
+                                <span>@user.City - @user.Address - @user.PostalCode</span>
+                                به شماره تلفن
+                                <span><bdi>@user.PhoneNumber</bdi></span>
+                                تحویل داده خواهد شد.
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class='title_style7' style='padding:30px 0 20px;'>
+                    <span class='title'>انتخاب درگاه پرداخت</span>
+                </div>
+
+                <form asp-action="Pay" asp-controller="Cart" method="post">
+                    <input type="hidden" name="pricepay" value="@sumall" />
+                    <input type="hidden" name="username" value="@User.Identity.Name" />
+                    <div class='final_price'>
+                        <ul class='step none_list_style'>
+                            <li class='item clearfix'>
+                                <div class='right_part'>
+                                    <label class='check_radio_style1'>
+                                        <input type='radio' name='bankid' value="2" id='payment1'>
+                                        <span class='icon'></span>
+                                    </label>
+                                </div><!-- close .right_part -->
+                                <div class='left_part'>
+                                    <div class='icon'><i class='i-send-box1'></i></div>
+                                    <div class='title'>زرین پال</div>
+                                    <div class='sub_title'>پرداخت مطمعا و آنلاین</div>
+                                </div><!-- close .left_part -->
+                            </li><!-- close .item -->
+                           
+                        </ul>
+                    </div>
+                    <div class='cart_btn'>
+                        <button style="border: none;vertical-align: top;cursor: pointer;" type="submit"
+                                class='btn_style1 add_cart'>
+                            <i class='i-left-open'></i><span>پرداخت آنلاین خرید</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div><!--close .bottom_part-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .cart_part1-->

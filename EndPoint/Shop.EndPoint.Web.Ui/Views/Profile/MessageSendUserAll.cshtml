@@ -1,0 +1,157 @@
+﻿@model ShopActionResult<List<MessageViewModel>>
+@inject IMessageService messageservice
+@inject IUserService  userservice
+@{
+    ViewData["Title"] = "پیام های ارسالی";
+    ViewData["Breadcromb"] = " پیام های ارسالی";
+    var user = User.Identity.Name;
+    var AppUser = userservice.GetByUserName(user);
+    var listMessAdmin = messageservice.GetAdminMessageRecive(AppUser.Id);
+
+}
+
+<partial name="_HeaderPartial" />
+
+<div class='panel_style1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+            <partial name="_HeaderProfile" />
+            <div class="panel_content">
+                <div class="massage_style1">
+                    <div class="top_part">
+                        <ul class="step clearfix none_list_style">
+                            <li class="item">
+                                <a asp-controller="Profile" asp-action="MessageReply" title="" class="link">پیام های دریافتی</a>
+                                @{
+                                    if (listMessAdmin.Counts > 0)
+                                    {
+                                        <span class="count">
+                                            @listMessAdmin.Counts
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="count">
+                                            0
+                                        </span>
+
+                                    }
+                                }
+                            </li>
+                            <li class="item active">
+                                <a asp-controller="Profile" asp-action="MessageSendUserAll" title="" class="link">پیام های ارسالی</a>
+                                @{
+                                    if (Model.Counts > 0)
+                                    {
+                                        <span class="count">
+                                            @Model.Counts
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="count">
+                                            0
+                                        </span>
+
+                                    }
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bottom_part">
+                        <div class="table2">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class='text-center'>#</th>
+                                        <th class='text-center'> پیام</th>
+                                        <th class='text-center'>تاریخ ارسال</th>
+                                        <th class='text-center'>وضعیت</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int L = 1;
+                                        if (Model.Data.Count() > 0)
+                                        {
+                                            foreach (var item in Model.Data)
+                                            {
+                                                <tr>
+                                                    <td>@L</td>
+                                                    <td>@item.Text</td>
+                                                    <td>@item.Date.ToString("yyyy/MM/dd")</td>
+                                                    <td>
+                                                        @if (item.Confirm == true)
+                                                        {
+                                                            <div class="read">خوانده شده</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="not_read">خوانده نشده</div>
+                                                        }
+
+                                                    </td>
+
+                                                </tr>
+                                                L = L + 1;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td>شما تاکنون هیچ پیامی ارسال نکرده اید</td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination_style1">
+                            <nav aria-label="...">
+
+                                @for (int i = 1; i <= Model.Pages; i++)
+                                {
+
+                                    if (Model.Page == i)
+                                    {
+
+                                        <ul class="pagination pagination-lg">
+                                            <li class="page-item  active">
+                                                <a class="page-link" href='/Profile/MessageSendUserAll?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                            </li>
+                                        </ul>
+
+
+                                    }
+                                    else
+                                    {
+
+                                        <ul class="pagination pagination-lg">
+                                            <li class="page-item ">
+                                                <a class="page-link" href='/Profile/MessageSendUserAll?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                            </li>
+
+                                        </ul>
+
+                                    }
+
+
+                                }
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

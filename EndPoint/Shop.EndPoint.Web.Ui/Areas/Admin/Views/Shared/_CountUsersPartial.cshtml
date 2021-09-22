@@ -1,0 +1,13 @@
+﻿@inject IProfileIndexService profileindexservice
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+        <div class="info-box-content">
+            <span class="info-box-text" style="text-align: center;padding: 10px;">تعداد کاربران</span>
+            <span class="info-box-number" style="text-align: center;">@profileindexservice.GetAllUser().Count()<small>&nbsp;&nbsp;عدد</small></span>
+        </div>
+
+    </div>
+
+</div>

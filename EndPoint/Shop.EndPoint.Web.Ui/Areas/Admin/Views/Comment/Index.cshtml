@@ -1,0 +1,155 @@
+﻿@model ShopActionResult<List<CommentViewModel>>
+@inject IProductService productservice
+@{
+    ViewData["Title"] = "نظرات";
+   
+}
+
+
+
+
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>نظرات </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت نظرات </li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                @if (Model.Data.Count() > 0)
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                        <thead>
+                                            <tr>
+
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().NameFamily)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().Date)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().Confirm)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().ProductName)
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Data)
+                                            {
+                                                var ProductName = productservice.GetByIdPro(Model.Data.First().ProductId).Titel;
+
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.NameFamily)
+                                                    </td>
+                                                    <td>
+                                                        @ShamsiPlugin.ToPeString(item.Date)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Confirm)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => ProductName)
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Details" asp-route-id="@item.CommentId"><i class="fa fa-clipboard" style="color:forestgreen; font-size:23px;"></i></a>    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.CommentId"><i class="fa fa-trash" style="color:red; font-size:23px;"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+
+                                }
+                                else
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;" class="alert alert-danger">
+                                                    <span> تاکنون نظری  ثبت نشده!!</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.Pages; i++)
+                                    {
+
+                                        if (Model.Page == i)
+                                        {
+
+
+
+                                            <li class="active">
+                                                <a href="/Admin/Comment/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/Admin/Comment/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+

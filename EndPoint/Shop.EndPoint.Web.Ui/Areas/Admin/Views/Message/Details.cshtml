@@ -1,0 +1,86 @@
+﻿@model MessageViewModel
+@inject IUserService userservice
+
+@{
+   
+    ViewData["Title"] = "جزئیات پیام";
+    
+}
+
+
+<style>
+    span {
+        color: #3c8dbc;
+        font-weight: 700;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>پیام ها دریافت شده</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت پیام های دریافت شده</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="timeline">
+
+                <li class="time-label">
+                    <span class="bg-red">
+                        ارسال کننده:
+                        @userservice.GetByUserId(Model.UserIdSend).NameFamily
+
+                    </span>
+                </li>
+
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">گیرنده:<span href="">  @userservice.GetByUserId(Model.UserIdRecive).NameFamily</span> </h3>
+                    </div>
+                </li>
+
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">تایید | عدم تایید:<span href="">  @Html.DisplayFor(model => model.Confirm) </span> </h3>
+                    </div>
+                </li>
+
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"> @Html.DisplayNameFor(model => model.Date):<span href=""> @ShamsiPlugin.ToPeString(Model.Date)</span> </h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"> @Html.DisplayNameFor(model => model.Text):<span href="">@Html.DisplayFor(model => model.Text)</span> </h3>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <br />
+    <div>
+        <form asp-action="Create" asp-controller="Message" method="post">
+            <input type="hidden" name="usersendid" value="@Model.UserIdSend" />
+            <input type="hidden" name="messageid" value="@Model.MessageId" />
+            <textarea name="replay" required class="form-control"></textarea><br />
+            <input type="submit"  class="btn btn-info" value="پاسخ" />
+        </form>
+    </div>
+</section>
+
+

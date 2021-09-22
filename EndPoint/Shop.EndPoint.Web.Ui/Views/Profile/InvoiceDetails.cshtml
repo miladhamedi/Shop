@@ -1,0 +1,83 @@
+﻿@model List<ShopingCartViewModel>
+@inject IGalleryService galleryservice
+@inject IProductService productservice
+
+@{
+
+    ViewBag.Titel = "جزئیات صورتحساب";
+    ViewBag.Breadcromb = "سبد خرید";
+
+}
+
+<partial name="_HeaderPartial" />
+
+
+@{
+   
+        <div class='cart_part1'>
+            <div class='container'>
+                <div class='inner'>
+
+                    <div class='bottom_part'>
+                        <div class='table_style1'>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class='pic text-center'><span>محصول</span></th>
+                                        <th class='subject text-center'><span>شرح</span></th>
+                                        <th class='price text-center'><span>قیمت واحد</span></th>
+                                        <th class='count text-center'><span>تعداد</span></th>
+                                        <th class='total_price text-center  '><span>قیمت کل</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        var product = productservice.GetByIdPro(item.ProductId);
+
+
+                                        <tr>
+                                            <td>
+                                                    @{
+                                                        string UrlImg = galleryservice.GetPicName(item.ProductId);
+                                                    }
+                                                <img class='pic' src='/uploads/Products/@UrlImg' title='' alt=''>
+                                            </td>
+                                            <td>@product.Titel</td>
+                                            <td><span class='price'>@product.DiscuntedPrice</span></td>
+                                            <td>
+                                                <div class='quantity_style1'>
+
+                                                    <input type='text' data-item="@item.Count" value='@item.Count'>
+
+                                                </div>
+                                            </td>
+                                           
+                                            <td>
+                                                <span class='total_price'>
+                                                    @{
+                                                        var price = item.Price;
+                                                        var count = item.Count;
+                                                        var pricecount = price * count;
+                                                    }
+
+                                                    @pricecount
+
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        
+                                    }
+                                </tbody>
+                            </table>
+                        </div><!-- close .table_style1 -->
+                       
+                       
+                    </div><!--close .bottom_part-->
+                </div><!--close .inner-->
+            </div><!--close .container-->
+        </div><!--close .cart_part1-->
+
+   
+}

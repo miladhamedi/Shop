@@ -1,0 +1,121 @@
+﻿@model ShopActionResult<List<CommentViewModel>>
+
+@{
+    ViewData["Title"] = "پیام های من";
+    ViewData["Breadcromb"] = "پیام های من";
+
+}
+
+<partial name="_HeaderPartial" />
+
+
+<div class='panel_style1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+
+            <partial name="_HeaderProfile" />
+            <div class='panel_content'>
+                <div class='table2'>
+                    @{
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class='text-center'>#</th>
+                                    <th class='text-center'>نام محصول</th>
+                                    <th class='text-center'>تاریخ ارسال</th>
+                                    <th class='text-center'>وضعیت</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Data.Count > 0)
+                                {
+
+
+
+                                    int i = 1;
+                                    foreach (var item in Model.Data)
+                                    {
+
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.ProductName</td>
+                                            <td>@ShamsiPlugin.ToPeString(item.Date)</td>
+                                            <td>
+                                                @if (item.Confirm == false)
+                                                {
+                                                    <div class='not_read'>تایید نشده</div>
+                                                }
+                                                else
+                                                {
+                                                    <div class='read'>تایید شده</div>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                        i = i + 1;
+                                    }
+
+
+                                }
+                                else
+                                {
+
+
+
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>نظری  ثبت  نشده</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+                </div><!-- close .table2 -->
+                <div class="pagination_style1">
+                    <nav aria-label="...">
+
+                        @for (int i = 1; i <= Model.Pages; i++)
+                        {
+
+                            if (Model.Page == i)
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item  active">
+                                        <a class="page-link" href='/Profile/ListComment?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+                                </ul>
+
+
+                            }
+                            else
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item ">
+                                        <a class="page-link" href='/Profile/ListComment?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+
+                                </ul>
+
+                            }
+
+
+                        }
+                    </nav>
+                </div>
+            </div>
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .panel_style1-->

@@ -1,0 +1,67 @@
+﻿@model ColorViewModel
+
+@{
+    ViewData["Title"] = "اضافه کردن رنگ";
+
+}
+
+<script src="~/jscolor_Images/jscolor.js"></script>
+<section class="content-header">
+    <h1>
+        اضافه کردن
+        <small>رنگ </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">اضافه کردن رنگ </li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                    </div>
+
+                    <form asp-area="Admin" asp-action="Create" asp-controller="Color" method="post">
+                        <div class="box-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="ColorPro"></label>
+                                <input class="form-control" id="Color" asp-for="ColorPro" placeholder="نام رنگ" type="text">
+                                <span asp-validation-for="ColorPro" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ColorCode"></label>
+                                <input class="color form-control" asp-for="ColorCode" id="ColorCode" placeholder="کد رنگ ">
+                                <span asp-validation-for="ColorCode" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

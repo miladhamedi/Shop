@@ -1,0 +1,123 @@
+﻿@model MessageViewModel
+@inject IMessageService messageservice
+@inject IUserService  userservice
+@{
+    ViewData["Title"] = "پیام های من";
+    ViewData["Breadcromb"] = " پیام های من";
+    var user = User.Identity.Name;
+    var AppUser = userservice.GetByUserName(user);
+    var listMessage = messageservice.GetUserMessageAll(AppUser.Id);
+    var listMessAdmin = messageservice.GetAdminMessageRecive(AppUser.Id);
+}
+
+<partial name="_HeaderPartial" />
+
+<div class='panel_style1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+            @{
+                if (ViewBag.Message != null)
+                {
+
+                    string message = ViewBag.Message.ToString();
+
+                    if (message == "OK")
+                    {
+
+                        <div class="alarm_style2">
+                            <div class="success_alarm box">
+                                <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                                <div class="alarm_text">پیام شما با موفقیت ارسال گردید</div>
+                                <div class="close_icon"><i class="i-cancel"></i></div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alarm_style2">
+                            <div class="success_alarm box">
+                                <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                                <div class="alarm_text">  ارسال پیام ناموفق بود </div>
+                                <div class="close_icon"><i class="i-cancel"></i></div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+            <partial name="_HeaderProfile" />
+
+            <div class="panel_content">
+                <div class="title_style7">
+                    <span class="title">پیام به مدیریت سایت</span>
+                </div>
+                <div class="form_style2">
+                    <form style="width:60%; margin:0 auto;" asp-controller="Profile" asp-action="MessageSend" method="POST">
+                        <input type="hidden" asp-for="UserNameSend" name="UsernameSend" value="@User.Identity.Name" />
+                        <ul class="step none_list_style clearfix">
+                            <li class="item textarea">
+                                <div class="icon"><i class="i-check"></i></div>
+                                <textarea asp-for="Text" placeholder=".... پیام" maxlength="240" name="Text" type="text"></textarea>
+                                <span class="focus_bg"></span>
+                                <span class="important"><i class="i-star"></i></span>
+                                <span asp-validation-for="Text" class="text-danger"></span>
+                            </li>
+
+                            <li class="item submit">
+                                <button type="submit">ارسال پیام</button>
+                            </li>
+
+                        </ul>
+                    </form>
+                </div>
+                <div class="massage_style1">
+                    <div class="top_part">
+                        <ul class="step clearfix none_list_style">
+                            <li class="item">
+                                <a asp-controller="Profile" asp-action="MessageReply" title="" class="link">پیام های دریافتی</a>
+                                @{
+                                    if (listMessAdmin.Counts > 0)
+                                    {
+                                        <span class="count">
+                                            @listMessAdmin.Counts
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="count">
+                                            0
+                                        </span>
+
+                                    }
+                                }
+
+                            </li>
+                            <li class="item ">
+                                <a asp-controller="Profile" asp-action="MessageSendUserAll" title="" class="link">پیام های ارسالی</a>
+                                @{
+                                    if (listMessage.Counts > 0)
+                                    {
+                                        <span class="count">
+                                            @listMessage.Counts
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="count">
+                                            0
+                                        </span>
+
+                                    }
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

@@ -1,0 +1,165 @@
+﻿@model ShopActionResult<List<ArticleViewModel>>
+
+@{
+
+    ViewData["Title"] = "مقالات";
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>مقاله ها</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت مقاله ها</li>
+    </ol>
+</section>
+
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <a asp-action="Create" class="btn btn-info"><i class="fa fa-plus-square"></i> مقاله جدید</a>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                @if (Model.Data.Count() > 0)
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    @Html.DisplayNameFor(model => model.Data.First().Image)
+                                                </th>
+                                                <th class="text-center">
+                                                    @Html.DisplayNameFor(model => model.Data.First().Titel)
+                                                </th>
+                                                <th class="text-center">
+                                                    @Html.DisplayNameFor(model => model.Data.First().View)
+                                                </th>
+                                                <th class="text-center">
+                                                    @Html.DisplayNameFor(model => model.Data.First().Date)
+                                                </th>
+                                                <th class="text-center"> عملیات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Data)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">
+
+                                                        <div class="form-horizontal">
+                                                            <img src="~/uploads/article/@item.Image" height="100" width="100" alt="@item.Titel" />
+                                                        </div>
+
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        @Html.DisplayFor(modelItem => item.Titel)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @Html.DisplayFor(modelItem => item.View)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @ShamsiPlugin.ToPeString(item.Date)
+                                                    </td>
+
+                                                    <td style="text-align:center">
+                                                        <a asp-area="Admin" asp-action="Edit" asp-controller="Article" asp-route-articleid="@item.ArticleId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
+                                                        &nbsp;&nbsp;
+                                                        <a asp-area="Admin" asp-controller="Article" asp-action="Delete" asp-route-articleid="@item.ArticleId"><i class="fa fa-trash" style="color:red; font-size:20px;"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;" class="alert alert-danger">
+                                                    <span> تاکنون مقاله ای ثبت نشده!!</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.Pages; i++)
+                                    {
+
+                                        if (Model.Page == i)
+                                        {
+
+
+
+                                            <li class="active">
+                                                <a href="/Admin/Article/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/Admin/Article/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+

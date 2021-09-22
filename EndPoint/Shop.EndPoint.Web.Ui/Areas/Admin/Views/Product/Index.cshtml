@@ -1,0 +1,221 @@
+﻿@model ShopActionResult<List<ProductViewModel>>
+
+@{
+    ViewData["Title"] = "مدیریت محصولات";
+
+}
+
+<style>
+    th {
+        text-align: center;
+    }
+
+    .even {
+        background-color: white;
+    }
+
+    .odd {
+        background-color: #ebebeb;
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>محصولات</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت  محصولات</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <a asp-controller="Product" asp-area="Admin" asp-action="Create" class="btn btn-info"><i class="fa fa-plus-square"></i>محصول جدید</a>
+                    <br />
+                    <div class=" col-md-offset-10 col-md-12">
+                        <span>راهنما:</span>
+                        <span class="btn" style="background-color:#ffeaed;">
+                            اتمام موجودی
+                        </span>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().CodeProduct)
+                                            </th>
+                                            <th>
+
+                                                @Html.DisplayNameFor(model => model.Data.First().Titel)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().Price)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().DiscuntPercent)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().DiscuntedPrice)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().ActiveInActive)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().Date)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Data.First().Stcok)
+                                            </th>
+                                            <th>ویرایش</th>
+                                            <th>مشخصات فنی</th>
+                                            <th> تصاویر</th>
+                                            <th> رنگ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int eo = 1;
+
+                                        }
+
+                                        @foreach (var item in Model.Data)
+                                        {
+                                            string evenodd = "";
+                                            if (eo % 2 == 0)
+                                            {
+
+                                                evenodd = "even";
+                                            }
+                                            else
+                                            {
+                                                evenodd = "odd";
+                                            }
+                                            var price = Math.Round(item.Price);
+                                            var pricestring = string.Format("{0:0,0}", price);
+                                            var percentDiscount = Math.Round(item.DiscuntPercent);
+                                            var percentpri = string.Format("{0:0,0}", percentDiscount);
+                                            var Discountprice = Math.Round(item.DiscuntedPrice);
+                                            var DisPrice = string.Format("{0:0,0}", Discountprice);
+                                            string bg_color = "";
+                                            if (item.Stcok == 0)
+                                            {
+                                                bg_color = "background-color:#ffeaed";
+                                            }
+                                            <tr style="@bg_color" class="@evenodd">
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CodeProduct)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Titel)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => pricestring)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => percentpri)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => DisPrice)
+                                                </td>
+                                                <td style="text-align:center">
+                                                    @if (item.ActiveInActive == true && item.Stcok > 0)
+                                                    {
+                                                        <i class="fa fa-eye" style="color:forestgreen">
+                                                        </i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-eye-slash" style="color:red">
+                                                        </i>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @ShamsiPlugin.ToPeString(item.Date)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Stcok)
+                                                </td>
+
+                                                <td>
+                                                    <a asp-controller="Product" asp-area="Admin" asp-action="Edit" asp-route-id="@item.ProductId"><i class="fa fa-edit" style="color:green;font-size:22px;"></i> </a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="TechnicalDetail" asp-action="Edit" asp-route-productid="@item.ProductId"><i class="fa fa-cogs" style="color:coral;font-size:22px;"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Gallery" asp-action="Index" asp-route-productid="@item.ProductId"><i class="fa fa-image" style="color:crimson;font-size:22px;"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="ProductColor" asp-action="Index" asp-route-productid="@item.ProductId"><i class="fa fa-check" style="color: blueviolet;font-size:22px;"></i></a>
+                                                </td>
+                                            </tr>
+                                            eo = eo + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.Pages; i++)
+                                    {
+
+                                        if (Model.Page == i)
+                                        {
+
+
+
+                                            <li class="active">
+                                                <a href="/Admin/Product/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/Admin/Product/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>

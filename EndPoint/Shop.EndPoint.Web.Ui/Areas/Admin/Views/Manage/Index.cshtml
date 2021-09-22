@@ -1,0 +1,32 @@
+﻿
+<section class="content-header">
+    <h1>
+        داشبورد
+        <small>مدیریت</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">داشبورد</li>
+    </ol>
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <partial name="_CountUsersPartial" />
+        <partial name="_CountProductsPartial" />
+        <div class="clearfix visible-sm-block"></div>
+        <partial name="_CountCommentsPartial" />
+        <partial name="_CountArticlePartial" />
+    </div>
+    <div class="row">
+
+        <div class="col-md-8">
+            <partial name="_LastProductPartial" />
+            <partial name="_LastOrderPartial" />
+        </div>
+        <partial name="_BillPartial" />
+
+    </div>
+
+</section>

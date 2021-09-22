@@ -1,0 +1,233 @@
+﻿@model ShopActionResult<List<ProductByCateViewModel>>
+
+
+
+@{
+    ViewData["Title"] = "آرشیو محصولات";
+    ViewData["Breadcromb"] = "آرشیو محصولات";
+    var allcategory = ViewBag.AllCategory;
+}
+
+
+
+
+
+<partial name="_HeaderPartial" />
+
+<div class='product_archive_part1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+            <div class='right_part'>
+                <div class='right_part1'>
+                    <div class='title_style5'>
+                        <span class='icon'><i class='i-list'></i></span>
+                        <div class='title'> دسته بندی محصولات</div>
+                    </div>
+                    <div class='list_part'>
+                        <ul class='step none_list_style'>
+                            @foreach (var item in allcategory.Data)
+                            {
+                                <li class='item'>
+
+                                    <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId" title='' class='link'>@item.Titel</a>
+                                    <div class='count'></div>
+
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div><!--close .right_part1-->
+                <div class='right_part2'>
+                    <div class='title_style5'>
+                        <span class='icon'><i class='i-search'></i></span>
+                        <div class='title'>جستجو پیشرفته</div>
+                    </div>
+                    <form asp-action="SearchPrice" asp-controller="Product" method="get">
+                        <div class='pro_search_part price_range'>
+
+                            <div class='title_style3'><span class='title'> بر اساس قیمت تومان</span></div>
+                            از  : <input type='text' name='min_price' placeholder="قیمت را وارد کنید">
+                            <br />
+                            <br />
+                            تا  : <input type='text' name='max_price' placeholder="قیمت را وارد کنید">
+                            <input type="hidden" name="categoryid" asp-for="Data.First().CategoryId" />
+                            <input type="submit" value="اعمال" />
+                        </div>
+
+                    </form>
+                </div>
+            </div><!--close .right_part-->
+            <div id="content" class='left_part'>
+                <div class='loading'>
+                    <img src='/assets/front/_images/loading/loader5.gif' title='' alt=''>
+                </div>
+                <div class='search_result'>
+                    <div class='search_title clearfix'>
+                        <div class='title'>@ViewData["Breadcromb"]</div>
+                        <div class='search_count'>
+                            نمایش <span>1</span> تا
+                            <span>4</span> از <span>4</span> آیتم
+                        </div>
+                    </div>
+                </div><!--close .search_result-->
+                <div class='box_style3'>
+                    <ul class='step clearfix none_list_style'>
+                        @if (Model.Data.Count() > 0)
+                        {
+                            @foreach (var item in Model.Data)
+                            {
+                                <li class='item'>
+                                    <div class='top_part'>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title='' class='pic'
+                                           style='background-image: url(/uploads/Products/@item.Picture);'></a>
+                                    </div><!--close .top_part-->
+                                    <div class='bottom_part'>
+                                        <div class='content_part'>
+                                            <a href='' title='' class='name ellipsis'>
+                                                @item.Title
+                                            </a>
+                                            @if (item.DisCountPercent >= 1)
+                                            {
+                                                var price = Math.Round(item.Price);
+                                                var pricestring = string.Format("{0:0,0}", price);
+
+                                                var Disprice = Math.Round(item.DisCountPrice);
+                                                var Dispricestring = string.Format("{0:0,0}", Disprice);
+
+                                                <div class='price_part'>
+                                                    <span class='org_price'>
+                                                        @pricestring
+                                                        تومان
+                                                    </span>
+                                                    <span class='off_price'>@Dispricestring تومان</span>
+                                                </div>
+                                              
+                                            }
+                                            else
+                                            {
+                                                var price = Math.Round(item.Price);
+                                                var pricestring = string.Format("{0:0,0}", price);
+
+                                                <div class='price_part'>
+                                                    <span class='org_price'>
+                                                        @pricestring
+                                                        تومان
+                                                    </span>
+
+                                                </div>
+
+                                            }
+
+
+                                        </div><!--close .content_part-->
+                                        <ul class='link_part clearfix none_list_style'>
+
+
+                                            <li class='item2 see_more'>
+                                            </li>
+
+                                            <li class='item2 add_cart'>
+                                                <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                                   title='' class='link2'>
+                                                    <i class='i-add-shop'></i>
+                                                    <span>جزئیات بیشتر کالا </span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div><!--close .bottom_part-->
+                                </li><!--close .item-->
+                            }
+
+                        }
+                        else
+                        {
+                            <li>
+                                <span>
+                                    محصولی یافت نشد
+                                </span>
+                            </li>
+                        }
+
+
+
+                        <form method="POST" action="/cart/add" id="cart-product-2" style="display: none;">
+                            <input type="hidden" name="product_id" value="2">
+                            <input type="hidden" name="_token" value="KubHdUwJNAhD3EiMO7ancz5OGMtQTMwekpJlr53n">
+                        </form>
+
+                    </ul>
+                </div><!--close .box_style3-->
+                <div class='pagination_style1'>
+                    <nav aria-label="...">
+
+                        @for (int i = 1; i <= Model.Pages; i++)
+                        {
+
+                            if (Model.Page == i)
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item  active">
+                                        <a class="page-link" href='/Product/ProductByCategory?catgoryid=@Model.Data.First().CategoryId&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+                                </ul>
+
+
+                            }
+                            else
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item ">
+                                        <a class="page-link" href='/Product/ProductByCategory?catgoryid=@Model.Data.First().CategoryId&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+
+                                </ul>
+
+                            }
+
+
+                        }
+                    </nav>
+                </div><!--close .left_part-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+
+
+    </div><!--close .product_archive_part1-->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

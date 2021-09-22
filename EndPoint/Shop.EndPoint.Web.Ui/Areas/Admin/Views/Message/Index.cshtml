@@ -1,0 +1,174 @@
+﻿@model ShopActionResult<List<MessageViewModel>>
+@inject IUserService userservice
+
+@{
+    
+    ViewData["Title"] = "لیست پیام ها";
+   
+}
+
+<style>
+    th {
+        text-align: center;
+    }
+
+    .even {
+        background-color: white;
+    }
+
+    .odd {
+        background-color: #ebebeb;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        مدیریت
+        <small>پیام ها</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت پیام ها </li>
+    </ol>
+</section>
+<!-- Main content -->
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                  
+                    <div class=" col-md-offset-10 col-md-12">
+
+                        <span>راهنما:</span>
+                        <span class="btn" style="background-color: #ffcfcf;">
+                           پیام تایید نشده
+                        </span>
+
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                @if (Model.Data.Count() > 0)
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().UserIdSend)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().Date)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Data.First().Confirm)
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Data)
+                                            {
+                                                string bg_color = "";
+                                                if (item.Confirm == true)
+                                                {
+                                                    bg_color = "#d0fade";
+
+                                                }
+                                                else
+                                                {
+                                                    bg_color = "#ffcfcf";
+                                                }
+                                                <tr style=" background-color:@bg_color">
+
+                                                    <td class="text text-center">
+                                                        @userservice.GetByUserId(item.UserIdSend).NameFamily
+                                                    </td>
+                                                    <td class="text text-center">
+                                                        @ShamsiPlugin.ToPeString(item.Date)
+                                                    </td>
+                                                    <td class="text text-center">
+                                                        @Html.DisplayFor(modelItem => item.Confirm)
+                                                    </td>
+                                                    <td class="text text-center">
+                                                        <a asp-controller="Message" asp-action="Details" asp-route-messageid="@item.MessageId">مشاهده</a>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;" class="alert alert-danger">
+                                                    <span> تاکنون پیامی دریافت نشده!!</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.Pages; i++)
+                                    {
+
+                                        if (Model.Page == i)
+                                        {
+
+
+
+                                            <li class="active">
+                                                <a href="/Admin/Message/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/Admin/Message/Index?page=@i.ToString()" aria-controls="example2" class="" data-dt-idx="1" tabindex="0">@i.ToString()</a>
+                                            </li>
+
+
+
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

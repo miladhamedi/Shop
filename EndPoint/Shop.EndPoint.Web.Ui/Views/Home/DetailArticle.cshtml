@@ -1,0 +1,52 @@
+﻿@model ArticleViewModel
+@{
+    ViewData["Title"] = Model.Titel;
+    ViewData["Breadcromb"] = Model.Titel;
+
+}
+
+
+ <partial name="_HeaderPartial" />
+
+ <div class='article_detail_part1'>
+     <div class='container'>
+         <div class='inner'>
+             <div class='top_part'>
+                 <div class='pic_part' style='background-image:url(/uploads/article/@Model.Image);'></div>
+                 <div class='info_part'>
+                     <ul class='step none_list_style clearfix'>
+                         <li class='item clearfix'>
+                             <span class='icon'><i class='i-eye'></i></span>
+                             <span class='content'>@Model.View</span>
+                         </li>
+                         <li class='item clearfix'>
+                             <span class='icon'><i class='i-calendar'></i></span>
+                             <span class='content'>@Model.Date</span>
+                         </li>
+                     </ul>
+                 </div><!--close .info_part-->
+                 <div class='title_style7'>
+                     <div class='title'>@Model.Titel</div>
+                 </div>
+             </div><!--close .top_part-->
+             <div class='bottom_part'>
+                 <article class='content_style1'>
+                     @Html.Raw(Model.Text)
+                 </article>
+
+             </div><!--close .bottom_part-->
+         </div><!--close .inner-->
+     </div><!--close .container-->
+     <br />
+     <br />
+     <div class='bottom_part'>
+         <div class='container'>
+             <div class='inner'>
+
+             </div><!--close .inner-->
+         </div><!--close .container-->
+     </div><!--close .bottom_part-->
+
+ </div><!--close .article_archive_part-->
+
+

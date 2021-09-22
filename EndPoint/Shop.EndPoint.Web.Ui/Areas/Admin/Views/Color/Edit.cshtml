@@ -1,0 +1,78 @@
+﻿@model ColorViewModel
+
+@{
+    ViewData["Title"] = "تغییر رنگ";
+
+}
+<script src="~/jscolor_Images/jscolor.js"></script>
+<link href="~/css/farbtastic.css" rel="stylesheet" />
+<script src="~/js/farbtastic.js"></script>
+
+<section class="content-header">
+    <h1>
+        اصلاح
+        <small>رنگ </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">اصلاح رنگ </li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                    </div>
+
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="Color" method="post">
+
+                        <div class="box-body">
+                            <input type="hidden" asp-for="ColorId" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="ColorPro"></label>
+                                <input class="form-control" asp-for="ColorPro" id="Color" type="text">
+                                <span asp-validation-for="ColorPro" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ColorCode"></label>
+                                <input class="color form-control" asp-for="ColorCode" id="ColorCode" name="ColorCode" type="text">
+                                <div id="colorpicker"></div>
+                                <span asp-validation-for="ColorCode" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">اصلاح رنگ</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#colorpicker').farbtastic('#ColorCode');
+
+    });
+
+</script>

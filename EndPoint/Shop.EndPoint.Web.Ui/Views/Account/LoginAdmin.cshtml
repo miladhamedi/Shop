@@ -1,0 +1,105 @@
+﻿@model LoginViewModel
+@{
+    ViewBag.Titel = "ورود مدیر";
+    ViewBag.Breadcromb = "ورود مدیر";
+
+}
+<partial name="_HeaderPartial" />
+
+<div class='register_part1'>
+
+
+   
+
+    <div class='container'>
+        <div class='inner clearfix'>
+            <div class='signin_part center-block '>
+                <div class='part_inner'>
+                    <div class='title_style7'>
+                        <div class='title'> عضویت </div>
+                    </div>
+                    <div class='form_style2'>
+                        <form id='frm_register' asp-controller="Account" asp-action="LoginAdmin" asp-route-returnUrl="/Admin/Manage/Index" method="post">
+                            <div asp-validation-summary="All"></div>
+                            <input type="hidden" name="_token" value="dsIvqII2PJDqUl2f2CzMupXHJ2TfV59ozigxe4jM">
+
+                            @{
+
+                                if (ViewBag.Status != null)
+                                {
+                                    string Message = ViewBag.Status.ToString();
+                                    if (Message == "OK")
+                                    {
+                                        string message = ViewBag.Message.ToString();
+                                        <div class="alarm_style2">
+                                            <div class="success_alarm box">
+                                                <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                                                <div class="alarm_text">@message</div>
+                                                <div class="close_icon"><i class="i-cancel"></i></div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        string message = ViewBag.Message.ToString();
+                                        <div class="alarm_style2">
+                                            <div class="success_alarm box">
+                                                <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                                                <div class="alarm_text">@message</div>
+                                                <div class="close_icon"><i class="i-cancel"></i></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+
+                            <ul class='step none_list_style clearfix'>
+                                <li class='item'>
+                                    <div class='icon'><i class='i-mail'></i></div>
+                                    <input asp-for="Email" type='text' placeholder='ایمیل یا نام کاربری'>
+                                    <span class='focus_bg'></span>
+                                    <span class='important'><i class='i-star'></i></span>
+                                    <span asp-validation-for="Email"></span>
+                                </li>
+                                <li class='item'>
+                                    <div class='icon'><i class='i-key'></i></div>
+                                    <input asp-for="Password" type='password' id="password" placeholder='کلمه عبور'>
+                                    <span class='focus_bg'></span>
+                                    <span class='important'><i class='i-star'></i></span>
+                                    <span asp-validation-for="Password"></span>
+
+                                    <div class="singin_part" style="text-align:left">
+                                        <div class="text">
+                                            <a asp-action="ForgotPassword" asp-controller="Account" title="" class="link">رمزخود را فراموش کرده اید؟</a>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li style="margin-right:26px;">
+                                    <span class='focus_bg'></span>
+                                    <input type="checkbox" asp-for="RememberMe" name="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+
+                                </li>
+                                <li class='item submit'>
+                                    <button type="submit" class="submit">ورود</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div><!-- close .part_inner -->
+            </div><!-- close .signin_part -->
+        </div><!-- close .inner -->
+    </div><!-- close .continer -->
+</div><!-- close .register_part1 -->
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+

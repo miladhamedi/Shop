@@ -1,0 +1,72 @@
+﻿@inject IUserService userservice
+@{
+    ViewBag.Titel = "پروفایل";
+    ViewBag.Breadcromb = "پروفایل";
+    var user = User.Identity.Name;
+
+}
+
+
+<partial name="_HeaderPartial" />
+<div class='panel_style1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+         <partial name="_HeaderProfile"/>
+         <div class='panel_content'>
+             @{
+                      if (ViewBag.Message != null)
+                 {
+                     string message = ViewBag.Message.ToString();
+
+                     if (message == "Add")
+                     {
+
+                         <div class="alarm_style2">
+                             <div class="success_alarm box">
+                                 <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                 <div class="alarm_text">مشخصات تکمیلی با موفقیت ثبت شد</div>
+                                 <div class="close_icon"><i class="i-cancel"></i></div>
+                             </div>
+                         </div>
+
+                     }
+                     if (message == "NotAdd")
+                     {
+                         <div class="alarm_style2">
+                             <div class="success_alarm box">
+                                 <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                 <div class="alarm_text">مشخصات ثبت نشد</div>
+                                 <div class="close_icon"><i class="i-cancel"></i></div>
+                             </div>
+                         </div>
+
+                     }
+
+                 }
+
+
+
+               
+             }
+
+             <div class='form_style2'>
+                 @{
+                     if (userservice.checkValueUser(user) == false)
+                     {
+                         <partial name="_AddressUserPartial" />
+                     }
+                     if (userservice.checkValueUser(user) == true)
+                     {
+                         <partial name="_EditProfilePartial" />
+
+                     }
+
+
+
+                 }
+
+             </div><!--close .form_style2-->
+         </div><!--clsoe .panel_content-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .panel_style1-->

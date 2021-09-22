@@ -1,0 +1,114 @@
+﻿@model ShopActionResult<List<InvoiceViewModel>>
+@{
+    ViewData["Title"] = " سفارش های من";
+    ViewData["Breadcromb"] = " سفارش های من";
+
+}
+
+<partial name="_HeaderPartial" />
+
+<div class="panel_style1">
+    <div class="container">
+        <div class="inner clearfix">
+            <partial name="_HeaderProfile" />
+            <div class="panel_content">
+                <div class="title_style7">
+                    <span class="title">لیست خرید های من</span>
+                </div>
+                <div class="table2 table3">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">شناسه فاکتور</th>
+                                <th class="text-center">تاریخ سفارش</th>
+                                <th class="text-center">بهای کل ( تومان )</th>
+                                <th class="text-center">وضعیت پرداخت</th>
+                                <th class="text-center">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int l = 1;
+                                if (Model.Data.Count > 0)
+                                {
+                                    foreach (var item in Model.Data)
+                                    {
+                                        <tr>
+                                            <td>@l</td>
+                                            <td>@item.InvoiceNumber</td>
+                                            <td>@ShamsiPlugin.ToPeString(item.Date)</td>
+                                            <td>@item.Price</td>
+                                            <td>
+                                                @if (item.Status == true)
+                                                {
+                                                    <div class="read">پرداخت موفق</div>
+                                                }
+
+
+                                            </td>
+                                            <td>
+
+                                                <a asp-action="InvoiceDetails" asp-controller="Profile" asp-route-invoicenumber="@item.InvoiceNumber"><i class="i i-shopping-cart" style="color:forestgreen; font-size:25px;"></i></a>
+
+                                            </td>
+                                        </tr>
+                                        l = l + 1;
+                                    }
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>شما تاکنون هیچ خریدی  نداشته اید</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- table2 -->
+                <div class="pagination_style1">
+                    <nav aria-label="...">
+
+                        @for (int i = 1; i <= Model.Pages; i++)
+                        {
+
+                            if (Model.Page == i)
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item  active">
+                                        <a class="page-link" href='/Profile/OrderList?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+                                </ul>
+
+
+                            }
+                            else
+                            {
+
+                                <ul class="pagination pagination-lg">
+                                    <li class="page-item ">
+                                        <a class="page-link" href='/Profile/OrderList?page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                    </li>
+
+                                </ul>
+
+                            }
+
+
+                        }
+                    </nav>
+                </div>
+            </div>
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div>
+

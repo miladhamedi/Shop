@@ -1,0 +1,557 @@
+﻿@model ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "جزئیات محصول";
+    ViewData["Breadcromb"] = "جزئیات محصول";
+}
+
+<script src="~/assets/front/_plugins/drift-master/dist/Drift.js"></script>
+<link href="~/assets/front/_plugins/drift-master/dist/drift-basic.css" rel="stylesheet" />
+
+
+<partial name="_HeaderPartial" />
+
+
+
+@{
+    if (ViewBag.Status != null)
+    {
+        string Message = ViewBag.Status.ToString();
+        if (Message == "OK")
+        {
+            string message = ViewBag.Message.ToString();
+            <div class="alarm_style2">
+                <div class="success_alarm box">
+                    <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                    <div class="alarm_text">@message</div>
+                    <div class="close_icon"><i class="i-cancel"></i></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            string message = ViewBag.Message.ToString();
+            <div class="alarm_style2">
+                <div class="success_alarm box">
+                    <div class="alarm_icon"><img src="~/assets/front/_images/icon/checked.png" alt=""></div>
+                    <div class="alarm_text">@message</div>
+                    <div class="close_icon"><i class="i-cancel"></i></div>
+                </div>
+            </div>
+        }
+    }
+}
+<div class='product_detail_part1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+            <div class='right_part'>
+                <img class='drift-demo-trigger product_img'
+                     src='/uploads/Products/@Model.GalleryDtos.FirstOrDefault().PictureName'
+                     data-zoom='/uploads/Products/@Model.GalleryDtos.FirstOrDefault().PictureName'>
+            </div>
+            <div class='center_part'>
+                <div class='have_scroll_y'>
+                    <ul class='step none_list_style'>
+                        @foreach (var item in Model.GalleryDtos)
+                        {
+
+                            <li class='item'
+                                style='background-image: url(/uploads/Products/@item.PictureName);'
+                                data-big='/uploads/Products/@item.PictureName'>
+
+                            </li>
+
+                        }
+                    </ul><!--close .step-->
+                </div><!--close .have_scroll_y-->
+            </div><!--close .center_part-->
+            <div class='left_part'>
+                <div class='zoom_part'></div>
+                <div class='zoom_part'></div>
+                <div class='wrapper'>
+                    <div class='product_title'>@Model.Title</div>
+                    <div class='product_information'>
+                        <div class='product_brand'
+                             style='background-image:url();'></div>
+                        <ul class='step none_list_style'>
+
+                            <li class='item'>
+                                <span class='title'>شرکت سازنده</span>
+                                <span class='content'>@Model.Manufacturer</span>
+                            </li>
+
+                            <li class='item'>
+                                <span class='title'> گارانتی</span>
+                                <span class='content'>@Model.ManufacturingCountry</span>
+                            </li>
+
+                            <li class='item'>
+                                <span class='title'> موجودی انبار</span>
+                                <span class='content'>@Model.Stock</span>
+                            </li>
+
+                            <li class='item color'>
+                                <span class='title'>رنگ</span>
+                                <span class='content'>
+                                    <ul class='step2'>
+                                        @foreach (var item in Model.ColorDtos)
+                                        {
+                                            <li class='item2'>
+                                                <span class='color_code'
+                                                      style='background-color:#@item.ColorCode;'></span>
+                                                <span class='color_text'>@item.ColorPro</span>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </span>
+                            </li>
+
+
+                        </ul>
+                    </div><!--close .product_information-->
+
+                    @if (Model.DiscountPercent >= 1)
+                    {
+                        var price = Math.Round(Model.Price);
+                        var pricestring = string.Format("{0:0,0}", price);
+
+                        var Disprice = Math.Round(Model.PriceDisCount);
+                        var Dispricestring = string.Format("{0:0,0}", Disprice);
+
+                        <div class='product_price'>
+
+                            <span class='off_price'>@pricestring تومان</span>
+                            <span class='org_price'>@Dispricestring  تومان</span>
+
+                        </div><!--close .product_price-->
+
+
+
+                    }
+                    else
+                    {
+                        var price = Math.Round(Model.Price);
+                        var pricestring = string.Format("{0:0,0}", price);
+
+                        <div class='product_price'>
+                            <span class='org_price'>@pricestring تومان</span>
+                        </div><!--close .product_price-->
+                    }
+
+                    <div class='select_part'>
+                        <form method="POST" asp-controller="Cart" asp-action="AddCart" id='cart-product-2'>
+                            <input type="hidden" name="productid" asp-for="ProductId">
+                            <select name='colorid' class='select_style1'>
+                                <option class="text">رنگ محصول را انتخاب کنید</option>
+                                @foreach (var item in Model.ColorDtos)
+                                {
+                                    <option class="" value="@item.ColorId">@item.ColorPro</option>
+
+                                }
+                            </select>
+
+                            <select name='warranty' class='select_style1'>
+                                <option class="active text">گارانتی محصول را انتخاب کنید</option>
+                                <option value="@Model.Warranty">@Model.Warranty</option>
+                            </select>
+
+
+                            <div class='product_btn'>
+                                <a href='#' onclick="event.preventDefault();
+                                    document.getElementById('cart-product-2').submit();" title=''
+                                   class='btn_style1 add_cart'>
+                                    <i class='i-add-shop'></i><span>افزودن به سبد خرید</span>
+                                </a>
+                            </div>
+
+                        </form>
+                    </div><!--close .select_part-->
+
+                </div><!--close .wrapper-->
+            </div><!--close .left_part-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .product_detail_part1-->
+<div class="product_detail_part2">
+    <div class="container">
+        <div class="inner">
+            <div class="product_text">
+                <div class="top_part clearfix">
+                    <div class="title_style6">توضیحات محصول</div>
+
+                    <div class="page_info">
+                        <ul class="step none_list_style clearfix">
+                            <li class="item">
+                                <div class="icon"><i class="i-eye"></i></div>
+                                <div class="content">بازدید :<span>@Model.View</span></div>
+                            </li>
+                            <li class="item">
+                                <div class="icon"><i class="i-calendar"></i></div>
+                                <div class="content">
+                                    تاریخ :<span>@Model.Date</span>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="icon"><i class="i-comments"></i></div>
+                                <div class="content">
+                                    نظرات
+                                    :<span>@Model.CommentDtos.Count</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!--close .top-part-->
+                <article class="content_style1">
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                </article>
+            </div><!--close .product_content-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div>
+<div class="product_detail_part3">
+    <div class="container">
+        <div class="inner">
+            <div class="tab_style1">
+                <div class="top_part">
+                    <ul class="step1 clearfix">
+                        <li class="item active" data-target="part1">مشخصات فنی</li>
+                        <li class="item" data-target="part2">نظرات کاربران</li>
+                    </ul>
+                </div><!--close .top_part-->
+                <div class="bottom_part">
+                    <div class="full_information tab_section" data-target="part1">
+                        <ul class="step none_list_style">
+
+                            <li class="item clearfix">
+                                <div class="title">شرکت سازنده</div>
+                                <div class="text">@Model.Manufacturer</div>
+                            </li>
+                            <li class="item clearfix">
+                                <div class="title">کشور سازنده</div>
+                                <div class="text">@Model.ManufacturingCountry </div>
+                            </li>
+                            <li class="item clearfix">
+                                <div class="title"> مدل</div>
+                                <div class="text">@Model.Model</div>
+                            </li>
+                            <li class="item clearfix">
+                                <div class="title"> سال تولید</div>
+                                <div class="text">@Model.ProductionYear</div>
+                            </li>
+                            <li class="item clearfix">
+                                <div class="title">جنس کالا</div>
+                                <div class="text">@Model.Type</div>
+                            </li>
+
+
+
+                        </ul>
+                    </div><!--close .full_information-->
+                    <div class="comment_part tab_section" data-target="part2" style="display:none;">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <div class='comment_part tab_section' data-target='part2' style='display:none;'>
+                                <div class='comment_style1'>
+                                    <div class="form_style1">
+                                        <form asp-action="CommentProduct" asp-controller="Product" method="POST" asp-route-returnurl="/Product/ProductDetails?productid=@Model.ProductId">
+                                            <input type="hidden" name="productid" value="@Model.ProductId">
+                                            <input type="hidden" name="username" value="@User.Identity.Name" />
+                                            <ul class="step none_list_style clearfix">
+                                                <li class="item textarea">
+                                                    <span class="title">متن نظر</span>
+                                                    <textarea name="text" required title="متن را وارد نمایید" placeholder="نظر خود را وارد نمایید..."></textarea>
+                                                </li>
+                                                <li class="item submit">
+                                                    <button type="submit">ثبت نظر</button>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="comment_alarm clearfix">
+                                <div class="form_style1 login_part">
+                                    <div class="text">برای ثبت نظر خود باید وارد حساب کاربری شوید</div>
+                                    <form asp-action="LoginComment" asp-controller="Account" method="POST" asp-route-returnurl="/Product/ProductDetails?productid=@Model.ProductId">
+
+                                        <ul class=" none_list_style clearfix ">
+                                            <li class="item">
+                                                <span class="title">ایمیل</span>
+                                                <input name="email" placeholder="ایمبل را وارد کنید" type="text">
+                                            </li>
+                                            <li class="item">
+                                                <span class="title">رمز عبور</span>
+                                                <input name="password" placeholder="پسورد را وارد کنید" type="password">
+                                            </li>
+
+                                            <li>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox3" type="checkbox" name="RememberMe">
+                                                    <label for="checkbox3">
+                                                        <span>مرابه خاطر بسپار؟</span>
+                                                    </label>
+                                                </div>
+                                            </li>
+
+                                            <li class="item submit">
+                                                <button type="submit">ورود کاربران</button>
+                                            </li>
+                                        </ul>
+
+                                    </form>
+                                </div><!--close .form_style1-->
+                                <div class="singin_part">
+                                    <div class="text">
+                                        قبلاً در فروشگاه  <strong>اینترنتی ما</strong> ثبت نام نکرده اید؟
+                                    </div>
+                                    <a asp-action="Register" asp-controller="Account" title="" class="link">ثبت نام <i class="i-add-user"></i></a>
+                                </div>
+                            </div><!--close .comment_alarm-->
+
+                        }
+                        <div class="product_detail_part2">
+                            <div class="page_info" style="margin:0 0 0 0 !important; ">
+                                <ul class="step none_list_style clearfix" style="width:100% !important;">
+
+                                    @foreach (var item in Model.CommentDtos)
+                                    {
+
+                                        <li class="item">
+                                            <div class="icon"><i class="i-eye"></i></div>
+                                            <div class="content">ارسال کننده :<span>@item.NameFamily</span></div>
+                                        </li>
+                                        <li class="item">
+                                            <div class="icon"><i class="i-calendar"></i></div>
+                                            <div class="content">
+                                                تاریخ :<span>@item.Date</span>
+                                            </div>
+                                        </li>
+                                        <li style="margin-left: 300px;right: 0;margin-top: 20px;padding-top: 10px; padding-bottom:28px;">
+
+                                            <p style="font-size: 16px;">
+                                                @item.Text
+                                            </p>
+
+                                        </li>
+
+                                    }
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+
+                    </div><!--close .comment_part-->
+                </div><!--close .bottom_part-->
+            </div><!--close .tab_style-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div>
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        /////////////////////////////////////////////////////////////////////////////
+        // zoom plugin
+        new Drift(document.querySelector('.drift-demo-trigger'), {
+            paneContainer: document.querySelector('.product_detail_part1 .left_part .zoom_part'),
+            inlinePane: 900,
+            inlineOffsetY: -85,
+            containInline: true,
+            hoverBoundingBox: true
+        });
+        $('.right_part').hover(function () {
+            $('.left_part .zoom_part').fadeIn(300);
+        }, function () {
+            $('.left_part .zoom_part').fadeOut(300);
+        });
+        /////////////////////////////////////////////////////////////////////////////
+        // top slide
+        $('.product_detail_part1 .center_part .item').click(function () {
+            var big_img = $(this).attr('data-big');
+            var cur_img = $('.right_part .product_img').attr('src');
+
+            $('.product_detail_part1 .center_part .item').siblings('.item').removeClass('active');
+            $(this).addClass('active');
+            if (cur_img != big_img) {
+                $('.right_part .product_img').stop().fadeOut(100);
+                setTimeout(function () {
+                    $('.right_part .product_img').attr('src', big_img).attr('data-zoom', big_img);
+                    $('.right_part .product_img').stop().fadeIn(300);
+                }, 100);
+            }
+        });// click
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        // open share box
+        $('.product_detail_part2 .share_part .link_btn').click(function () {
+            var box_display = $('.product_detail_part2 .share_part .share_box');
+            if (box_display.hasClass('active')) {
+                $('.product_detail_part2 .share_part .share_box').removeClass('active').stop().fadeOut(200);
+            }
+            else {
+                $('.product_detail_part2 .share_part .share_box').addClass('active').stop().fadeIn(200);
+            }
+        });// share box click
+        $('body').click(function (e) {
+            if (!$(e.target).is('.product_detail_part2 .share_part') && !$(e.target).is('.product_detail_part2 .share_part *')) {
+                $('.product_detail_part2 .share_part .share_box').removeClass('active').stop().fadeOut(200);
+            }
+        });// body click
+        /////////////////////////////////////////////////////////////////////////////////////\
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        //tab_style1
+        $('.tab_style1 .top_part .item').click(function () {
+            $('.tab_style1 .top_part .item').siblings('.item').removeClass('active');
+            $(this).addClass('active');
+            ////////tab slide
+            var target = $(this).attr('data-target');
+            var target_bottom = $('.tab_style1 .bottom_part .tab_section[data-target=' + target + ']');
+            if (target_bottom.css('display') != 'block') {
+                $('.tab_style1 .bottom_part .tab_section').fadeOut(200);
+                target_bottom.stop(true, false).fadeIn(150, function () {
+                    $(this).addClass('active');
+                });
+            }
+            else {
+                target_bottom.stop(true, false).fadeIn(0, function () {
+                    $(this).addClass('active');
+                });
+            }
+        });// tab style1
+
+    });// document
+
+</script>
+<style>
+    .checkbox {
+        padding-left: 20px;
+    }
+
+        .checkbox label {
+            display: inline-block;
+            position: relative;
+            padding-left: 5px;
+        }
+
+            .checkbox label::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                width: 17px;
+                height: 17px;
+                left: 0;
+                margin-left: -20px;
+                border: 1px solid #cccccc;
+                border-radius: 3px;
+                background-color: #fff;
+                -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            }
+
+            .checkbox label::after {
+                display: inline-block;
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                left: 0;
+                top: 0;
+                margin-left: -22px;
+                padding-left: 3px;
+                padding-top: 3px;
+                font-size: 11px;
+                color: #555555;
+            }
+
+        .checkbox input[type="checkbox"] {
+            opacity: 0;
+        }
+
+            .checkbox input[type="checkbox"]:focus + label::before {
+                outline: thin dotted;
+                outline: 5px auto -webkit-focus-ring-color;
+                outline-offset: -2px;
+            }
+
+            .checkbox input[type="checkbox"]:checked + label::after {
+                font-family: "kiket";
+                content: "\77";
+            }
+
+
+            .checkbox input[type="checkbox"]:disabled + label {
+                opacity: 0.65;
+            }
+
+                .checkbox input[type="checkbox"]:disabled + label::before {
+                    background-color: #eeeeee;
+                    cursor: not-allowed;
+                }
+
+        .checkbox.checkbox-circle label::before {
+            border-radius: 50%;
+        }
+
+        .checkbox.checkbox-inline {
+            margin-top: 0;
+        }
+
+    .checkbox-primary input[type="checkbox"]:checked + label::before {
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+
+    .checkbox-primary input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox-danger input[type="checkbox"]:checked + label::before {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+
+    .checkbox-danger input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox-info input[type="checkbox"]:checked + label::before {
+        background-color: #5bc0de;
+        border-color: #5bc0de;
+    }
+
+    .checkbox-info input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox-warning input[type="checkbox"]:checked + label::before {
+        background-color: #f0ad4e;
+        border-color: #f0ad4e;
+    }
+
+    .checkbox-warning input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+
+    .checkbox-success input[type="checkbox"]:checked + label::before {
+        background-color: #5cb85c;
+        border-color: #5cb85c;
+    }
+
+    .checkbox-success input[type="checkbox"]:checked + label::after {
+        color: #fff;
+    }
+</style>

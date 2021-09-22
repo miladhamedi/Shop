@@ -1,0 +1,78 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "جزئیات کاربر";
+
+
+}
+
+<style>
+    span {
+        color: #3c8dbc;
+        font-weight: 700;
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <ul class="timeline">
+
+                <li class="time-label">
+                    <span class="bg-red">
+                        نام کاربری :   @Html.DisplayFor(model => model.UserName)
+                    </span>
+                </li>
+
+
+                <li>
+                    <i class="fa fa-user bg-aqua"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">نام و نام خانوادگی :</span> @Html.DisplayFor(model => model.NameFamily)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-green"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">پست الکترونیکی :</span> @Html.DisplayFor(model => model.Email)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-orange"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">شهر :</span> @Html.DisplayFor(model => model.City)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-yellow"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">استان :</span>@Html.DisplayFor(model => model.Province)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-maroon"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">آدرس :</span> @Html.DisplayFor(model => model.Address)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-red"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">کدپستی :</span> @Html.DisplayFor(model => model.PostalCode)</h3>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa fa-user bg-olive"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border"><span href="">شماره همراه :</span>@Html.DisplayFor(model => model.PhoneNumber)</h3>
+                    </div>
+                <li>
+
+
+
+            </ul>
+        </div>
+
+    </div>
+
+</section>
