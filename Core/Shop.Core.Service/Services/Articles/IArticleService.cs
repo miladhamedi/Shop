@@ -12,6 +12,7 @@ namespace Shop.Core.Service.Services.Articles
     {
         ShopActionResult<List<ArticleDto>> GetAll(int page = 1);
         ArticleDto GetById(int id);
+        ArticleDto DetailArticle(int id);
         void UpdateArticle(ArticleDto article);
         void AddArticle(ArticleDto article);
         void RemoveArticle(ArticleDto article);

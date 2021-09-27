@@ -77,6 +77,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
 
             var user = userService.GetByUserId(userid);
+            if (user == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             user.Access = true;
             userService.UpdatedUser(user);
             return RedirectToAction("Index");
@@ -87,6 +91,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
 
             var user = userService.GetByUserId(userid);
+            if (user == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             user.Access = false;
             userService.UpdatedUser(user);
             return RedirectToAction("Index");
@@ -95,7 +103,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Details(Guid userid)
         {
             var user = userService.GetByUserId(userid);
-
+            if (user == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             UserViewModel userViewModel = new UserViewModel();
 
             userViewModel.PhoneNumber = user.PhoneNumber;
@@ -116,6 +127,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult ListRole(Guid userid)
         {
             var user = userService.GetByUserId(userid);
+            if (user == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             var listRole = roleService.GetAllRoleUser(user.Id);
             List<RoleViewModel> roleViewModels = new List<RoleViewModel>();
             foreach (var item in listRole)
@@ -133,6 +148,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             var roleid = roleService.GetByRoleName(rolename);
             var Userrole = userRoleService.GetRoleId(roleid);
+            if (Userrole == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             userRoleService.RemoveUserRole(Userrole);
             return RedirectToAction("ListRole", new { userid = Userrole.UserId });
         }

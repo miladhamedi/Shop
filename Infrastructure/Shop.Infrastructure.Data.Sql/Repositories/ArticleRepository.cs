@@ -38,7 +38,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public Article GetById(int id)
         {
-            var article = shopDbContext.Articles.Where(c => c.ArticleId == id).SingleOrDefault();
+            var article = shopDbContext.Articles.Where(c => c.ArticleId == id).AsNoTracking().SingleOrDefault();
             return article;
         }
 

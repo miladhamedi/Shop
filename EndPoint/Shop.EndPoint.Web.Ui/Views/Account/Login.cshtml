@@ -172,26 +172,14 @@
                             <a href='محصولات/products' title='' class='link'>محصولات</a>
                             <div class='sub_style2'>
                                 <ul class='step2 none_list_style'>
-                                    <li class='item2'>
-                                        <a href='اجاق-گاز-و-فر/products/category/1'
-                                           class='link2'>اجاق گاز و فر</a>
-                                    </li>
-                                    <li class='item2'>
-                                        <a href='اجاق-گاز-و-فر/products/category/1'
-                                           class='link2'>هود</a>
-                                    </li>
-                                    <li class='item2'>
-                                        <a href='اجاق-گاز-و-فر/products/category/1'
-                                           class='link2'>سینک ظرفشویی</a>
-                                    </li>
-                                    <li class='item2'>
-                                        <a href='اجاق-گاز-و-فر/products/category/1'
-                                           class='link2'>قهوه ساز</a>
-                                    </li>
-                                    <li class='item2'>
-                                        <a href='اجاق-گاز-و-فر/products/category/1'
-                                           class='link2'>مایکروویو</a>
-                                    </li>
+                                    @foreach (var item in listCat.Data)
+                                    {
+                                        <li class='item2'>
+                                            <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId"
+                                               class='link2'>@item.Titel</a>
+                                        </li>
+
+                                    }
                                 </ul>
                             </div>
                         </li>
@@ -288,7 +276,7 @@
             <div class='signin_part center-block'>
                 <div class='part_inner'>
                     <div class='title_style7'>
-                        <div class='title'> عضویت </div>
+                        <div class='title'> ورود </div>
                     </div>
                     <div class='form_style2'>
                         <form id='frm_login' method="POST" asp-controller="Account" asp-action="Login">

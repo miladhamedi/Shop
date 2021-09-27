@@ -20,20 +20,22 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         private readonly IArticleService articleService;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly IArticleRepository articleRepository;
 
         public ArticleController(IArticleService articleService,
-            IMapper mapper, IWebHostEnvironment webHostEnvironment,IArticleRepository articleRepository)
+            IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             this.articleService = articleService;
             this.mapper = mapper;
             this.webHostEnvironment = webHostEnvironment;
-            this.articleRepository = articleRepository;
         }
         public IActionResult Index(int page = 1)
         {
             ShopActionResult<List<ArticleViewModel>> actionResult = new ShopActionResult<List<ArticleViewModel>>();
             var ListArticle = articleService.GetAll(page);
+            if (ListArticle.Data.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             actionResult.Pages = ListArticle.Pages;
             actionResult.Page = ListArticle.Page;
             List<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
@@ -101,7 +103,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             var article = articleService.GetById(articleid);
             if (article == null)
-                return null;
+                return RedirectToAction("Notfound", "Manage");
             var Article = mapper.Map<ArticleViewModel>(article);
 
             return View(Article);
@@ -112,11 +114,12 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(IFormFile Image, ArticleViewModel articleViewModel)
         {
-            //repository
-            var article = articleRepository.GetById(articleViewModel.ArticleId);
-            try
-            {
-                if (Image != null)
+            
+            var article = articleService.GetById(articleViewModel.ArticleId);
+            if (article == null)
+                return RedirectToAction("Notfound", "Manage");
+
+            if (Image != null)
                 {
                     var uploads = Path.Combine(webHostEnvironment.WebRootPath, "uploads\\article");
                     var RoutFile = Path.Combine(webHostEnvironment.WebRootPath, "uploads\\article\\" + article.Image);
@@ -137,44 +140,43 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
                     article.Description = articleViewModel.Description;
                     article.Image = FileName;
                     article.Text = articleViewModel.Text;
+                    article.ArticleId = articleViewModel.ArticleId;
                     article.Titel = articleViewModel.Titel;
 
-                    //repository
-                    articleRepository.UpdateArticle(article);
+                    
+                    articleService.UpdateArticle(article);
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     article.Description = articleViewModel.Description;
                     article.Text = articleViewModel.Text;
+                    article.ArticleId = articleViewModel.ArticleId;
                     article.Titel = articleViewModel.Titel;
 
-                    //repository
-                    articleRepository.UpdateArticle(article);
+                   
+                    articleService.UpdateArticle(article);
                     return RedirectToAction("Index");
                 }
-            }
-            catch (Exception)
-            {
-
-                return RedirectToAction("Index");
-            }
-
+            
         }
         
         public IActionResult Delete(int articleid)
         {
-            //localuploadfile
-            //repository
-            var article = articleRepository.GetById(articleid);
+            
+            var article = articleService.GetById(articleid);
+            if (article == null)
+            {
+                return RedirectToAction("Notfound","Manage");
+            }
             var RoutFile = Path.Combine(webHostEnvironment.WebRootPath, "uploads\\article\\" + article.Image);
 
             if (System.IO.File.Exists(RoutFile))
             {
                 System.IO.File.Delete(RoutFile);
             }
-            //repository
-            articleRepository.RemoveArticle(article);
+            
+            articleService.RemoveArticle(article);
             return RedirectToAction("Index");
         }
     }

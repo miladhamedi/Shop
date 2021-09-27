@@ -35,7 +35,8 @@
                                     {
 
                                         var product = productservice.GetByIdPro(item.ProductId);
-
+                                        var Pricepro = Math.Round(product.Price);
+                                        var Priceproduct = string.Format("{0:0,0}", Pricepro);
 
                                         <tr>
                                             <td>
@@ -45,7 +46,7 @@
                                                 <img class='pic' src='/uploads/Products/@UrlImg' title='' alt=''>
                                             </td>
                                             <td>@product.Titel</td>
-                                            <td><span class='price'>@product.DiscuntedPrice</span></td>
+                                            <td><span class='price'>@Priceproduct</span></td>
                                             <td>
                                                 <div class='quantity_style1'>
 
@@ -60,9 +61,11 @@
                                                         var price = item.Price;
                                                         var count = item.Count;
                                                         var pricecount = price * count;
+                                                        var PriceProduct = Math.Round(pricecount);
+                                                        var PriceProstring = string.Format("{0:0,0}", PriceProduct);
                                                     }
 
-                                                    @pricecount
+                                                    @PriceProstring
 
                                                 </span>
                                             </td>

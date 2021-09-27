@@ -31,6 +31,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             ShopActionResult<List<MessageViewModel>> shopActionResult = new ShopActionResult<List<MessageViewModel>>();
             var ListMessageRecive = messageService.GetAllMessageAdmin(page);
+            if (ListMessageRecive.Data.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             List<MessageViewModel> messageViewModels = new List<MessageViewModel>();
 
             shopActionResult.Page = ListMessageRecive.Page;
@@ -52,6 +56,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Details(int messageid)
         {
             var message = messageService.GetById(messageid);
+            if (message == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             var Message = mapper.Map<MessageViewModel>(message);
             return View(Message);
         }

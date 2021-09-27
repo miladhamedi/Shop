@@ -282,93 +282,93 @@
             </div><!--close .inner-->
         </div><!--close .container-->
     </section><!--close .home_part1-->
-    <section class='home_part2'>
+    <section class='home_part4'>
+        <div class="title_style5">
+            <div class='title_style4'>
+                <div class='title'>جدید ترین محصولات</div>
+            </div><!--close .title_style1-->
+        </div>
+       
         <div class='container'>
             <div class='inner'>
-                <div class='title_style1'>
-                    <div class='title'>جدیدترین ها</div>
-                    <div class='btn'>
-                        <div class='owl_btns' data-target='.slide1'>
-                            <span class='arrow right prev'><i class='i-left-open'></i></span>
-                            <span class='arrow left next'><i class='i-right-open'></i></span>
-                        </div>
-                    </div>
-                </div><!--close .title_style1-->
-                <div class='box_style2'>
-                    <ul class='step slide1 owl-carousel none_list_style'>
+                <div class='box_style3'>
+                    <ul class='step slide3 owl-carousel none_list_style'>
                         @foreach (var item in NewProduct)
                         {
                             <li class='item'>
                                 <div class='top_part'>
-                                    <ul class='link_part none_list_style'>
-                                        <li class='item2 add_cart have_tooltip'>
-                                            <a href='#'
-                                               title='' class='link2'>
+                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                       title='' class='pic'
+                                       style='background-image: url(/uploads/Products/@item.Picture);'>
+
+                                    </a>
+                                </div><!--close .top_part-->
+                                <div class='bottom_part'>
+                                    <div class='content_part'>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
+                                           title='' class='name ellipsis'>@item.Title</a>
+                                        @if (item.DisCountPercent >= 1)
+                                        {
+                                            var price = Math.Round(item.Price);
+                                            var pricestring = string.Format("{0:0,0}", price);
+
+                                            var Disprice = Math.Round(item.PriceDiscount);
+                                            var Dispricestring = string.Format("{0:0,0}", Disprice);
+
+                                            <div class='price_part'>
+                                                <span class='org_price'>
+                                                    @pricestring
+                                                    تومان
+                                                </span>
+                                                <span class='off_price'>@Dispricestring تومان</span>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            var price = Math.Round(item.Price);
+                                            var pricestring = string.Format("{0:0,0}", price);
+
+                                            <div class='price_part'>
+                                                <span class='org_price'>
+                                                    @pricestring
+                                                    تومان
+                                                </span>
+
+                                            </div>
+
+                                        }
+                                    </div><!--close .content_part-->
+                                    <ul class='link_part clearfix none_list_style'>
+                                        <li class='item2 add_cart'>
+                                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId" title='' class='link2'>
                                                 <i class='i-add-shop'></i>
-                                                <div class='tooltip_style1'><span>افزودن به سبد خرید</span></div>
+                                                <span>جزییات بیشتر کالا</span>
                                             </a>
                                         </li>
+                                        <li class='item2 see_more'>
+                                            <a href='#'
+                                               title='' class='link2'>
 
-                                        <li class='item2 box_btn have_tooltip'>
-                                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId">
-                                                <i class='i-link'></i>
-                                                <div class='tooltip_style1'><span>جزییات بیشتر</span></div>
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class='pic'
-                                         style='background-image: url(/uploads/Products/@item.Picture);'>
-                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
-                                           title='' class='name ellipsis'></a>
-                                    </div>
-                                    @if (item.DisCountPercent >= 1)
-                                    {
-                                        var price = Math.Round(item.Price);
-                                        var pricestring = string.Format("{0:0,0}", price);
-
-                                        var Disprice = Math.Round(item.PriceDiscount);
-                                        var Dispricestring = string.Format("{0:0,0}", price);
-
-                                        <div class='price_part'>
-                                            <span class='org_price'>
-                                                @pricestring
-                                                تومان
-                                            </span>
-                                            <span class='off_price'>@Dispricestring تومان</span>
-                                        </div>
-
-
-
-                                    }
-                                    else
-                                    {
-                                        var price = Math.Round(item.Price);
-                                        var pricestring = string.Format("{0:0,0}", price);
-
-                                        <div class='price_part'>
-                                            <span class='org_price'>
-                                                @pricestring
-                                                تومان
-                                            </span>
-
-                                        </div>
-
-                                    }
-
-                                </div>
-                                <div class='bottom_part'>
-                                    <a asp-controller="Product" asp-action="ProductDetails" asp-route-productid="@item.ProductId"
-                                       title='' class='name ellipsis'>@item.Title</a>
-                                </div>
+                                </div><!--close .bottom_part-->
                             </li><!--close .item-->
                         }
 
 
                     </ul><!--close .step-->
                 </div><!--close .box_style2-->
+                <div class='btn'>
+                    <div class='owl_btns' data-target='.slide3'>
+                        <span class='arrow right prev'><i class='i-left-open'></i></span>
+                        <span class='arrow left next'><i class='i-right-open'></i></span>
+                    </div>
+                </div>
             </div><!--close .inner-->
         </div><!--close .container-->
-    </section><!--close .home_part2-->
+    </section><!--close .home_part4-->
     <section class='home_part3'>
         <div class='container'>
             <div class='inner'>

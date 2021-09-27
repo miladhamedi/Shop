@@ -407,15 +407,10 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                         shopingCartService.UpdateCart(item);
                     }
 
-
-                    //var setting = settingService.GetSetting();
-                    //SendSms sendsms = new SendSms();
-
                     try
                     {
                         var use = userService.GetByUserId(Factor.UserId);
-                        //await emailSender.EmailSenderAsync(use.Email, "پرداخت صورتحساب", " پرداخت صورتحساب " + Factor.InvoiceNumber + "  با موفقیت انجام شد. ");
-                        // sendsms.SendSMS(serversms.SmsService, serversms.SmsUser, serversms.SmsPassword, quser.PhoneNumber, "صورتحساب : " + qFactor.InvoiceId + " با موفقیت انجام شد.");
+                        await emailSender.EmailSenderAsync(use.Email, "پرداخت صورتحساب", + Factor.InvoiceNumber + "  با موفقیت انجام شد. "); 
                         return RedirectToAction("PayComplete", new { invoiceid = Factor.InvoiceId, userid = Factor.UserId });
 
                     }
@@ -446,18 +441,15 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             try
             {
 
-                if (invoiceid == 0 && userid == null)
-                    return RedirectToAction("OrdersList", "Profile");
-
                 var qinvoice = iinvoiceService.GetByIdInvoice(userid, invoiceid);
 
                 if (qinvoice == null)
-                    return RedirectToAction("OrdersList", "Profile");
+                    return RedirectToAction("OrderList", "Profile");
 
                 var qshopingcart = shopingCartService.GetListCarts(userid, qinvoice.InvoiceNumber);
 
                 if (qshopingcart.Count() == 0)
-                    return RedirectToAction("OrdersList", "Profile");
+                    return RedirectToAction("OrderList", "Profile");
 
                 InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
 
@@ -475,7 +467,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             catch (Exception)
             {
 
-                return RedirectToAction("OrdersList", "Profile");
+                return RedirectToAction("OrderList", "Profile");
             }
         }
 

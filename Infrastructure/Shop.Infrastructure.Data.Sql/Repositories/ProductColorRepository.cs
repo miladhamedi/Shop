@@ -38,13 +38,13 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public ProductColor GetByProColorId(int productcolorid)
         {
-            var proColor = shopDbContext.ProductColors.Where(c => c.ProductColorId == productcolorid).AsNoTracking().FirstOrDefault();
+            var proColor = shopDbContext.ProductColors.Where(c => c.ProductColorId == productcolorid).FirstOrDefault();
             return proColor;
         }
 
         public ProductColor GetColorByProductId(int colorid, int productid)
         {
-            var productColor = shopDbContext.ProductColors.Where(c => c.ColorId == colorid && c.ProductId == productid).AsNoTracking().FirstOrDefault();
+            var productColor = shopDbContext.ProductColors.Where(c => c.ColorId == colorid && c.ProductId == productid).FirstOrDefault();
             return productColor;
         }
 

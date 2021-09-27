@@ -27,6 +27,15 @@ namespace Shop.Core.Service.Services.Articles
             articleRepository.AddArticle(articl);
         }
 
+        public ArticleDto DetailArticle(int id)
+        {
+            var article = articleRepository.GetById(id);
+            article.View += 1;
+            articleRepository.UpdateArticle(article);
+            var articl = mapper.Map<ArticleDto>(article);
+            return articl;
+        }
+
         public ShopActionResult<List<ArticleDto>> GetAll(int page = 1)
         {
             ShopActionResult<List<ArticleDto>> actionResult = new ShopActionResult<List<ArticleDto>>();

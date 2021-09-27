@@ -91,12 +91,14 @@ namespace Shop.Core.Service.Services.Colors
             List<ColorProductDto> colorDtos = new List<ColorProductDto>();
             foreach (var item in ColorPro)
             {
+                var colorProduct = productColorRepository.GetColorByProductId(item.ColorId, productid);
                 var color = colorRepository.GetByColorId(item.ColorId);
                 ColorProductDto colorDto = new ColorProductDto();
                 colorDto.ColorCode = color.ColorCode;
                 colorDto.ColorId = color.ColorId;
                 colorDto.ColorPro = color.ColorPro;
                 colorDto.ProductId = productid;
+                colorDto.ProductColorId = colorProduct.ProductColorId;
                 colorDtos.Add(colorDto);
             }
             return colorDtos;

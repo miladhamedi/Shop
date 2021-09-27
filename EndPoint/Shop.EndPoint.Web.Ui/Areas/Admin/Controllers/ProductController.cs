@@ -32,6 +32,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             ShopActionResult<List<ProductViewModel>> prolistor = new ShopActionResult<List<ProductViewModel>>();
 
             var prolist = productService.GetAllProduct(page);
+            if (prolist.Data.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             prolistor.Page = prolist.Page;
             prolistor.Pages = prolist.Pages;
             List<ProductViewModel> productViewModels = new List<ProductViewModel>();
@@ -104,11 +108,11 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var product = productService.GetById(id);
-            ViewBag.ListCategory = new SelectList(categoryService.GetAllCategory(), "CategoryId", "Titel", product.CategoryId);
-            if (product  == null)
+            if (product == null)
             {
-                return RedirectToAction("Home","Error");
+                return RedirectToAction("Notfound", "Manage");
             }
+            ViewBag.ListCategory = new SelectList(categoryService.GetAllCategory(), "CategoryId", "Titel", product.CategoryId);
             EditProductViewModel productViewModel = new EditProductViewModel();
 
 
@@ -144,6 +148,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
                 product.Stcok = model.Stcok;
                 product.Titel = model.Titel;
                 product.Weight = model.Weight;
+                product.ProductId = model.ProductId;
                 product.CategoryId = model.CategoryId;
 
                 productService.UpdateProduct(product);

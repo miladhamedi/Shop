@@ -25,6 +25,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             ShopActionResult<List<WeightViewModel>> actionResult = new ShopActionResult<List<WeightViewModel>>();
             var ListWeight = weightService.GetAllWeight(page);
+            if (ListWeight.Data.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             actionResult.Pages = ListWeight.Pages;
             actionResult.Page = ListWeight.Page;
             List<WeightViewModel> weightViewModels = new List<WeightViewModel>();
@@ -65,6 +69,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var weight = weightService.GetById(id);
+            if (weight == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             var Weight = mapper.Map<WeightViewModel>(weight);
             return View(Weight);
         }
@@ -75,6 +83,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(WeightViewModel model)
         {
             var weight = weightService.GetById(model.WeightId);
+            if (weight == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             weight.Weight_Max = model.Weight_Max;
             weight.Weight_Min = model.Weight_Min;
             weight.Weight_Price = model.Weight_Price;
@@ -86,6 +98,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Remove(int id)
         {
             var weight = weightService.GetById(id);
+            if (weight == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             weightService.RemoveWeight(weight);
             return RedirectToAction("Index");
         }

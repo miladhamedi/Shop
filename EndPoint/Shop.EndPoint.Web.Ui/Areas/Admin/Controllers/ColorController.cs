@@ -28,6 +28,8 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             ShopActionResult<List<ColorViewModel>> actionResult = new ShopActionResult<List<ColorViewModel>>();
             var listColor = colorService.GetAllColor(page);
+            if (listColor.Data.Count == 0)
+                return RedirectToAction("Notfound", "Manage");
             actionResult.Pages = listColor.Pages;
             actionResult.Page = page;
             List<ColorViewModel> colorViewModels = new List<ColorViewModel>();
@@ -46,7 +48,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-          
+
             return View();
         }
 
@@ -72,7 +74,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var color = colorService.GetByColorId(id);
             if (color == null)
             {
-                return RedirectToAction("Home","Error");
+                return RedirectToAction("Notfound", "Manage");
             }
             var Color = mapper.Map<ColorViewModel>(color);
 
@@ -88,9 +90,9 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-               
-                var color = colorService.GetByColorId(model.ColorId);
 
+                var color = colorService.GetByColorId(model.ColorId);
+ 
                 color.ColorPro = model.ColorPro;
                 color.ColorCode = model.ColorCode;
                 color.ColorId = model.ColorId;

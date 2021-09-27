@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Shop.Core.Contract.Repositories;
 using Shop.Core.Service.Dto;
 using Shop.Core.Service.Services.Colors;
 using Shop.Core.Service.Services.ProductColors;
@@ -17,17 +18,23 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         private readonly IColorService colorService;
         private readonly IMapper mapper;
         private readonly IProductColorService productColorService;
+        private readonly IProductColorRepository productColorRepository;
 
         public ProductColorController(IColorService colorService,
-            IMapper mapper, IProductColorService productColorService)
+            IMapper mapper, IProductColorService productColorService,IProductColorRepository productColorRepository)
         {
             this.colorService = colorService;
             this.mapper = mapper;
             this.productColorService = productColorService;
+            this.productColorRepository = productColorRepository;
         }
         public IActionResult Index(int productid)
         {
             var ListColorProduct = colorService.GetByProductId(productid);
+            if (ListColorProduct.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             List<ColorProductViewModel> colorViewModels = new List<ColorProductViewModel>();
             foreach (var item in ListColorProduct)
             {
@@ -68,25 +75,33 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         }
 
 
-
-        public IActionResult Delete(int colorid, int productid)
+       
+        public IActionResult Delete(int productcolorid ,int productid)
         {
             var ListColorProduct = colorService.GetByProductId(productid);
-            var productColor = productColorService.GetColorByProductId(colorid, productid);
+            var productColor = productColorRepository.GetByProColorId(productcolorid);
+            if (productColor == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             if (ListColorProduct.Count == 1)
             {
                 return RedirectToAction("Index", new { productid = productid });
             }
-            productColorService.RemoveProductCololr(productColor);
+            productColorRepository.RemoveProductCololr(productColor);
             return RedirectToAction("Index", new { productid = productid });
 
 
         }
 
 
-        public IActionResult Edit(int colorid, int productid)
+        public IActionResult Edit(int productcolorid)
         {
-            var productColor = productColorService.GetColorByProductId(colorid, productid);
+            var productColor = productColorRepository.GetByProColorId(productcolorid);
+            if (productColor == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             ProductColorViewModel productColorViewModel = new ProductColorViewModel();
             productColorViewModel.ProductColorId = productColor.ProductColorId;
             productColorViewModel.ProductId = productColor.ProductId;
@@ -99,11 +114,15 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ProductColorViewModel model)
         {
-            var productcolor = productColorService.GetByProColorId(model.ProductColorId);
+            if (model == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
+            var productcolor = productColorRepository.GetByProColorId(model.ProductColorId);
             productcolor.ColorId = model.ColorId;
             productcolor.ProductColorId = model.ProductColorId;
             productcolor.ProductId = model.ProductId;
-            productColorService.UpdateProColor(productcolor);
+            productColorRepository.UpdateProColor(productcolor);
             return RedirectToAction("Index", new { productid = model.ProductId });
         }
 

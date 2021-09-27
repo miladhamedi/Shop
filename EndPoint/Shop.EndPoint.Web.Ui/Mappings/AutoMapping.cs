@@ -19,11 +19,11 @@ namespace Shop.EndPoint.Web.Ui.Mappings
         {
             CreateMap<IdentityUserRole<Guid>, UserRoleDto>();
             CreateMap<UserRoleDto, UserRoleViewModel>();
-            CreateMap<Article, ArticleDto>();
             CreateMap<Color, ColorDto>();
             CreateMap<ColorDto, ColorViewModel>();
             CreateMap<ColorViewModel, ColorDto>();
             CreateMap<ColorDto, Color>();
+            CreateMap<Article, ArticleDto>();
             CreateMap<ArticleDto, Article>();
             CreateMap<ArticleDto, ArticleViewModel>();
             CreateMap<Article, ArticleViewModel>();
@@ -33,6 +33,26 @@ namespace Shop.EndPoint.Web.Ui.Mappings
             CreateMap<MessageViewModel, MessageDto>();
             CreateMap<Gallery, GalleryDto>();
             CreateMap<GalleryDto, Gallery>();
+            CreateMap<Setting, SettingDto>();
+            CreateMap<UserPage, UserPageDto>();
+            CreateMap<UserPageDto, UserPage>();
+            CreateMap<UserPageDto, UserPageViewModel>();
+            CreateMap<UserPageViewModel, UserPageDto>();
+            CreateMap<Weight, WeightDto>();
+            CreateMap<ColorProductDto, ColorProductViewModel>();
+            CreateMap<WeightDto, Weight>();
+            CreateMap<WeightDto, WeightViewModel>();
+            CreateMap<WeightViewModel, WeightDto>();
+            CreateMap<Color, ColorDto>();
+            CreateMap<ProductByCateDto, ProductByCateViewModel>();
+            CreateMap<UserDto, ApplicationUser>();
+            CreateMap<ApplicationUser, UserDto>();
+            CreateMap<UserDto, UserViewModel>();
+            CreateMap<InvoiceDto, Invoice>();
+            CreateMap<Invoice, InvoiceDto>();
+            CreateMap<ProductDetailsDto, ProductDetailsViewModel>();
+            CreateMap<Product, ProductDto>();
+            CreateMap<ProductDto, Product>();
             CreateMap<GalleryDto, GalleryViewModel>()
                 .ForMember(c =>
           c.ProductId,
@@ -47,16 +67,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
           c.GalleryId,
           opt => opt.MapFrom(src => src.GalleryId));
 
-            CreateMap<Setting, SettingDto>();
-            CreateMap<UserPage, UserPageDto>();
-            CreateMap<UserPageDto, UserPage>();
-            CreateMap<UserPageDto, UserPageViewModel>();
-            CreateMap<UserPageViewModel, UserPageDto>();
-            CreateMap<Weight, WeightDto>();
-            CreateMap<ColorProductDto, ColorProductViewModel>();
-            CreateMap<WeightDto, Weight>();
-            CreateMap<WeightDto, WeightViewModel>();
-            CreateMap<WeightViewModel, WeightDto>();
+            
             CreateMap<CommentDto, Comment>()
                 .ForMember(c =>
           c.ProductId,
@@ -85,6 +96,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
         .ForMember(c =>
           c.UserId,
           opt => opt.MapFrom(src => src.UserId));
+
             CreateMap<Comment, CommentDto>()
               .ForMember(c =>
         c.ProductId,
@@ -145,7 +157,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
        c.UserId,
        opt => opt.MapFrom(src => src.UserId));
 
-            CreateMap<Color, ColorDto>();
+           
 
             CreateMap<Category, CategoryDto>()
                 .ForMember(c =>
@@ -237,11 +249,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
        opt => opt.MapFrom(src => src.ActivePassive));
 
 
-            CreateMap<ProductDetailsDto, ProductDetailsViewModel>();
-            CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>();
-            //CreateMap<ProductDto, ProductViewModel>();
-            //CreateMap<ProductViewModel, ProductDto>();
+          
             CreateMap<IdentityRole<Guid>, RoleDto>()
       .ForMember(c =>
           c.RoleId,
@@ -570,10 +578,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
          c.DisCountPrice,
          opt => opt.MapFrom(src => src.DiscuntedPrice));
 
-            CreateMap<ProductByCateDto, ProductByCateViewModel>();
-            CreateMap<UserDto, ApplicationUser>();
-            CreateMap<ApplicationUser, UserDto>();
-            CreateMap<UserDto, UserViewModel>();
+           
             CreateMap<ApplicationUser, PostInformationDto>()
      .ForMember(c =>
   c.City,
@@ -615,8 +620,7 @@ namespace Shop.EndPoint.Web.Ui.Mappings
       .ForMember(c =>
          c.Date,
          opt => opt.MapFrom(src => src.Date));
-            CreateMap<InvoiceDto, Invoice>();
-            CreateMap<Invoice, InvoiceDto>();
+           
             CreateMap<InvoiceDto, InvoiceViewModel>()
   .ForMember(c =>
       c.InvoiceNumber,

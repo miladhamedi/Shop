@@ -33,6 +33,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Index(int productid)
         {
             var listgallery = galleryService.GetAllProId(productid);
+            if (listgallery.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             List<GalleryViewModel> galleryViewModels = new List<GalleryViewModel>();
             foreach (var item in listgallery)
             {
@@ -120,7 +124,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var gallery = galleryService.GetByGalleryId(galleryid);
             if (gallery == null)
             {
-                return null;
+                return RedirectToAction("Notfound", "Manage");
             }
             var GalleryVi = mapper.Map<GalleryViewModel>(gallery);
             return View(GalleryVi);
@@ -133,7 +137,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(GalleryViewModel model, IFormFile PictureName)
         {
             var gallery = galleryService.GetByGalleryId(model.GalleryId);
-
+            if (gallery == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             if (PictureName != null)
             {
                 var uploads = Path.Combine(webHostEnvironment.WebRootPath, "uploads\\Products\\");
@@ -174,7 +181,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var gallery = galleryService.GetByGalleryId(galleryid);
             if (gallery == null)
             {
-                return null;
+                return RedirectToAction("Notfound", "Manage");
             }
             var RoutFile = Path.Combine(webHostEnvironment.WebRootPath, "uploads\\Products\\" + gallery.PictureName);
 

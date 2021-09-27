@@ -12,5 +12,6 @@ namespace Shop.Core.Service.Dto
         public string ColorPro { get; set; }
         public string ColorCode { get; set; }
         public int ProductId { get; set; }
+        public int ProductColorId { get; set; }
     }
 }

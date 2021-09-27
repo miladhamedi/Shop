@@ -14,5 +14,11 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             return View();
         }
+
+
+        public IActionResult Notfound()
+        {
+            return View();
+        }
     }
 }

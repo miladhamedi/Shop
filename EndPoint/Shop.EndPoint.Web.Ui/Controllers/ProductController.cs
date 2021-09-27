@@ -52,6 +52,10 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             ShopActionResult<List<ProductByCateViewModel>> prolistor = new ShopActionResult<List<ProductByCateViewModel>>();
 
             var listProCat = productService.ProductByCatelist(catgoryid, page);
+            if (listProCat.Data.Count == 0)
+            {
+                return RedirectToAction("Error","Home");
+            }
 
             prolistor.Page = listProCat.Page;
             prolistor.Pages = listProCat.Pages;
@@ -71,6 +75,10 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         public IActionResult ProductDetails(int productid)
         {
             var product = productService.ProductDetails(productid);
+            if (product == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
             var ProDetails = mapper.Map<ProductDetailsViewModel>(product);
             ViewBag.Message = TempData["Message"];
             ViewBag.Status = TempData["Status"];
@@ -117,6 +125,10 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             ShopActionResult<List<ProductByCateViewModel>> prolistor = new ShopActionResult<List<ProductByCateViewModel>>();
 
             var listProduct = productService.SearchProduct(title, page);
+            if (listProduct.Data.Count == 0)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             prolistor.Page = listProduct.Page;
             prolistor.Pages = listProduct.Pages;
@@ -143,6 +155,10 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             ShopActionResult<List<ProductByCateViewModel>> prolistor = new ShopActionResult<List<ProductByCateViewModel>>();
 
             var listProduct = productService.SearchPrice(categoryid, min_price, max_price, page);
+            if (listProduct.Data.Count == 0)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             prolistor.Page = page;
             prolistor.Pages = listProduct.Pages;

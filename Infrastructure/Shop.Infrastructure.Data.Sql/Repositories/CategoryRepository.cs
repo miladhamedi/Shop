@@ -37,7 +37,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public Category GetById(int categoryid)
         {
-            var Category = shopDbContext.Categories.Where(c=>c.CategoryId == categoryid).FirstOrDefault();
+            var Category = shopDbContext.Categories.Where(c=>c.CategoryId == categoryid).AsNoTracking().FirstOrDefault();
             return Category;
 
         }

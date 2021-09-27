@@ -62,6 +62,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
             List<ShopingCartViewModel> shopingCartViewModels = new List<ShopingCartViewModel>();
             var ShopingInvoice = shopingCartService.GetByInvoiceId(invoicenumber);
+            if (ShopingInvoice == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             foreach (var item in ShopingInvoice)
             {
                 var shop = mapper.Map<ShopingCartViewModel>(item);

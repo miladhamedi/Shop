@@ -55,6 +55,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(int productid)
         {
             var technicaldetail = technicalDetailService.GetByProductId(productid);
+            if (technicaldetail == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             var technicalDetail = mapper.Map<TechnicalDetailViewModel>(technicaldetail);
             return View(technicalDetail);
         }
@@ -64,7 +68,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(TechnicalDetailViewModel technicalDetailView)
         {
             var technicaldetail = technicalDetailService.GetByProductId(technicalDetailView.ProductId);
-           
+            if (technicaldetail == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             technicaldetail.Warranty = technicalDetailView.Warranty;
             technicaldetail.Type = technicalDetailView.Type;
             technicaldetail.Model = technicalDetailView.Model;

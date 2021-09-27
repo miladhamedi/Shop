@@ -545,3 +545,4 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\U
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\UserPage\Create.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\UserPage\Edit.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\NotAccessPage.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\Manage\Notfound.cshtml.g.cs

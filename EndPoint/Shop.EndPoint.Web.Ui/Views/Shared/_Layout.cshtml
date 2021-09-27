@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@inject ICategoryService  categoryservice
+@{
+    var listCat = categoryservice.GetAll();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewData["Title"]</title>
@@ -16,7 +20,7 @@
     <link rel='stylesheet' type='text/css' href="~/assets/front/_css/animate.css">
     <link rel="stylesheet" type="text/css" href="~/assets/front/_css/master.css">
     <link rel="stylesheet" type="text/css" href="~/assets/front/_css/media.css">
-    
+
     <script src="~/assets/front/_js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
@@ -33,13 +37,13 @@
                 <div class='right_part'>
                     <a href='' title='' class='logo'></a>
                     <div class='title'>فروشگاه لوازم آشپزخانه کی کِت</div>
-                    <p class='text'>09358022968</p><!--close .text-->
+                    <p class='text'></p><!--close .text-->
                     <div class='atlasweb'>
                         <span class='atlas_logo'></span>
-                        <a href='#' target='_blank' title='طراحی سایت'> </a> 
+                        <a href='#' target='_blank' title='طراحی سایت'> </a>
                         <a href='#' title='بهینه سازی سایت'
-                           target='_blank'></a>   
-                    </div> 
+                           target='_blank'></a>
+                    </div>
                 </div><!--close .right_part-->
                 <div class='left_part'>
                     <div class='footer_part1'>
@@ -85,31 +89,15 @@
                     </div><!--close .footer_part2-->
                     <div class='footer_part3'>
                         <ul class='step clearfix none_list_style'>
-                            <li class='item'>
-                                <a href='#' title='' class='link'>
-                                    هود
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='#' title='' class='link'>
-                                    سینک ظرفشویی
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='#' title='' class='link'>
-                                    اجاق گاز و فر
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='#' title='' class='link'>
-                                    قهوه ساز
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='#' title='' class='link'>
-                                    ماکروویو
-                                </a>
-                            </li>
+                            @foreach (var item in listCat.Data)
+                            {
+                                <li class='item'>
+                                    <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId"
+                                       class='link'>@item.Titel</a>
+                                </li>
+
+                            }
+
                         </ul>
                     </div><!--close .footer_part3-->
                     <div class='footer_part4 clearfix'>
@@ -133,99 +121,70 @@
                     </div><!--close .footer_part4-->
                     <div class='footer_part5'>
                         <ul class='step clearfix none_list_style'>
-                            <li class='item'><a href='' class='link'>صفحه اصلی</a></li>
-                            <li class='item'>
-                                <a href='/محصولات/products' title='' class='link'>محصولات</a>
-                            </li>
-                            <li class='item'><a href='/اخبار/news' title='' class='link'>اخبار</a></li>
-                            <li class='item'><a href='/مقالات/article' title='' class='link'>مقالات</a></li>
-                            <li class='item'>
-                                <a href='/درباره-ما/about-us' title='' class='link'>
-                                    درباره
-                                    ما
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='/تماس-با-ما/contact-us' title='' class='link'>
-                                    تماس
-                                    با ما
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='/قوانین-و-سیاست-ها/law' title='' class='link'>
-                                    قوانین
-                                    و سیاست ها
-                                </a>
-                            </li>
-                            <li class='item'>
-                                <a href='/نقشه-سایت/sitemap' title='' class='link'>
-                                    نقشه
-                                    سایت
-                                </a>
-                            </li>
+                           
                         </ul>
                     </div><!--close .footer_part5-->
                 </div><!--close .left_part-->
             </div><!--close .inner-->
         </div><!--close .container-->
-        
+
 
         <div class='goto_top gotop'><i class='i-up-open'></i></div>
     </footer><!--close footer-->
 
     @RenderSection("Scripts", required: false)
     <partial name="_ValidationScriptsPartial">
-    @*<img src='http://gowebsite.ir/_images/under_label.png?ver=0.1' class='under_label' style='position:fixed; top:220px; right:0px; width:200px; z-index:10000;'>*@
+        @*<img src='http://gowebsite.ir/_images/under_label.png?ver=0.1' class='under_label' style='position:fixed; top:220px; right:0px; width:200px; z-index:10000;'>*@
 
-    <!--all script in site-->
-    <script src="~/bowercomponents/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-    <script src='~/assets/front/_js/jquery-ui-effect.min.js'></script>
-    <script src='~/assets/front/_js/html5shiv.min.js'></script>
-
-    <!--form validate-->
-    <script src='~/assets/front/_js/jquery.validate.min.js'></script>
-    <script src='~/assets/front/_js/additional-methods.min.js'></script>
-    <script src='~/assets/front/_js/all_form_validate.js?ver=0.6'></script>
-
-    <!--toast-->
-    <link href='~/assets/front/_plugins/toast/jquery.toast.css' rel='stylesheet' type='text/css'>
-    <script src='~/assets/front/_plugins/toast/jquery.toast.min.js'></script>
-
-    <!--ajax form-->
-    <script src='~/assets/front/_js/jQuery.form.js'></script>
-
-    <!--ellipsis-->
-    <script src='~/assets/front/_plugins/ellipsis/jquery.dotdotdot.min.js'></script>
-
-    <!--autosize-->
-    <script src='~/assets/front/_plugins/autosize/jquery.autosize.min.js'></script>
-
-    <!--scripts-->
-    <script src='~/assets/front/_js/functions.js?ver=0.1'></script>
-    <script src='~/assets/front/_js/master.js?ver=0.1'></script>
+        <!--all script in site-->
+        <script src="~/bowercomponents/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
-    <!--bxslider-->
-    <script src='~/assets/front/_plugins/bxslider/jquery.bxslider.min.js'></script>
-    <link href='~/assets/front/_plugins/bxslider/jquery.bxslider.css' type='text/css' rel='stylesheet'>
+        <script src='~/assets/front/_js/jquery-ui-effect.min.js'></script>
+        <script src='~/assets/front/_js/html5shiv.min.js'></script>
 
-    <!--ms_scroll-->
-    <link rel='stylesheet' type='text/css'
-          href='~/assets/front/_plugins/ms_scroll/jquery.mCustomScrollbar.css'>
-    <script src='~/assets/front/_plugins/ms_scroll/jquery.mCustomScrollbar.concat.min.js'></script>
+        <!--form validate-->
+        <script src='~/assets/front/_js/jquery.validate.min.js'></script>
+        <script src='~/assets/front/_js/additional-methods.min.js'></script>
+        <script src='~/assets/front/_js/all_form_validate.js?ver=0.6'></script>
 
-    <!--owl_carosel-->
-    <link rel='stylesheet' href='~/assets/front/_plugins/owlcarousel/owl.carousel.min.css'>
-    <script src='~/assets/front/_plugins/owlcarousel/owl.carousel.min.js'></script>
+        <!--toast-->
+        <link href='~/assets/front/_plugins/toast/jquery.toast.css' rel='stylesheet' type='text/css'>
+        <script src='~/assets/front/_plugins/toast/jquery.toast.min.js'></script>
 
-    <!--nice select-->
-    <script src="~/assets/front/_plugins/nice_select/js/jquery.nice-select.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/assets/front/_plugins/nice_select/css/nice_select.css">
+        <!--ajax form-->
+        <script src='~/assets/front/_js/jQuery.form.js'></script>
 
-    <script src="~/assets/front/_plugins/drift-master/dist/Drift.js"></script>
-    <link href="~/assets/front/_plugins/drift-master/dist/drift-basic.css" rel="stylesheet" />
+        <!--ellipsis-->
+        <script src='~/assets/front/_plugins/ellipsis/jquery.dotdotdot.min.js'></script>
+
+        <!--autosize-->
+        <script src='~/assets/front/_plugins/autosize/jquery.autosize.min.js'></script>
+
+        <!--scripts-->
+        <script src='~/assets/front/_js/functions.js?ver=0.1'></script>
+        <script src='~/assets/front/_js/master.js?ver=0.1'></script>
+
+
+        <!--bxslider-->
+        <script src='~/assets/front/_plugins/bxslider/jquery.bxslider.min.js'></script>
+        <link href='~/assets/front/_plugins/bxslider/jquery.bxslider.css' type='text/css' rel='stylesheet'>
+
+        <!--ms_scroll-->
+        <link rel='stylesheet' type='text/css'
+              href='~/assets/front/_plugins/ms_scroll/jquery.mCustomScrollbar.css'>
+        <script src='~/assets/front/_plugins/ms_scroll/jquery.mCustomScrollbar.concat.min.js'></script>
+
+        <!--owl_carosel-->
+        <link rel='stylesheet' href='~/assets/front/_plugins/owlcarousel/owl.carousel.min.css'>
+        <script src='~/assets/front/_plugins/owlcarousel/owl.carousel.min.js'></script>
+
+        <!--nice select-->
+        <script src="~/assets/front/_plugins/nice_select/js/jquery.nice-select.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="~/assets/front/_plugins/nice_select/css/nice_select.css">
+
+        <script src="~/assets/front/_plugins/drift-master/dist/Drift.js"></script>
+        <link href="~/assets/front/_plugins/drift-master/dist/drift-basic.css" rel="stylesheet" />
 
 
 

@@ -80,6 +80,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(int userpageid)
         {
             var Userpage = userPageService.GetById(userpageid);
+            if (Userpage == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             var userpage = mapper.Map<UserPageViewModel>(Userpage);
             ViewBag.ListRole = new SelectList(roleService.GetAllRole(), "RoleId", "RoleName", userpage.RoleId);
             return View(userpage);
@@ -106,6 +110,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
 
             var Userpage = userPageService.GetById(userpageid);
+            if (Userpage == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             userPageService.RemoveUserPage(Userpage);
 
             return RedirectToAction("Index");

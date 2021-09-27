@@ -17,7 +17,7 @@ namespace Shop.Core.Service.ServiceSender
         {
             this.settingRepository = settingRepository;
         }
-        public Task EmailSenderAsync(string email, string subject, string message)
+        public  Task EmailSenderAsync(string email, string subject, string message)
         {
             var setting =  settingRepository.GetSetting();
 

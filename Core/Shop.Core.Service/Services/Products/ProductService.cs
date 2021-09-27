@@ -131,6 +131,7 @@ namespace Shop.Core.Service.Services.Products
         public ProductDetailsDto ProductDetails(int productid)
         {
             var product = productRepository.GetProductById(productid);
+
             var tchnic = technicalDetailRepository.GetByProductId(product.ProductId);
             var ListColor = colorService.GetByProductColor(product.ProductId);
             var ListComment = commentService.GetAllProId(product.ProductId);
@@ -159,8 +160,7 @@ namespace Shop.Core.Service.Services.Products
             productDto.View = product.Visit += 1;
 
             productRepository.UpdateProduct(product);
-
-
+           
             return productDto;
 
 
@@ -173,7 +173,7 @@ namespace Shop.Core.Service.Services.Products
             ShopActionResult<List<ProductByCateDto>> shopActionResult = new ShopActionResult<List<ProductByCateDto>>();
             List<ProductByCateDto> productByCateDtos = new List<ProductByCateDto>();
             shopActionResult.Counts = listpro.Count();
-            shopActionResult.ItemCount = 3;
+            shopActionResult.ItemCount = 9;
             shopActionResult.Page = page;
             var skip = (page - 1) * shopActionResult.ItemCount;
             var ListProduct = listpro.Skip(skip).Take(shopActionResult.ItemCount);
@@ -199,7 +199,7 @@ namespace Shop.Core.Service.Services.Products
             ShopActionResult<List<ProductByCateDto>> shopActionResult = new ShopActionResult<List<ProductByCateDto>>();
             List<ProductByCateDto> productByCateDtos = new List<ProductByCateDto>();
             shopActionResult.Counts = listProduct.Count();
-            shopActionResult.ItemCount = 3;
+            shopActionResult.ItemCount = 9;
             shopActionResult.Page = page;
             var skip = (page - 1) * shopActionResult.ItemCount;
             var ListProduct = listProduct.Skip(skip).Take(shopActionResult.ItemCount);

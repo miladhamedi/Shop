@@ -21,7 +21,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         private readonly IArticleRepository articleRepository;
 
         public HomeController(ILogger<HomeController> logger, IMapper mapper
-            , IArticleService articleService,IArticleRepository articleRepository)
+            , IArticleService articleService, IArticleRepository articleRepository)
 
         {
             _logger = logger;
@@ -35,7 +35,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             return View();
         }
 
-       
+
         public IActionResult About()
         {
             return View();
@@ -44,16 +44,20 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         {
             return View();
         }
-     
+
         public IActionResult Contact()
         {
             return View();
         }
 
-   
+
         public IActionResult Article()
         {
             var Ariclelist = articleService.GetAll();
+            if (Ariclelist.Data.Count == 0)
+            {
+                return RedirectToAction("Error");
+            }
 
             List<ArticleViewModel> articleViewModel = new List<ArticleViewModel>();
             foreach (var item in Ariclelist.Data)
@@ -62,8 +66,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                 articleViewModel.Add(ListArticle);
             }
 
-            if (Ariclelist.Data == null)
-                return RedirectToAction("Error");
+         
 
             return View(articleViewModel.Take(3));
         }
@@ -72,14 +75,15 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
         public IActionResult DetailArticle(int id)
         {
-            //repository
-            var article = articleRepository.GetById(id);
-            article.View += 1;
-            //repository
-            articleRepository.UpdateArticle(article);
+            var article = articleService.DetailArticle(id);
+            if (article == null)
+            {
+                return RedirectToAction("Error");
+
+            }
             var Article = mapper.Map<ArticleViewModel>(article);
-           
-            if (Article == null)
+
+            if (Article != null)
                 return RedirectToAction("Error");
 
             return View(Article);
@@ -91,7 +95,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             return View();
         }
 
-      
+
 
     }
 }

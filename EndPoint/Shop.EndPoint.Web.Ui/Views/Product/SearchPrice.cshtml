@@ -142,47 +142,67 @@
                         }
                         else
                         {
-                            <li>
-                                <span>
-                                    محصولی یافت نشد
-                                </span>
-                            </li>
+                            <div class='bottom_part'>
+                                <div class="no_item">
+
+                                    <div class="table1">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" width="220">
+
+                                                        <h2 class="text-center">نتیجه یافت نشد</h2>
+
+                                                    </td>
+
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div><!--close .bottom_part-->
                         }
 
                     </ul>
                 </div><!--close .box_style3-->
                 <div class='pagination_style1'>
                     <nav aria-label="...">
-
-                        @for (int i = 1; i <= Model.Pages; i++)
+                        @if (Model.Data.Count > 0)
                         {
 
-                            if (Model.Page == i)
+                            @for (int i = 1; i <= Model.Pages; i++)
                             {
 
-                                <ul class="pagination pagination-lg">
-                                    <li class="page-item  active">
-                                        <a class="page-link" href='/Product/SearchPrice?categoryid=@Model.Data.First().CategoryId&min_price=@ViewBag.Pricemin&max_price=@ViewBag.Pricemax&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+                                if (Model.Page == i)
+                                {
 
-                                    </li>
-                                </ul>
+                                    <ul class="pagination pagination-lg">
+                                        <li class="page-item  active">
+                                            <a class="page-link" href='/Product/SearchPrice?categoryid=@Model.Data.First().CategoryId&min_price=@ViewBag.Pricemin&max_price=@ViewBag.Pricemax&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                        </li>
+                                    </ul>
+
+
+                                }
+                                else
+                                {
+
+                                    <ul class="pagination pagination-lg">
+                                        <li class="page-item ">
+                                            <a class="page-link" href='/Product/SearchPrice?categoryid=@Model.Data.First().CategoryId&min_price=@ViewBag.Pricemin&max_price=@ViewBag.Pricemax&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
+
+                                        </li>
+
+                                    </ul>
+
+                                }
 
 
                             }
-                            else
-                            {
-
-                                <ul class="pagination pagination-lg">
-                                    <li class="page-item ">
-                                        <a class="page-link" href='/Product/SearchPrice?categoryid=@Model.Data.First().CategoryId&min_price=@ViewBag.Pricemin&max_price=@ViewBag.Pricemax&page=@i.ToString()' tabindex="-1">@i.ToString()</a>
-
-                                    </li>
-
-                                </ul>
-
-                            }
-
-
                         }
                     </nav>
                 </div><!--close .left_part-->

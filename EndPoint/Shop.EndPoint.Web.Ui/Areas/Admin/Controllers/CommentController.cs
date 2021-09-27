@@ -15,15 +15,13 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
     public class CommentController : BaseController
     {
         private readonly ICommentService commentService;
-        private readonly ICommentRepository commentRepository;
         private readonly IMapper mapper;
       
 
         public CommentController(ICommentService commentService,
-            ICommentRepository commentRepository,IMapper mapper)
+            IMapper mapper)
         {
             this.commentService = commentService;
-            this.commentRepository = commentRepository;
             this.mapper = mapper;
          
         }
@@ -33,6 +31,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
             ShopActionResult<List<CommentViewModel>> actionResult = new ShopActionResult<List<CommentViewModel>>();
             var ListComment = commentService.GetAll(page);
+            if (ListComment.Data.Count == 0)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             actionResult.Pages = ListComment.Pages;
             actionResult.Page = ListComment.Page;
             List<CommentViewModel> commentViewModels = new List<CommentViewModel>();
@@ -54,7 +56,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var comment = commentService.GetCommentById(id);
             if (comment == null)
             {
-                return View("Error", "Home");
+                return RedirectToAction("Notfound", "Manage");
             }
             var Comment = mapper.Map<CommentViewModel>(comment);
 
@@ -65,6 +67,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var comment = commentService.GetCommentById(id);
+            if (comment == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             if (comment == null)
             {
                 return View("Error","Home");
@@ -85,7 +91,9 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var comment = commentService.GetCommentById(model.CommentId);
 
             if (comment == null)
-                return RedirectToAction("Erorr", "Home");
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
 
             comment.Confirm = true;
            
@@ -99,7 +107,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
             var comment = commentService.GetCommentById(id);
             if (comment == null)
             {
-                return RedirectToAction("Erorr", "Home");
+                return RedirectToAction("Notfound", "Manage");
             }
 
             commentService.DeleteComment(comment);

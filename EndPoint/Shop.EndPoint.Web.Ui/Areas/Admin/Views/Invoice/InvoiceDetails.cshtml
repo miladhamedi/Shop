@@ -53,6 +53,8 @@
                                         @foreach (var item in Model)
                                         {
                                             var product = productservice.GetByIdPro(item.ProductId);
+                                            var Pricepro = Math.Round(product.Price);
+                                            var Priceproduct = string.Format("{0:0,0}", Pricepro);
                                             <tr>
                                                 <td class="text-center">
 
@@ -70,7 +72,7 @@
                                                     @Html.DisplayFor(modelItem => product.Titel)
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class='price'>@product.Price</span>
+                                                    <span class='price'>@Priceproduct</span>
                                                 </td>
                                                 <td class="text-center">
                                                     @Html.DisplayFor(modelItem => item.Count)
@@ -81,16 +83,18 @@
                                                         @{
                                                             var price = item.Price;
                                                             var count = item.Count;
-                                                            var pricecount = Convert.ToDecimal(price) * count;
+                                                            var pricecount = price * count;
+                                                            var PriceProduct = Math.Round(pricecount);
+                                                            var PriceProstring = string.Format("{0:0,0}", PriceProduct);
                                                         }
 
-                                                        @pricecount.ToString()
+                                                        @PriceProstring
 
                                                     </span>
                                                 </td>
                                             </tr>
                                         }
-                                       
+
                                     </tbody>
                                 </table>
                             </div>

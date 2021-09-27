@@ -71,6 +71,10 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         public IActionResult Delete(Guid roleid)
         {
             var role = roleService.GetById(roleid);
+            if (role == null)
+            {
+                return RedirectToAction("Notfound", "Manage");
+            }
             roleService.RemoveRole(role);
             return RedirectToAction("Index");
 

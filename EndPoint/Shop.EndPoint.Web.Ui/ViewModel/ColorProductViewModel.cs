@@ -12,5 +12,6 @@ namespace Shop.EndPoint.Web.Ui.ViewModel
         public string ColorPro { get; set; }
         public string ColorCode { get; set; }
         public int ProductId { get; set; }
+        public int ProductColorId { get; set; }
     }
 }

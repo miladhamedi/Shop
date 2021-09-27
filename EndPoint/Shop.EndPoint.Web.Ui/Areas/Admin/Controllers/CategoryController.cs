@@ -14,14 +14,12 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 {
     public class CategoryController : BaseController
     {
-        private readonly ICategoryRepository categoryRepository;
         private readonly ICategoryService categoryService;
         private readonly IMapper mapper;
 
-        public CategoryController(ICategoryRepository categoryRepository,
+        public CategoryController(
             ICategoryService  categoryService,IMapper mapper)
         {
-            this.categoryRepository = categoryRepository;
             this.categoryService = categoryService;
             this.mapper = mapper;
         }
@@ -29,6 +27,8 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             ShopActionResult<List<CategoryViewModel>> actionResult = new ShopActionResult<List<CategoryViewModel>>();
             var Listcategory = categoryService.GetAll(page);
+            if (Listcategory.Data.Count == 0)
+                return RedirectToAction("Notfound", "Manage");
             actionResult.Pages = Listcategory.Pages;
             actionResult.Page = page;
             List<CategoryViewModel> categoryViewModels = new List<CategoryViewModel>();
@@ -71,9 +71,7 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         {
             var category = categoryService.GetById(id);
             if (category == null)
-            {
-                return View("Error","Home");
-            }
+                return RedirectToAction("Notfound", "Manage");
 
             var Category = mapper.Map<CategoryViewModel>(category);
 
@@ -88,14 +86,16 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                //repository
-                var Category = categoryRepository.GetById(model.CategoryId);
-
+             
+                var Category = categoryService.GetById(model.CategoryId);
+                if (Category == null)
+                    return RedirectToAction("Notfound", "Manage");
                 Category.ActivePassive = model.ActivePassive;
                 Category.Titel = model.Titel;
+                Category.CategoryId = model.CategoryId;
 
-                //repository
-                categoryRepository.UpdateCategory(Category);
+
+                categoryService.UpdateCategory(Category);
 
                 return RedirectToAction("Index");
 
