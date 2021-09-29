@@ -32,16 +32,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
             return gallery;
         }
 
-       
-
-        //public Gallery GetById(int Galleryid)
-        //{
-        //    var gallery = shopDbContext.Galleries.Where(c => c.Default == false).SingleOrDefault(c => c.GalleryId == Galleryid);
-        //    return gallery;
-              
-        //}
-
-        public Gallery GetByIdGallery(int Galleryid)
+        public Gallery GetByGalleryId(int Galleryid)
         {
             var gallery = shopDbContext.Galleries.Where(c => c.GalleryId == Galleryid).AsNoTracking().FirstOrDefault();
             return gallery;

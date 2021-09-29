@@ -11,4 +11,3 @@ F:\Shop\Core\Shop.Core.Domain\obj\Debug\net5.0\Shop.Core.Domain.csproj.CoreCompi
 F:\Shop\Core\Shop.Core.Domain\obj\Debug\net5.0\Shop.Core.Domain.dll
 F:\Shop\Core\Shop.Core.Domain\obj\Debug\net5.0\ref\Shop.Core.Domain.dll
 F:\Shop\Core\Shop.Core.Domain\obj\Debug\net5.0\Shop.Core.Domain.pdb
-F:\Shop\Core\Shop.Core.Domain\obj\Debug\net5.0\Shop.Core.Domain.csproj.AssemblyReference.cache

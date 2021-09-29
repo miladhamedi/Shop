@@ -78,7 +78,7 @@ namespace Shop.Core.Service.Services.Products
 
         public ProductDto GetById(int productid)
         {
-            var user = productRepository.GetById(productid);
+            var user = productRepository.GetByProductId(productid);
             var AppUser = mapper.Map<ProductDto>(user);
             return AppUser;
         }

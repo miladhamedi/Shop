@@ -10,8 +10,7 @@ namespace Shop.Core.Contract.Repositories
         string GetPicName(int productid);
         List<Gallery> GetAllProId(int productid);
         int AddGallery(Gallery gallery);
-        //Gallery GetById(int Galleryid);
-        Gallery GetByIdGallery(int Galleryid);
+        Gallery GetByGalleryId(int Galleryid);
         void RemoveGallery(Gallery gallery);
         void UpdateGallery(Gallery gallery);
 

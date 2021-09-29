@@ -12,7 +12,7 @@ namespace Shop.Core.Contract.Repositories
         void UpdateArticle(Article article);
         void AddArticle(Article article);
         void RemoveArticle(Article article);
-        List<Article> GetAllArticle();
+       
       
     }
 }

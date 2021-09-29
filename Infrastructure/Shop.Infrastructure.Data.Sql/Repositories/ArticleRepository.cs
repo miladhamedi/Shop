@@ -30,12 +30,6 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
             return Listarticle;
         }
 
-        public List<Article> GetAllArticle()
-        {
-            var Listarticle = shopDbContext.Articles.AsNoTracking().ToList();
-            return Listarticle;
-        }
-
         public Article GetById(int id)
         {
             var article = shopDbContext.Articles.Where(c => c.ArticleId == id).AsNoTracking().SingleOrDefault();

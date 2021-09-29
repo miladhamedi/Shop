@@ -30,13 +30,14 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         private readonly IUserService userService;
         private readonly IColorService colorService;
         private readonly ITechnicalDetailService technicalDetailService;
+        private readonly IinvoiceRepository iinvoiceRepository;
         private readonly IShopingCartService shopingCartService;
         private readonly IMapper mapper;
         private readonly IWeightService weightService;
         private readonly IinvoiceService iinvoiceService;
         private readonly ISettingService settingService;
         private readonly IEmailSender emailSender;
-        private readonly IinvoiceRepository iinvoiceRepository;
+       
 
         public CartController(IProductService productService,
             IUserService userService, IColorService colorService,
@@ -69,7 +70,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
             if (user != null && Shoping != null)
             {
-                //قیمت با احتساب مالیات
+                
                 List<decimal> listsum = new List<decimal>();
                 foreach (var item in Shoping)
                 {
@@ -83,7 +84,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                 List<decimal> listDiscount = new List<decimal>();
                 foreach (var item in Shoping)
                 {
-                    //تخفیفات
+                   
                     var product = productService.GetByIdPro(item.ProductId);
                     var percent = product.DiscuntPercent == 0 ? 0 : product.DiscuntPercent;
                     var percentDiscount = percent;

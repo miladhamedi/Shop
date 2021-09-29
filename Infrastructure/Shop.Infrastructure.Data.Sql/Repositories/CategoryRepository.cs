@@ -25,8 +25,8 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public bool ExsistCategory(int categoryid)
         {
-            var User = shopDbContext.Categories.Any(c => c.CategoryId == categoryid);
-            return User;
+            var Category = shopDbContext.Categories.Any(c => c.CategoryId == categoryid);
+            return Category;
         }
 
         public List<Category> GetAll()

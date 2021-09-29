@@ -17,7 +17,7 @@ namespace Shop.Core.Contract.Repositories
         List<Product> GetAllProduct();
         List<Product> LastProduct();
         int AddProduct(Product product);
-        Product GetById(int productid);
+        Product GetByProductId(int productid);
 
     }
 }

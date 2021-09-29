@@ -36,7 +36,7 @@ namespace Shop.Core.Service.Services.Profile
         public List<ArticleDto> GetAllArticle()
         {
             List<ArticleDto> articleDtos = new List<ArticleDto>();
-            var listArticle = articleRepository.GetAllArticle();
+            var listArticle = articleRepository.GetAll();
             foreach (var item in listArticle)
             {
                 var article = mapper.Map<ArticleDto>(item);

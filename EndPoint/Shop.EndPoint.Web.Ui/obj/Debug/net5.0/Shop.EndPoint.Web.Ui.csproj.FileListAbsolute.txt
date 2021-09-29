@@ -3,7 +3,6 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.Gene
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.AssemblyInfoInputs.cache
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.AssemblyInfo.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.csproj.CoreCompileInputs.cache
-F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.MvcApplicationPartsAssemblyInfo.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.MvcApplicationPartsAssemblyInfo.cache
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.RazorAssemblyInfo.cache
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.RazorAssemblyInfo.cs

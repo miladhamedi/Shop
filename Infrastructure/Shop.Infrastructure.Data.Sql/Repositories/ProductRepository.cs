@@ -40,7 +40,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
             return ProCateList;
         }
 
-        public Product GetById(int productid)
+        public Product GetByProductId(int productid)
         {
             var product = shopDbContext.Products.Where(c => c.ProductId == productid).Include(c=>c.Galleries).AsNoTracking().FirstOrDefault();
             return product;

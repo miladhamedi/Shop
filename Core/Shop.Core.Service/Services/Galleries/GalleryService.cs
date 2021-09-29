@@ -42,7 +42,7 @@ namespace Shop.Core.Service.Services.Galleries
 
         public GalleryDto GetByGalleryId(int galleryid)
         {
-            var gallery = galleryRepository.GetByIdGallery(galleryid);
+            var gallery = galleryRepository.GetByGalleryId(galleryid);
             var Gallery = mapper.Map<GalleryDto>(gallery);
             return Gallery;
         }
