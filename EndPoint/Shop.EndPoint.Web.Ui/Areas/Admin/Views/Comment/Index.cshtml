@@ -2,12 +2,20 @@
 @inject IProductService productservice
 @{
     ViewData["Title"] = "نظرات";
-   
+
 }
 
 
 
+<style>
+    th {
+        text-align: center;
+    }
 
+    td {
+        text-align: center;
+    }
+</style>
 <section class="content-header">
     <h1>
         مدیریت
@@ -52,13 +60,13 @@
                                                 <th>
                                                     @Html.DisplayNameFor(model => model.Data.First().ProductName)
                                                 </th>
-                                                <th></th>
+                                                <th> عملیات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model.Data)
                                             {
-                                                var ProductName = productservice.GetByIdPro(Model.Data.First().ProductId).Titel;
+                                                var ProductName = productservice.GetByIdPro(item.ProductId).Titel;
 
                                                 <tr>
 
@@ -74,10 +82,15 @@
                                                     <td>
                                                         @Html.DisplayFor(modelItem => ProductName)
                                                     </td>
-                                                    <td style="text-align:center">
-                                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Details" asp-route-id="@item.CommentId"><i class="fa fa-clipboard" style="color:forestgreen; font-size:23px;"></i></a>    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a asp-area="Admin" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.CommentId"><i class="fa fa-trash" style="color:red; font-size:23px;"></i></a>
-                                                    </td>
+                                                    @if (item.Confirm == false)
+                                                    {
+                                                        <td>
+                                                            <a asp-area="Admin" asp-controller="Comment" asp-action="Details" asp-route-id="@item.CommentId"><i class="fa fa-clipboard" style="color:forestgreen; font-size:23px;"></i></a>    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a onclick="return confirm('آیا مابل ب حذف پیام هستید؟؟؟؟')" asp-area="Admin" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.CommentId"><i class="fa fa-trash" style="color:red; font-size:23px;"></i></a>
+                                                        </td>
+                                                    }
+
+
                                                 </tr>
                                             }
                                         </tbody>

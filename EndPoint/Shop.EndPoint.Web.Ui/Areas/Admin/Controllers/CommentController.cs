@@ -31,10 +31,6 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
             ShopActionResult<List<CommentViewModel>> actionResult = new ShopActionResult<List<CommentViewModel>>();
             var ListComment = commentService.GetAll(page);
-            if (ListComment.Data.Count == 0)
-            {
-                return RedirectToAction("Notfound", "Manage");
-            }
             actionResult.Pages = ListComment.Pages;
             actionResult.Page = ListComment.Page;
             List<CommentViewModel> commentViewModels = new List<CommentViewModel>();

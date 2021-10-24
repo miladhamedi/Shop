@@ -90,7 +90,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         {
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Profile");
-
+            
             ViewBag.Message = TempData["Message"];
             ViewBag.Status = TempData["Status"];
 
@@ -121,7 +121,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                     var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-
+                       
                         //loggerFactory.LogError(1, "کاربر وارد شد");
                         return RedirectToAction("Index", "Profile");
 

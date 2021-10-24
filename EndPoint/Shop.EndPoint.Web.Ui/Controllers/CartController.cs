@@ -117,7 +117,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         public IActionResult AddCart(int productid, int colorid)
         {
             if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Register", "Account");
+                return RedirectToAction("Login", "Account");
 
             var AppUser = User.Identity.Name;
             var user = userService.GetByUserName(AppUser);
@@ -128,9 +128,9 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                 var technical = technicalDetailService.GetByProductId(Product.ProductId);
                 var color = colorService.GetByColorId(colorid);
 
-                if (technical == null && color == null)
+                if (technical == null || color == null)
                 {
-                    TempData["Message"] = "اضافه شدن ب سبد خرید ناموفق بود";
+                    TempData["Message"] = "رنگ و گارانتی محصول را انتخاب کنید";
                     TempData["Status"] = "NotOk";
 
                     return RedirectToAction("ProductDetails", "Product", new { productid = productid });
@@ -465,7 +465,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
                 return View(invoiceViewModel ?? null);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return RedirectToAction("OrderList", "Profile");

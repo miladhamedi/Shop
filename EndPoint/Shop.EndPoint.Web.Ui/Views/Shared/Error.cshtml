@@ -1,8 +1,10 @@
-﻿@model ErrorViewModel
+﻿@inject ICategoryService  categoryservice
 @{
-    ViewData["Title"] = "خطا";
+  
+    var listCat = categoryservice.GetAll();
 }
-<partial name="_HeaderPartial" />
+
+
 <div style="position:absolute;top:-200%;"><a href="https://codebazan.ir/">&#1705;&#1583;&#1576;&#1575;&#1586;&#1575;&#1606;</a></div>
 <html>
 <head>
@@ -20,6 +22,239 @@
     </style>
 </head>
 <body>
+
+
+    <header class='header_style1 other_page'>
+        <div class='container'>
+            <div class='inner'>
+                <div class='header_part1 clearfix'>
+                    <div class='right_part'>
+                        <a href='' title='' class='logo'></a>
+                    </div><!--close .right_part-->
+                    <div class='center_part'>
+                        <ul class='step clearfix none_list_style'>
+                            <li class='item'><a asp-controller="Home" asp-action="Index" title='' class='link'>صفحه اصلی</a></li>
+                            <li class='item have_menu'>
+                                <a href='#' title='' class='link'>محصولات</a>
+                                <div class='sub_style1'>
+                                    <ul class='step2 none_list_style'>
+                                        @foreach (var item in listCat.Data)
+                                        {
+                                            <li class='item2'>
+                                                <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId"
+                                                   class='link2'>@item.Titel</a>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class='item'><a asp-controller="Home" asp-action="Article" title='' class='link'>مقالات</a></li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="About" title='' class='link'>
+                                    درباره
+                                    ما
+                                </a>
+                            </li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="Contact" title='' class='link'>
+                                    تماس
+                                    با ما
+                                </a>
+                            </li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="law" title='' class='link'>
+                                    قوانین
+                                    و سیاست ها
+                                </a>
+                            </li>
+                        </ul>
+                    </div><!--close .center_part-->
+                    <div class='left_part'>
+
+                        <ul class='step none_list_style'>
+                            <li class='item have_tooltip responsive_menu_btn menu'>
+                                <span class='link'>
+                                    <i class='i-layout'></i>
+                                    <div class='tooltip_style1'>
+                                        <span>فهرست</span>
+                                    </div>
+                                </span>
+                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <li class='item have_tooltip'>
+                                    <a asp-controller="Cart" asp-action="ListCart" class='link' title=''>
+                                        <i class='i-shop'></i>
+                                        <div class='tooltip_style1'><span>سبد خرید</span></div>
+                                    </a>
+                                </li>
+                                <li class="item have_tooltip">
+                                    <a asp-controller="Profile" asp-action="Index" class="link" title="">
+                                        <i class="i-avatar"></i>
+                                        <div style="display: none; opacity: 1;" class="tooltip_style1"><span>پروفایل من</span></div>
+                                    </a>
+                                </li>
+                                <li class="item have_tooltip">
+                                    <a asp-controller="Account" asp-action="Logout" class="link" title="">
+                                        <i class="i-power-1"></i>
+                                        <div style="display: none; opacity: 1;" class="tooltip_style1"><span>خروج</span></div>
+                                    </a>
+                                </li>
+
+                            }
+                            else
+                            {
+
+
+
+                                <li class='item have_tooltip'>
+                                    <a asp-controller="Account" asp-action="Register" class='link' title=''>
+                                        <i class='i-add-user'></i>
+                                        <div class='tooltip_style1'><span> عضویت</span></div>
+                                    </a>
+                                </li>
+                                <li class='item have_tooltip'>
+                                    <a asp-controller="Account" asp-action="Login" class='link' title=''>
+                                        <i class='i-user'></i>
+                                        <div class='tooltip_style1'><span>ورود </span></div>
+                                    </a>
+                                </li>
+
+                            }
+                        </ul>
+                    </div><!--close .left_part-->
+                </div><!--close .header_part1-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+        <div class='responsive_menu'>
+            <div class='close_bg'></div>
+            <div class='wrapper'>
+                <div class='close_btn'><i class='i-cancel'></i></div>
+                <div class='top_part'>
+                    <a href='' title='' class='logo'>
+                        <span>فروشگاه لوازم آشپزخانه کی کِت</span>
+                    </a>
+                </div><!-- close .top_part -->
+                <div class='middle_part'>
+                    <ul class='step clearfix none_list_style'>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Cart" asp-action="Index" class='link' title=''>
+                                    <i class='i-shop'></i>
+                                    <div class='tooltip_style1'><span>0</span></div>
+                                </a>
+                            </li>
+                            <li class="item have_tooltip">
+                                <a asp-controller="Profile" asp-action="Index" class="link" title="">
+                                    <i class="i-avatar"></i>
+                                    <div style="display: none; opacity: 1;" class="tooltip_style1"><span>پروفایل من</span></div>
+                                </a>
+                            </li>
+                            <li class="item have_tooltip">
+                                <a asp-controller="Account" asp-action="Logout" class="link" title="">
+                                    <i class="i-power-1"></i>
+                                    <div style="display: none; opacity: 1;" class="tooltip_style1"><span>خروج</span></div>
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Account" asp-action="Register" class='link' title=''>
+                                    <i class='i-add-user'></i>
+                                    <div class='tooltip_style1'><span> عضویت</span></div>
+                                </a>
+                            </li>
+                            <li class='item have_tooltip'>
+                                <a asp-controller="Account" asp-action="Login" class='link' title=''>
+                                    <i class='i-user'></i>
+                                    <div class='tooltip_style1'><span>ورود </span></div>
+                                </a>
+                            </li>
+
+                        }
+                    </ul>
+                </div><!-- close .middle_part -->
+                <div class='bottom_part'>
+                    <div class='have_scroll_y'>
+                        <ul class='step none_list_style'>
+                            <li class='item'><a asp-controller="Home" asp-action="Index" title='' class='link'>صفحه اصلی</a></li>
+                            <li class='item have_menu'>
+                                <a href='محصولات/products' title='' class='link'>محصولات</a>
+                                <div class='sub_style2'>
+                                    <ul class='step2 none_list_style'>
+                                        @foreach (var item in listCat.Data)
+                                        {
+                                            <li class='item2'>
+                                                <a asp-controller="Product" asp-action="ProductByCategory" asp-route-catgoryid="@item.CategoryId"
+                                                   class='link2'>@item.Titel</a>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class='item'><a asp-controller="Home" asp-action="Article" title='' class='link'>مقالات</a></li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="About" title='' class='link'>
+                                    درباره
+                                    ما
+                                </a>
+                            </li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="Contact" title='' class='link'>
+                                    تماس
+                                    با ما
+                                </a>
+                            </li>
+                            <li class='item'>
+                                <a asp-controller="Home" asp-action="Law" title='' class='link'>
+                                    قوانین
+                                    و سیاست ها
+                                </a>
+                            </li>
+                        </ul>
+                    </div><!-- close .have_scroll_y -->
+                </div><!-- close .bottom_part -->
+            </div><!-- close .wrapper -->
+        </div><!-- close .responsive_menu -->
+
+    </header>
+
+
+    <div class='page_title'>
+        <div class='container'>
+            <div class='inner'>
+                <div class='title'>صفحه مورد نظر پیدا نشد</div>
+                <div id='breadcromb'>
+                    <ul class='list clearfix none_list_style'>
+                        <li><a href='' title=''><i class='i-home-house-streamline'></i></a></li>
+                        <li><a href='#' title=''>صفحه مورد نظر پیدا نشد</a></li>
+                    </ul><!--close .list-->
+                </div><!--close #breadcrumb-->
+                <div class='search_part'>
+                    <div class='search_btn'>
+                        <i class='open_icon i-search'></i>
+                        <i class='close_icon i-cancel'></i>
+                    </div>
+                    <div class='search_input'>
+                        <form method="POST" asp-controller="Product" asp-action="SearchProduct">
+                            <input type="hidden" name="_token" value="KubHdUwJNAhD3EiMO7ancz5OGMtQTMwekpJlr53n">
+                            <input name="title" type='text' placeholder='جستجو کنید'>
+                            <button><i class='i-search'></i></button>
+                        </form>
+                    </div><!--close .search_input-->
+                </div><!--close .search_part-->
+            </div><!--close .inner-->
+        </div><!--close .container-->
+    </div><!--close .page_title-->
+
     <div align="center" style="margin:130px 150px">
         <div style="border: 1px solid #DFDFDF;text-align:center;width:670px;margin-top:10%;padding:5px;font-family:Tahoma;font-size:10pt" dir="rtl">
             <div style="background:url(https://dl.codebazan.ir/uploads/1513529174.png);width:670px;height:452px;">

@@ -23,7 +23,7 @@
             <div class="box">
                 <div class="box-header">
                     <a href="/Admin/ProductColor/Create?productid=@Model.First().ProductId&returnUrl=/Admin/ProductColor/Index" class="btn btn-info"><i class="fa fa-plus-square"></i> افزودن رنگ</a>
-                    <a asp-controller="Product" asp-action="Index" class="btn btn-success"><i class="fa fa-plus-square"></i>لیست محصولات</a>
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-success"><i class="fa fa-backward"></i>  برگشت ب لیست محصولات</a>
                 </div>
 
                 <div class="box-body">
@@ -36,7 +36,7 @@
                                         <tr role="row">
 
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" style="text-align:center;">
-                                               رنگ
+                                                رنگ
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" style="text-align:center;">
                                                 کد رنگ
@@ -49,29 +49,40 @@
                                     <tbody>
                                         @foreach (var item in Model)
                                         {
-                                            
-                                          
-                                            <tr role="row" class="odd">
-                                                <td style="text-align:center;">
-                                                    @Html.DisplayFor(modelItem => item.ColorPro)
+
+
+                                        <tr role="row" class="odd">
+                                            <td style="text-align:center;">
+                                                @Html.DisplayFor(modelItem => item.ColorPro)
+                                            </td>
+                                            <td style="text-align:center;">
+                                                @Html.DisplayFor(modelItem => item.ColorCode)
+                                            </td>
+                                            <td style="text-align:center;background-color:#@item.ColorCode"></td>
+                                            @if (Model.Count() > 1)
+                                            {
+
+                                                <td style="text-align:center">
+                                                    <a href="/Admin/ProductColor/Delete?productcolorid=@item.ProductColorId&productid=@Model.First().ProductId"><i class="fa fa-trash" style="color:red; font-size:20px;"></i></a>
+                                                    &nbsp;&nbsp;
+                                                    <a href="/Admin/ProductColor/Edit?productcolorid=@item.ProductColorId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
                                                 </td>
-                                                <td style="text-align:center;">
-                                                    @Html.DisplayFor(modelItem => item.ColorCode)
+
+                                            }
+                                            else
+                                            {
+                                                <td style="text-align:center">
+                                                    <a href="/Admin/ProductColor/Edit?productcolorid=@item.ProductColorId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
                                                 </td>
-                                                <td style="text-align:center;background-color:#@item.ColorCode"></td>
-
-                                              
-                                                    <td style="text-align:center">
-                                                        <a href="/Admin/ProductColor/Delete?productcolorid=@item.ProductColorId&productid=@Model.First().ProductId"><i class="fa fa-trash" style="color:red; font-size:20px;"></i></a>
-                                                        &nbsp;&nbsp;
-                                                        <a href="/Admin/ProductColor/Edit?productcolorid=@item.ProductColorId"><i class="fa fa-edit" style="color:forestgreen; font-size:20px;"></i></a>
-                                                    </td>
-
-                                               
+                                            }
 
 
 
-                                            </tr>
+
+
+
+
+                                        </tr>
                                         }
                                     </tbody>
 

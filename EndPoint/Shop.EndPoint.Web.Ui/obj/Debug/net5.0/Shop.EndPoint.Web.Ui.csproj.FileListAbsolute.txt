@@ -59,7 +59,6 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_EditP
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_HeaderPartial.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_HeaderProfile.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
-F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_LoginAdminPartial.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -545,3 +544,4 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\U
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\UserPage\Edit.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\NotAccessPage.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\Manage\Notfound.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.MvcApplicationPartsAssemblyInfo.cs
