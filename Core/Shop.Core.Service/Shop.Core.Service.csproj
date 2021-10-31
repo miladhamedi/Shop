@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Kavenegar.NetCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\Shop.Common\Shop.Common.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Shop.Infrastructure.Data.Sql\Shop.Infrastructure.Data.Sql.csproj" />
     <ProjectReference Include="..\Shop.Core.Contract\Shop.Core.Contract.csproj" />

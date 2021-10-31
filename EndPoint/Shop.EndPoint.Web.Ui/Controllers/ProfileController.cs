@@ -14,6 +14,7 @@ using Shop.Core.Service.Services.Messages;
 using Shop.Core.Service.Services.ShopingCart;
 using Shop.Core.Service.Services.User;
 using Shop.Core.Service.Services.UserRole;
+using Shop.Core.Service.ServiceSender;
 using Shop.EndPoint.Web.Ui.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             ICommentService commentService, IinvoiceService iinvoiceService,
             UserManager<ApplicationUser> userManager,
             ILogger<ProfileController> loggerFactory,
-            SignInManager<ApplicationUser> signInManager,IShopingCartService shopingCartService)
+            SignInManager<ApplicationUser> signInManager, IShopingCartService shopingCartService)
         {
             this.userService = userService;
             this.userRoleService = userRoleService;
@@ -58,56 +59,136 @@ namespace Shop.EndPoint.Web.Ui.Controllers
         public IActionResult Index()
         {
             ViewBag.Message = TempData["Message"];
+            ViewBag.Status = TempData["Status"];
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddInformationUser(UserViewModel userViewModel)
+        public IActionResult AddInformationUser(UserProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var user = User.Identity.Name;
 
-                var AppUser = userService.GetByUserName(userViewModel.UserName);
-                AppUser.City = userViewModel.City;
-                AppUser.Province = userViewModel.Province;
-                AppUser.Address = userViewModel.Address;
-                AppUser.PostalCode = userViewModel.PostalCode;
-                AppUser.IrCode = userViewModel.IrCode;
+                var AppUser = userService.GetByUserName(user);
+                AppUser.City = model.City;
+                AppUser.Province = model.Province;
+                AppUser.Address = model.Address;
+                AppUser.PostalCode = model.PostalCode;
+                AppUser.IrCode = model.IrCode;
+                AppUser.ActiveCode = CodeGenerators.ActiveCode();
                 userService.UpdatedUser(AppUser);
-                TempData["Message"] = "Add";
+
+                TempData["Status"] = true;
+                TempData["Message"] = "اطلاعات کاربر با موفقیت ثبت شد";
                 return RedirectToAction("Index");
             }
-            TempData["Message"] = "NotAdd";
-            return View(userViewModel);
+            TempData["Status"] = false;
+            TempData["Message"] = "اطلاعات کاربر با موفقیت ثبت شد";
+            return RedirectToAction("Index", model);
 
         }
 
 
 
+
+        public IActionResult ConfirmPhone(PhoneNumberViewModel model, string returnurl = null)
+        {
+            if (ModelState.IsValid)
+            {
+                var appuser = User.Identity.Name;
+                var user = userService.GetByUserName(appuser);
+                if (user.PhoneNumber == model.PhoneNumber)
+                {
+                
+                    TempData["Status"] = false;
+                    TempData["Message"] = "شماره همراه از قبل وجود دارد";
+                    return RedirectToAction("ChangPhoneNumber");
+
+                }
+                SmsSender sender = new SmsSender();
+                sender.SMS(model.PhoneNumber, "ب فروشگاه اینترنتی خوش آمدید" + Environment.NewLine + "کد فعالسازی" + user.ActiveCode);
+                ViewBag.PhoneNu = model.PhoneNumber;
+                ViewBag.url = returnurl;
+                ViewBag.Status = true;
+                ViewBag.Message = "کد فعالسازی ب شماره همراه ارسال شد";
+                return View();
+            }
+            if (Url.IsLocalUrl(returnurl))
+            {
+                TempData["Status"] = false;
+                TempData["Message"] = "لطفا شماره همراه را وارد نمائید";
+                return RedirectToAction("ChangPhoneNumber");
+
+            }
+            TempData["Status"] = false;
+            TempData["Message"] = "شماره همراه را وارد کنید";
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditInformationUser(UserViewModel userViewModel)
+        public IActionResult ConfirmPhone(ComfirmPhoneViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = userService.GetByUserName(userViewModel.UserName);
-                user.City = userViewModel.City;
-                user.Province = userViewModel.Province;
-                user.Address = userViewModel.Address;
-                user.IrCode = userViewModel.IrCode;
-                user.PostalCode = userViewModel.PostalCode;
-                userService.UpdatedUser(user);
-                TempData["Message"] = "Edit";
-                return View("Index");
+                var user = User.Identity.Name;
+                var AppUser = userService.GetByUserName(user);
+                if (AppUser.ActiveCode == model.ActiveCode)
+                {
+                    AppUser.PhoneNumberConfirmed = true;
+                    AppUser.PhoneNumber = model.PhoneNumber;
+                    userService.UpdatedUser(AppUser);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Status = false;
+                    ViewBag.Message = "کد فعالسازی اشتباه وارد شده است";
+                    return View();
+                }
             }
-            TempData["Message"] = "NotEdit";
-            return View(userViewModel);
+            ViewBag.Status = false;
+            ViewBag.Message = "کد فعالسازی را وارد کنید";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditInformationUser(UserProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = User.Identity.Name;
+                var AppUser = userService.GetByUserName(user);
+                AppUser.City = model.City;
+                AppUser.Province = model.Province;
+                AppUser.Address = model.Address;
+                AppUser.IrCode = model.IrCode;
+                AppUser.PostalCode = model.PostalCode;
+                userService.UpdatedUser(AppUser);
+                TempData["Status"] = true;
+                TempData["Message"] = "ویرایش کاربر باموفقیت انجام شد";
+                return RedirectToAction("Index");
+
+            }
+            TempData["Status"] = false;
+            TempData["Message"] = "ویرایش کاربر با موفقیت انجام نشد";
+            return RedirectToAction("Index", model);
+
 
         }
 
-
+        public IActionResult ChangPhoneNumber()
+        {
+            var user = User.Identity.Name;
+            var AppUser = userService.GetByUserName(user);
+            ViewBag.PhoneNumber = AppUser.PhoneNumber;
+            ViewBag.Message = TempData["Message"];
+            ViewBag.Status = TempData["Status"];
+            return View();
+        }
 
 
         public IActionResult MessageSend()
@@ -119,17 +200,17 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult MessageSend(MessageViewModel messageViewModel)
+        public IActionResult MessageSend(AddMessageViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var AdminRole = userRoleService.GetByAdminRole();
-                var SenderUser = userService.GetByUserName(messageViewModel.UserNameSend);
+                var SenderUser = userService.GetByUserName(model.UserNameSend);
                 var UserModel = new MessageDto();
 
                 UserModel.UserIdRecive = AdminRole.UserId;
                 UserModel.UserIdSend = SenderUser.Id;
-                UserModel.Text = messageViewModel.Text;
+                UserModel.Text = model.Text;
                 UserModel.Date = DateTime.Now;
                 UserModel.Confirm = false;
 
@@ -140,8 +221,8 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             }
 
 
-
-            return View(messageViewModel);
+            TempData["Message"] = "NotOk";
+            return RedirectToAction("MessageSend");
         }
 
         public IActionResult MessageSendUserAll(int page = 1)
@@ -234,7 +315,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
         public IActionResult InvoiceDetails(int invoicenumber)
         {
-           
+
             List<ShopingCartViewModel> shopingCartViewModels = new List<ShopingCartViewModel>();
             var ShopingInvoice = shopingCartService.GetByInvoiceId(invoicenumber);
             foreach (var item in ShopingInvoice)

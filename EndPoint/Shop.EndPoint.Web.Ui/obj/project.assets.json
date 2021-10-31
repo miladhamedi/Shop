@@ -38,6 +38,18 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
+      "Kavenegar.NetCore/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/Kavenegar.NetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/Kavenegar.NetCore.dll": {}
+        }
+      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -3454,6 +3466,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Kavenegar.NetCore": "1.0.0",
           "Shop.Common": "1.0.0",
           "Shop.Core.Contract": "1.0.0",
           "Shop.Core.Domain": "1.0.0",
@@ -3530,6 +3543,25 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Kavenegar.NetCore/1.0.0": {
+      "sha512": "Z9DzCYIWyk2vBgwYvXZVmIhCjpESXJWus9irWkJuRbu6ISccITWQKmcqt7lBD18xWnQXbnd0780Xfqt2Pqhuig==",
+      "type": "package",
+      "path": "kavenegar.netcore/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "kavenegar.netcore.1.0.0.nupkg.sha512",
+        "kavenegar.netcore.nuspec",
+        "lib/netcoreapp2.0/Kavenegar.NetCore.dll",
+        "lib/netcoreapp2.1/Kavenegar.NetCore.dll",
+        "lib/netstandard1.2/Kavenegar.NetCore.dll",
+        "lib/netstandard1.3/Kavenegar.NetCore.dll",
+        "lib/netstandard1.4/Kavenegar.NetCore.dll",
+        "lib/netstandard1.5/Kavenegar.NetCore.dll",
+        "lib/netstandard1.6/Kavenegar.NetCore.dll",
+        "lib/netstandard2.0/Kavenegar.NetCore.dll"
       ]
     },
     "Libuv/1.9.1": {
@@ -10870,6 +10902,7 @@
     "net5.0": [
       "AutoMapper >= 10.1.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 8.1.1",
+      "Kavenegar.NetCore >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.7",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.7",
@@ -10955,6 +10988,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[8.1.1, )"
+          },
+          "Kavenegar.NetCore": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",

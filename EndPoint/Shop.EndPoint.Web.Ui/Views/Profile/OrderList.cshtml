@@ -1,4 +1,5 @@
 ﻿@model ShopActionResult<List<InvoiceViewModel>>
+
 @{
     ViewData["Title"] = " سفارش های من";
     ViewData["Breadcromb"] = " سفارش های من";
@@ -38,7 +39,14 @@
                                             <td>@l</td>
                                             <td>@item.InvoiceNumber</td>
                                             <td>@ShamsiPlugin.ToPeString(item.Date)</td>
-                                            <td>@item.Price</td>
+                                            <td>
+
+                                                @{
+                                                    var PriceProduct = Math.Round(item.Price);
+                                                    var PriceProstring = string.Format("{0:0,0}", PriceProduct);
+                                                }
+                                                @PriceProstring
+                                            </td>
                                             <td>
                                                 @if (item.Status == true)
                                                 {

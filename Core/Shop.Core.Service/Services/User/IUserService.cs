@@ -11,6 +11,7 @@ namespace Shop.Core.Service.Services.User
     public interface IUserService
     {
         string GetEmailUser(Guid userid);
+        bool CheckConfirmPhone(string username);
         void AddInformationUser(UserDto userDto);
         bool checkValueUser(string username);
         UserDto GetByUserName(string username);

@@ -26,7 +26,7 @@ namespace Shop.Core.Domain.Entities
         public string Text { get; set; }
 
         [Display(Name = " ژمان ثبت")]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = nameof(MessageRes.RequierdMsg), ErrorMessageResourceType = typeof(MessageRes))]
         public DateTime Date { get; set; }
 
         [Display(Name ="تایید/رد ")]

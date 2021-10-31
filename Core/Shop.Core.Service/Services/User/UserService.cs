@@ -30,6 +30,12 @@ namespace Shop.Core.Service.Services.User
             userRepository.AddInformationUser(user);
         }
 
+        public bool CheckConfirmPhone(string username)
+        {
+            var userconfirm = userRepository.CheckConfirmPhone(username);
+            return userconfirm;
+        }
+
         public string CheckRoleUser(string username)
         {
            var Role = userRepository.CheckRoleUser(username);

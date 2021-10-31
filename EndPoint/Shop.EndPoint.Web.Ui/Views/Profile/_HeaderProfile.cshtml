@@ -1,4 +1,10 @@
-﻿<div class='dashboard'>
+﻿@inject IUserService userservice
+
+@{  
+    var AppUser = User.Identity.Name;
+    var user = userservice.GetByUserName(AppUser);
+}
+<div class='dashboard'>
     <ul class='step none_list_style'>
         <li class='item top_part clearfix'>
             <div class='right_part'>
@@ -8,8 +14,7 @@
                         <span class='text'>خروج</span>
                     </div>
                 </a>
-                <div class='user_pic'></div>
-                <div class='user_name'>@User.Identity.Name</div>
+                <div class='user_name'>@user.UserName</div>
             </div><!--close .right_part-->
             <div class='left_part'>
                 <ul class='step2 none_list_style clearfix'>
@@ -32,11 +37,17 @@
                     <a asp-controller="Profile" asp-action="Index" class='link2     active'>پروفایل من</a>
                 </li>
 
-                
+
                 <li class='item2 '><a asp-controller="Profile" asp-action="MessageSend" class='link2 '>پیام های من </a></li>
                 <li class='item2 '><a asp-controller="Profile" asp-action="ListComment" class='link2 '>نظرات ثبت شده من </a></li>
                 <li class='item2 '><a asp-controller="Profile" asp-action="ChangePassword" class='link2 '>تغییر کلمه عبور </a></li>
                 <li class='item2 '><a asp-controller="Profile" asp-action="OrderList" class='link2 '>لیست سفارشات </a></li>
+                @if (user.PhoneNumber != null)
+                {
+                    <li class='item2 '><a asp-controller="Profile" asp-action="ChangPhoneNumber" class='link2 '>ویرایش شماره همراه </a></li>
+                }
+
+
             </ul>
         </li><!--clsoe .item-->
     </ul><!--clsoe .step-->

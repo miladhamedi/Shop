@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Ar+XWO+pzs5Bv39ao5yU1yRlj1XLQ7MpLyytWhlv0wAvMT6XUS7QGhyGkm1aWODh7eIAAWP8Wtv5fG0h9/15Dg==",
+  "dgSpecHash": "F3Cjgc7TLVsD5sJNdb+Kmu+Y2zNXtycqDWeTIsn7zODqsSLiie57YV2rqvc1UEwtc+aBGX8cSdvhuvng5W9Q4Q==",
   "success": true,
   "projectFilePath": "F:\\Shop\\EndPoint\\Shop.EndPoint.Web.Ui\\Shop.EndPoint.Web.Ui.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Elahe\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Elahe\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Elahe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Elahe\\.nuget\\packages\\kavenegar.netcore\\1.0.0\\kavenegar.netcore.1.0.0.nupkg.sha512",
     "C:\\Users\\Elahe\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\Elahe\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.7\\microsoft.aspnetcore.cryptography.internal.5.0.7.nupkg.sha512",
     "C:\\Users\\Elahe\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.7\\microsoft.aspnetcore.cryptography.keyderivation.5.0.7.nupkg.sha512",

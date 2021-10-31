@@ -23,7 +23,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public List<Message> GetUserMessageAll(Guid userid)
         {
-            var userList = shopDbContext.Messages.Where(c => c.UserIdSend == userid).AsNoTracking().ToList();
+            var userList = shopDbContext.Messages.Where(c => c.UserIdSend == userid).OrderByDescending(c=>c.Date).AsNoTracking().ToList();
             return userList;
         }
 
@@ -36,7 +36,7 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
 
         public List<Message> GetAdminMessageRecive(Guid userid)
         {
-            var MessageList = shopDbContext.Messages.Where(c => c.UserIdRecive == userid).AsNoTracking().ToList();
+            var MessageList = shopDbContext.Messages.Where(c => c.UserIdRecive == userid).OrderByDescending(c=>c.Date).AsNoTracking().ToList();
             return MessageList;
         }
 

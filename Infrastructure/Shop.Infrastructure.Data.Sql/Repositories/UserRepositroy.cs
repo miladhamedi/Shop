@@ -87,5 +87,15 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
             var Lastuser = shopDbContext.Users.OrderByDescending(c => c.Date).Take(5).ToList();
             return Lastuser;
         }
+
+        public bool CheckConfirmPhone(string username)
+        {
+            var user = shopDbContext.Users.Where(c => c.UserName == username && c.PhoneNumberConfirmed == true).FirstOrDefault();
+            if (user != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

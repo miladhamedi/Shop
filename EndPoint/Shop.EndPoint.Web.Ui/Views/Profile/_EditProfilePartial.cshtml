@@ -1,4 +1,4 @@
-﻿@model UserViewModel
+﻿@model UserProfileViewModel
 @inject IUserService userservice
 @{
     Layout = null;
@@ -66,9 +66,7 @@
 
 
             <ul class='step none_list_style clearfix'>
-                <li>
-                    <input asp-for="UserName" value="@user.UserName" type="hidden">
-                </li>
+                
                 <li class='item half'>
                     <div class='icon'><i class='i-mobile'></i></div>
                     <input asp-for="IrCode" type='text' maxlength="10" placeholder='کدملی' value="@user.IrCode">

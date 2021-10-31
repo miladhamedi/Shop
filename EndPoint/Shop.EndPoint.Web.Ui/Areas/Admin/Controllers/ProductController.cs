@@ -67,9 +67,9 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductViewModel model)
+        public IActionResult Create(CreateProductViewModel model)
         {
-            if (model != null)
+            if (ModelState.IsValid)
             {
                 Random rnd = new Random();
                 var codproduct = rnd.Next(100, 9999) + DateTime.Now.Second + 1;

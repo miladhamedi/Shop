@@ -54,10 +54,7 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\Messa
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\MessageSendUserAll.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\OrderList.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
-F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_AddressUserPartial.cshtml.g.cs
-F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_EditProfilePartial.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_HeaderPartial.cshtml.g.cs
-F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_HeaderProfile.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
@@ -545,3 +542,10 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\U
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\User\NotAccessPage.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\Manage\Notfound.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Shop.EndPoint.Web.Ui.MvcApplicationPartsAssemblyInfo.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_AddressUserPartial.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_EditProfilePartial.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\bin\Debug\net5.0\Kavenegar.NetCore.dll
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\ChangPhoneNumber.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\ConfirmPhone.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_HeaderProfile.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_PhoneNumberPartial.cshtml.g.cs

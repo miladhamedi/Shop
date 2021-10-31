@@ -90,7 +90,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                     var percentDiscount = percent;
                     var price = item.Price;
                     var pricepercent = price * percentDiscount;
-                    var Discount = (pricepercent / 100);
+                    var Discount = pricepercent / 100;
                     var pricepercentcount = Discount * item.Count;
                     listDiscount.Add(pricepercentcount);
                 }

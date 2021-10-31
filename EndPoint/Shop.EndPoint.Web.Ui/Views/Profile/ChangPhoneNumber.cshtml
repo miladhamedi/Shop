@@ -1,0 +1,95 @@
+﻿@model PhoneNumberViewModel
+@{
+    ViewData["Title"] = " ویرایش شماره همراه";
+    ViewData["Breadcromb"] = " ویرایش شماره همراه";
+
+}
+
+<partial name="_HeaderPartial" />
+
+<div class='panel_style1'>
+    <div class='container'>
+        <div class='inner clearfix'>
+            <partial name="_HeaderProfile" />
+            <div class='panel_content'>
+                @{
+                    if (ViewBag.Message != null)
+                    {
+                        var message = ViewBag.Message.ToString();
+
+                        if (ViewBag.Status == true)
+                        {
+
+                            <div class="alarm_style2">
+                                <div class="success_alarm box">
+                                    <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                    <div class="alarm_text">@message</div>
+                                    <div class="close_icon"><i class="i-cancel"></i></div>
+                                </div>
+                            </div>
+
+                        }
+                        if (ViewBag.Status == false)
+                        {
+                            <div class="alarm_style2">
+                                <div class="success_alarm box">
+                                    <div class="alarm_icon"><img src="/assets/front/_images/icon/checked.png" alt=""></div>
+                                    <div class="alarm_text">@message</div>
+                                    <div class="close_icon"><i class="i-cancel"></i></div>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+
+
+
+
+                }
+
+                <div class='form_style2'>
+                    <div class='register_part1'>
+
+                        <div class='container'>
+                            <div class='inner clearfix'>
+                                <div class='signin_part center-block '>
+                                    <div class='part_inner'>
+                                        <div class='title_style7'>
+                                            <div class='title'> ویرایش شماره همراه </div>
+                                        </div>
+                                        <div class='form_style2'>
+                                            <form id='frm_register' asp-controller="Profile" asp-action="ConfirmPhone" asp-route-returnurl="Profile/ChangPhoneNumber" method="get">
+                                                <div asp-validation-summary="ModelOnly"></div>
+                                                <input type="hidden" name="_token" value="dsIvqII2PJDqUl2f2CzMupXHJ2TfV59ozigxe4jM">
+
+                                                <ul class='step none_list_style clearfix'>
+
+                                                    <li class='item'>
+                                                        <div class='icon'><i class='i-mobile'></i></div>
+                                                        <input asp-for="PhoneNumber" value="@ViewBag.PhoneNumber" placeholder='شماره همراه را وارد کنید'>
+                                                        <span class='focus_bg'></span>
+                                                        <span class='important'><i class='i-star'></i></span>
+                                                        <span asp-validation-for="PhoneNumber"></span>
+                                                    </li>
+
+                                                    <li class='item submit'>
+                                                        <button type="submit" class="submit">ارسال</button>
+                                                    </li>
+
+                                                </ul>
+
+                                            </form>
+                                        </div>
+                                    </div><!-- close .part_inner -->
+                                </div><!-- close .signin_part -->
+                            </div><!-- close .inner -->
+                        </div><!-- close .continer -->
+                    </div><!-- close .register_part1 -->
+
+                </div><!--close .form_style2-->
+
+            </div><!--clsoe .panel_content-->
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .panel_style1-->

@@ -1,4 +1,4 @@
-﻿@model ProductViewModel
+﻿@model CreateProductViewModel
 
 @{
     ViewData["Title"] = "ایجاد مصحول جدید";
@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label asp-for="CategoryId" class="col-md-2 control-label"></label>
                                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.ListCategory" style="height:50%"></select>
-                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                              
                             </div>
 
                             <div class="form-group">
@@ -92,8 +92,8 @@
 
 </section>
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
 

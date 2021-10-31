@@ -1,0 +1,39 @@
+﻿@model PhoneNumberViewModel
+
+
+
+<div class='register_part1'>
+
+    <div class='container'>
+        <div class='inner clearfix'>
+            <div class='signin_part center-block '>
+                <div class='part_inner'>
+                    <div class='title_style7'>
+                        <div class='title'> ثبت شماره همراه </div>
+                    </div>
+                    <div class='form_style2'>
+                        <form id='frm_register' asp-controller="Profile" asp-action="ConfirmPhone" method="get">
+                            <div asp-validation-summary="All"></div>
+                            <input type="hidden" name="_token" value="dsIvqII2PJDqUl2f2CzMupXHJ2TfV59ozigxe4jM">
+
+                            <ul class='step none_list_style clearfix'>
+                               
+                                <li class='item'>
+                                    <div class='icon'><i class='i-mobile'></i></div>
+                                    <input asp-for="PhoneNumber"   id="password" placeholder='شماره همراه'>
+                                    <span class='focus_bg'></span>
+                                    <span class='important'><i class='i-star'></i></span>
+                                    <span asp-validation-for="PhoneNumber"></span>
+                                </li>
+                              
+                                <li class='item submit'>
+                                    <button type="submit" class="submit">ارسال</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div><!-- close .part_inner -->
+            </div><!-- close .signin_part -->
+        </div><!-- close .inner -->
+    </div><!-- close .continer -->
+</div><!-- close .register_part1 -->

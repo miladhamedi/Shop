@@ -8,7 +8,7 @@ namespace Shop.Core.Contract.Repositories
 {
     public interface IUserRepositroy
     {
-
+        bool CheckConfirmPhone(string username);
         string GetEmailUser(Guid userid);
         void AddInformationUser(ApplicationUser applicationUser);
         bool checkValueUser(string username);

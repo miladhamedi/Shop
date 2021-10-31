@@ -127,9 +127,9 @@
                     {
 
                         <li class='item have_tooltip'>
-                            <a asp-controller="Cart" asp-action="Index" class='link' title=''>
+                            <a asp-controller="Cart" asp-action="ListCart" class='link' title=''>
                                 <i class='i-shop'></i>
-                                <div class='tooltip_style1'><span>0</span></div>
+                                <div class='tooltip_style1'><span>سبد خرید</span></div>
                             </a>
                         </li>
                         <li class="item have_tooltip">
@@ -281,7 +281,7 @@
                     </div>
                     <div class='form_style2'>
                         <form id='frm_register' asp-controller="Account" asp-action="Register" method="post">
-                            <div asp-validation-summary="All"></div>
+                            <div asp-validation-summary="ModelOnly"></div>
                             <input type="hidden" name="_token" value="dsIvqII2PJDqUl2f2CzMupXHJ2TfV59ozigxe4jM">
 
                             <ul class='step none_list_style clearfix'>

@@ -160,6 +160,9 @@ namespace Shop.Infrastructure.Data.Sql.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ActiveCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Address")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

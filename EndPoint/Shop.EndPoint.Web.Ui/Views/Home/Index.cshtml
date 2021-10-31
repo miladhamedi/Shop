@@ -68,11 +68,11 @@
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
-
+                            
                             <li class='item have_tooltip'>
-                                <a asp-controller="Cart" asp-action="Index" class='link' title=''>
+                                <a asp-controller="Cart" asp-action="ListCart" class='link' title=''>
                                     <i class='i-shop'></i>
-                                    <div class='tooltip_style1'><span>0</span></div>
+                                    <div class='tooltip_style1'><span>سبد خرید</span></div>
                                 </a>
                             </li>
                             <li class="item have_tooltip">

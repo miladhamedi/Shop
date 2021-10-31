@@ -27,6 +27,7 @@ namespace Shop.Core.Domain.Entities
         public string IrCode { get; set; }
         public DateTime Date { get; set; }
         public bool Access { get; set; }
+        public string ActiveCode { get; set; }
 
         public List<Invoice> Invoices { get; set; }
         public List<ShoppingCart> ShoppingCarts { get; set; }

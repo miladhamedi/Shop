@@ -29,7 +29,8 @@ namespace Shop.Core.Service.Dto
         public string IrCode { get; set; }
         public DateTime Date { get; set; }
         public bool Access { get; set; }
-     
+        public string ActiveCode { get; set; }
+
 
 
 

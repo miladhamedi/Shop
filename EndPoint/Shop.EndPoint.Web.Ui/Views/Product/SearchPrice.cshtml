@@ -3,8 +3,8 @@
 
 
 @{
-    ViewData["Title"] = "نتیجه جستوجو";
-    ViewData["Breadcromb"] = "نتیجه جستوجو";
+    ViewBag.Title = "نتیجه جستوجو";
+    ViewBag.Breadcromb = "نتیجه جستوجو";
     var ListCategoey = categoryservice.GetAll();
 
 }
@@ -47,12 +47,12 @@
                         <div class='pro_search_part price_range'>
 
                             <div class='title_style3'><span class='title'> بر اساس قیمت تومان</span></div>
-                            از  : <input type='text' name='min_price' placeholder="قیمت را وارد کنید" value='@ViewBag.Pricemin'>
+                            از  : <input type='text' name='min_price' placeholder="قیمت را وارد کنید">
                             <br />
                             <br />
-                            تا  : <input type='text' name='max_price' placeholder="قیمت را وارد کنید" value='@ViewBag.Pricemax'>
+                            تا  : <input type='text' name='max_price' placeholder="قیمت را وارد کنید">
                             <input type="hidden" name="categoryid" asp-for="Data.First().CategoryId" />
-                            <input type="submit" value="اعمال" />
+                            <input class="center-block btn btn-sm" type="submit" value="اعمال" />
                         </div>
 
                     </form>
