@@ -635,6 +635,9 @@ namespace Shop.EndPoint.Web.Ui.Mappings
       c.Status,
       opt => opt.MapFrom(src => src.Status))
    .ForMember(c =>
+      c.InvoiceStatus,
+      opt => opt.MapFrom(src => src.InvoiceStatus))
+   .ForMember(c =>
       c.AmountSent,
       opt => opt.MapFrom(src => src.AmountSent))
    .ForMember(c =>

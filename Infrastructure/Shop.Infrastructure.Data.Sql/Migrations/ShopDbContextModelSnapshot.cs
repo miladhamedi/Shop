@@ -426,6 +426,9 @@ namespace Shop.Infrastructure.Data.Sql.Migrations
                     b.Property<int>("InvoiceNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("InvoiceStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 

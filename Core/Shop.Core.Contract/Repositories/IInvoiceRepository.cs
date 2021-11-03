@@ -18,8 +18,9 @@ namespace Shop.Core.Contract.Repositories
         Invoice GetbyUseridInvoice(Guid userid, int invoice);
         List<Invoice> GetLastInvoice();
         List<Invoice> GetAll();
-        
-       
+        Invoice GetStatusProcess(Guid userid, int invoicenumber);
+
+
 
     }
 }

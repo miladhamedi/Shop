@@ -389,7 +389,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
                 {
                     Factor.Status = true;
                     Factor.TransactionId = res.RefId.ToString();
-
+                    Factor.InvoiceStatus = InvoiceStatus.InProcessing;
                     iinvoiceRepository.UpdateInvoice(Factor);
 
                     var shoping = shopingCartService.GetAllUserById(Factor.UserId);
@@ -465,7 +465,7 @@ namespace Shop.EndPoint.Web.Ui.Controllers
 
                 return View(invoiceViewModel ?? null);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return RedirectToAction("OrderList", "Profile");

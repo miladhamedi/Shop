@@ -27,6 +27,7 @@ namespace Shop.Core.Service.Dto
         public string TransactionId { get; set; }
         
         public string RefrenceId { get; set; }
+        public string InvoiceStatus { get; set; }
         public Guid UserId { get; set; }
     }
 }

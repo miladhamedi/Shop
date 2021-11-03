@@ -73,7 +73,12 @@ namespace Shop.Infrastructure.Data.Sql.Repositories
             return Lastproduct;
         }
 
-      
+        public Invoice GetStatusProcess(Guid userid, int invoicenumber)
+        {
+            var invoice = shopDbContext.Invoices.Where(c => c.UserId == userid && c.InvoiceNumber == invoicenumber && c.Status == true).AsNoTracking().FirstOrDefault();
+            return invoice;
+        }
+
         public Invoice InvoiceRefById(Guid userid, string Authority)
         {
             var qinvoice = shopDbContext.Invoices.Where(c => c.UserId == userid && c.RefrenceId == Authority && c.Status == false).FirstOrDefault();

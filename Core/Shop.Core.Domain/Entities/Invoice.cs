@@ -38,6 +38,8 @@ namespace Shop.Core.Domain.Entities
         [Display(Name = " شناسه مرجع")]
         [MaxLength(100)]
         public string RefrenceId { get; set; }
+        [Display(Name = " وضعیت فاکتور")]
+        public string InvoiceStatus { get; set; }
 
         public Guid UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

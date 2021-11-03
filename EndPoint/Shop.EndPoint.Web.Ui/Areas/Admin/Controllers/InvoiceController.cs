@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Common;
 using Shop.Core.Service.Services.Invoices;
 using Shop.Core.Service.Services.ShopingCart;
+using Shop.Core.Service.Services.User;
 using Shop.Core.Service.Services.UserPages;
 using Shop.EndPoint.Web.Ui.ViewModel;
 using System;
@@ -18,14 +19,18 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
         private readonly IMapper mapper;
         private readonly IShopingCartService shopingCartService;
         private readonly IUserPageService userPageService;
+        private readonly IUserService userService;
 
         public InvoiceController(IinvoiceService iinvoiceService,
-            IMapper mapper, IShopingCartService shopingCartService,IUserPageService userPageService)
+            IMapper mapper, IShopingCartService shopingCartService,
+            
+            IUserPageService userPageService,IUserService userService)
         {
             this.iinvoiceService = iinvoiceService;
             this.mapper = mapper;
             this.shopingCartService = shopingCartService;
             this.userPageService = userPageService;
+            this.userService = userService;
         }
         public IActionResult Index(int page = 1)
         {
@@ -72,6 +77,31 @@ namespace Shop.EndPoint.Web.Ui.Areas.Admin.Controllers
                 shopingCartViewModels.Add(shop);
             }
             return View(shopingCartViewModels);
+        }
+
+
+
+        public IActionResult StatusInvoice(int invoicenumber,Guid userid)
+        {
+            var invoice = iinvoiceService.GetStatusProcess(userid, invoicenumber);
+            var Invoice = mapper.Map<InvoiceViewModel>(invoice);
+            return View(Invoice);
+        }
+        
+        public IActionResult Deliverypost(int invoicenumber, Guid userid)
+        {
+            var invoice = iinvoiceService.GetStatusProcess(userid, invoicenumber);
+            invoice.InvoiceStatus = InvoiceStatus.Deliverypost;
+            iinvoiceService.UpdateInvoice(invoice);
+            return RedirectToAction("StatusInvoice", new { invoicenumber= invoicenumber, userid= userid });
+        }
+
+        public IActionResult Deliverybuyer(int invoicenumber, Guid userid)
+        {
+            var invoice = iinvoiceService.GetStatusProcess(userid, invoicenumber);
+            invoice.InvoiceStatus = InvoiceStatus.Deliverybuyer;
+            iinvoiceService.UpdateInvoice(invoice);
+            return RedirectToAction("StatusInvoice", new { invoicenumber = invoicenumber, userid = userid });
         }
     }
 }

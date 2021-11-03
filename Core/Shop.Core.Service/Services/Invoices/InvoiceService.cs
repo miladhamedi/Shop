@@ -135,6 +135,11 @@ namespace Shop.Core.Service.Services.Invoices
             return invoices;
         }
 
-
+        public InvoiceDto GetStatusProcess(Guid userid, int invoicenumber)
+        {
+            var Invoice = iinvoiceRepository.GetStatusProcess(userid, invoicenumber);
+            var invoices = mapper.Map<InvoiceDto>(Invoice);
+            return invoices;
+        }
     }
 }

@@ -1,0 +1,99 @@
+﻿@model InvoiceViewModel
+
+@{
+
+    ViewData["Title"] = "ثبت وضعیت صورتحساب ";
+
+}
+
+
+
+<section class="content-header">
+    <h1>
+
+        <small>لیست صورتحساب ها </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">لیست صورتحساب ها </li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">شناسه فاکتور</th>
+                                            <th class="text-center">تاریخ سفارش</th>
+                                            <th class="text-center">قیمت کل صورتحساب</th>
+                                            <th class="text-center">مشخص کردن وضعیت صورتحساب</th>
+                                            <th class="text-center">وضعیت فعلی صورتحساب</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+
+                                        <tr>
+
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => Model.InvoiceNumber)
+                                            </td>
+                                            <td class="text-center">
+                                                @ShamsiPlugin.ToPeString(Model.Date)
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    var PriceProduct = Math.Round(Model.Price);
+                                                    var PriceProstring = string.Format("{0:0,0}", PriceProduct);
+                                                    @Html.DisplayFor(modelItem => PriceProstring)
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="/Admin/Invoice/Deliverypost?invoicenumber=@Model.InvoiceNumber&userid=@Model.UserId" class="btn btn-info" >تحویل ب پست</a>
+                                                <a href="/Admin/Invoice/Deliverybuyer?invoicenumber=@Model.InvoiceNumber&userid=@Model.UserId" class="btn btn-success">تحویل ب خریدار </a>
+                                            </td>
+                                            <td class="text-center">
+
+                                                <h4 class="text text-danger">@Model.InvoiceStatus</h4>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+

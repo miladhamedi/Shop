@@ -25,6 +25,7 @@
                                 <th class="text-center">تاریخ سفارش</th>
                                 <th class="text-center">بهای کل ( تومان )</th>
                                 <th class="text-center">وضعیت پرداخت</th>
+                                <th class="text-center">وضعیت خرید</th>
                                 <th class="text-center">جزئیات فاکتور</th>
                             </tr>
                         </thead>
@@ -35,32 +36,38 @@
                                 {
                                     foreach (var item in Model.Data)
                                     {
-                                        <tr>
-                                            <td>@l</td>
-                                            <td>@item.InvoiceNumber</td>
-                                            <td>@ShamsiPlugin.ToPeString(item.Date)</td>
-                                            <td>
+                                                        <tr>
+                                                            <td>@l</td>
+                                                            <td>@item.InvoiceNumber</td>
+                                                            <td>@ShamsiPlugin.ToPeString(item.Date)</td>
+                                                            <td>
 
-                                                @{
-                                                    var PriceProduct = Math.Round(item.Price);
-                                                    var PriceProstring = string.Format("{0:0,0}", PriceProduct);
-                                                }
-                                                @PriceProstring
-                                            </td>
-                                            <td>
-                                                @if (item.Status == true)
-                                                {
-                                                    <div class="read">پرداخت موفق</div>
-                                                }
+                                                                @{
+                                                                    var PriceProduct = Math.Round(item.Price);
+                                                                    var PriceProstring = string.Format("{0:0,0}", PriceProduct);
+                                                                }
+                                                                @PriceProstring
+                                                            </td>
+                                                            <td>
+                                                                @if (item.Status == true)
+                                                                {
+                                                                    <div class="read">پرداخت موفق</div>
+                                                                }
 
 
-                                            </td>
-                                            <td>
+                                                            </td>
+                                                            <td>
+                                                               
+                                                                    <a asp-controller="Profile" asp-action="StatusInvoice" asp-route-invoicenumber="@item.InvoiceNumber"><i class="i i-clock-o" style="color:blue; font-size:25px;"></i></a>
+                                                            
 
-                                                <a asp-action="InvoiceDetails" asp-controller="Profile" asp-route-invoicenumber="@item.InvoiceNumber"><i class="i i-shopping-cart" style="color:forestgreen; font-size:25px;"></i></a>
+                                                            </td>
+                                                            <td>
 
-                                            </td>
-                                        </tr>
+                                                                <a asp-action="InvoiceDetails" asp-controller="Profile" asp-route-invoicenumber="@item.InvoiceNumber"><i class="i i-shopping-cart" style="color:forestgreen; font-size:25px;"></i></a>
+
+                                                            </td>
+                                                        </tr>
                                         l = l + 1;
                                     }
 

@@ -42,7 +42,8 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             ICommentService commentService, IinvoiceService iinvoiceService,
             UserManager<ApplicationUser> userManager,
             ILogger<ProfileController> loggerFactory,
-            SignInManager<ApplicationUser> signInManager, IShopingCartService shopingCartService)
+            SignInManager<ApplicationUser> signInManager, 
+            IShopingCartService shopingCartService)
         {
             this.userService = userService;
             this.userRoleService = userRoleService;
@@ -294,7 +295,14 @@ namespace Shop.EndPoint.Web.Ui.Controllers
             shopActionResult.Data = commentViewModels;
             return View(shopActionResult);
         }
-
+        public IActionResult StatusInvoice(int invoicenumber)
+        {
+            var user = User.Identity.Name;
+            var AppUser = userService.GetByUserName(user);
+            var Invoice = iinvoiceService.GetStatusProcess(AppUser.Id, invoicenumber);
+            ViewBag.StatusNumber = Invoice.InvoiceStatus;
+            return View();
+        }
 
         public IActionResult OrderList(int page = 1)
         {

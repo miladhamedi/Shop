@@ -549,3 +549,5 @@ F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\Chang
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\ConfirmPhone.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_HeaderProfile.cshtml.g.cs
 F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\_PhoneNumberPartial.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Views\Profile\StatusInvoice.cshtml.g.cs
+F:\Shop\EndPoint\Shop.EndPoint.Web.Ui\obj\Debug\net5.0\Razor\Areas\Admin\Views\Invoice\StatusInvoice.cshtml.g.cs

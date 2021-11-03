@@ -61,7 +61,12 @@
                                                         @ShamsiPlugin.ToPeString(item.Date)
                                                     </td>
                                                     <td class="text-center">
-                                                        @Html.DisplayFor(modelItem => item.Price)
+                                                        @{
+                                                            var PriceProduct = Math.Round(item.Price);
+                                                            var PriceProstring = string.Format("{0:0,0}", PriceProduct);
+                                                            @Html.DisplayFor(modelItem => PriceProstring)
+                                                        }
+
                                                     </td>
                                                     <td class="text-center">
                                                         @Html.DisplayFor(modelItem => item.TransactionId)

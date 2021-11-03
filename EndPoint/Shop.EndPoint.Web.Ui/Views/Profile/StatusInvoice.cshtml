@@ -1,0 +1,254 @@
+﻿@{
+
+    ViewBag.Titel = "وضعیت صورتحسابها";
+    ViewBag.Breadcromb = "وضعیت صورتحسابها";
+
+}
+
+<partial name="_HeaderPartial" />
+
+
+<div class='cart_part1'>
+    <div class='container'>
+        <div class='inner'>
+            <div class='top_part'style="margin:100px 100px">
+                <ul class='step clearfix none_list_style'>
+
+                    @if (ViewBag.StatusNumber == "در حال پردازش خرید")
+                    {
+                        <li class='item active'>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>1</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;" xml:space="preserve">
+                                        <path id="dec-post-arrow" d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                </svg>
+                                    </div>
+                                </div><!--close .number-->
+                                <div class='content'>
+                                    <span>در حال پردازش خرید</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;" xml:space="preserve">
+                                        <path id="dec-post-arrow_1_" d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                   </svg>
+                                    </div>
+                                </div><!--close .content-->
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='item '>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>1</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;" xml:space="preserve">
+                                        <path id="dec-post-arrow" d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+                                </svg>
+                                    </div>
+                                </div><!--close .number-->
+                                <div class='content'>
+                                    <span>در حال پردازش خرید</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;" xml:space="preserve">
+                                        <path id="dec-post-arrow_1_" d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                   </svg>
+                                    </div>
+                                </div><!--close .content-->
+                            </a>
+                        </li>
+                    }
+
+
+                    @if (ViewBag.StatusNumber == "تحویل ب پست")
+                    {
+                        <li class='item active '>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>2</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow"
+                                              d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+
+                                        <path id="dec-post-arrow_1_"
+                                              d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+
+
+                                    </svg>
+                                    </div>
+                                </div>
+                                <div class='content'>
+                                    <span>تحویل ب پست</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow_1_"
+                                              d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                  </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='item  '>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>2</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow"
+                                              d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+
+
+
+                                        <path id="dec-post-arrow_1_"
+                                              d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+
+
+
+                                    </svg>
+                                    </div>
+                                </div>
+                                <div class='content'>
+                                    <span>تحویل ب پست</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow_1_"
+                                              d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                  </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    }
+
+                    @if (ViewBag.StatusNumber == "تحویل ب خریدار")
+                    {
+                        <li class='item active '>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>3</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow"
+                                              d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+                                        <path id="dec-post-arrow_1_"
+                                              d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+                                    </svg>
+                                    </div>
+                                </div>
+                                <div class='content'>
+                                    <span>تحویل ب خریدار</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow_1_"
+                                              d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                   </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='item '>
+                            <a href='' title='' class='link'>
+                                <div class='number'>
+                                    <span>3</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="-90 -1 792 737" style="enable-background:new -90 -1 792 737;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow"
+                                              d="M702,736c-237.6-26.4-369.6-158.4-396-396C279.6,577.6,147.6,709.6-90,736" />
+                                        <path id="dec-post-arrow_1_"
+                                              d="M-90-1c237.6,26.4,369.6,158.4,396,396C332.4,157.4,464.4,25.4,702-1" />
+                                    </svg>
+                                    </div>
+                                </div>
+                                <div class='content'>
+                                    <span>تحویل ب خریدار</span>
+                                    <div class='svg_arrow'>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             viewBox="0 199 792 396" style="enable-background:new 0 199 792 396;"
+                                             xml:space="preserve">
+                                        <path id="dec-post-arrow_1_"
+                                              d="M0,198c237.6,26.4,369.6,158.4,396,396c26.4-237.6,158.4-369.6,396-396" />
+
+
+
+                                   </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+
+
+        </div><!--close .inner-->
+    </div><!--close .container-->
+</div><!--close .cart_part1--> }

@@ -20,7 +20,8 @@ namespace Shop.Core.Service.Services.Invoices
         ShopActionResult<List<InvoiceDto>> GetAll(int page = 1);
         ShopActionResult<List<InvoiceDto>> GetAllInvoice(int page = 1);
         InvoiceDto GetbyUseridInvoice(Guid userid, int invoice);
-       
+        InvoiceDto GetStatusProcess(Guid userid, int invoicenumber);
+
 
 
 

@@ -29,6 +29,7 @@ namespace Shop.EndPoint.Web.Ui.ViewModel
         public string TransactionId { get; set; }
 
         public string RefrenceId { get; set; }
+        public string InvoiceStatus { get; set; }
         public List<ListCart> ListCarts { get; set; }
         public Guid UserId { get; set; }
     }

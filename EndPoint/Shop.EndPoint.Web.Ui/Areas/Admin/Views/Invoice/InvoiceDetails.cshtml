@@ -29,9 +29,12 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
+
                 <div class="box-header">
                     <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-userid="@Model.First().UserId" class="btn btn-info">  مشخصات پستی کاربر</a>
+                    <a href="/Admin/Invoice/StatusInvoice?invoicenumber=@Model.First().InvoiceNumber&userid=@Model.First().UserId" class="btn btn-success">  مشخص کردن وضعیت خرید</a>
                 </div>
+               
 
                 <div class="box-body">
                     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
